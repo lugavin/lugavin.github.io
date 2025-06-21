@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="JMS 规范JMS 指定了消息结构、编程模型、和一套控制消息传送操作的规则和语义。 JMS 消息结构按照 JMS 规范，一个消息包括三部分：标题、属性和主体。  标题：标题指定了消息的 JMS 属性（目标、持久与否、有效期及优先级），这些属性控制了消息传送系统如何传送消息。 属性：属性（可以看作标题的扩充）为可选项，应用程序可以使用属性提供的值根据各种选择标准来过滤消息，属性为可选项。 消息主体：">
+<meta name="keywords" content="distributed">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分布式消息通信 - JMS">
+<meta property="og:url" content="https://lugavin.github.io/2018/11/01/architect/distributed/jms/index.html">
+<meta property="og:site_name" content="Gavin&#39;s blog">
+<meta property="og:description" content="JMS 规范JMS 指定了消息结构、编程模型、和一套控制消息传送操作的规则和语义。 JMS 消息结构按照 JMS 规范，一个消息包括三部分：标题、属性和主体。  标题：标题指定了消息的 JMS 属性（目标、持久与否、有效期及优先级），这些属性控制了消息传送系统如何传送消息。 属性：属性（可以看作标题的扩充）为可选项，应用程序可以使用属性提供的值根据各种选择标准来过滤消息，属性为可选项。 消息主体：">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://lugavin.github.io/images/architect/distributed-jms.png">
+<meta property="og:updated_time" content="2025-06-21T02:09:57.960Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="分布式消息通信 - JMS">
+<meta name="twitter:description" content="JMS 规范JMS 指定了消息结构、编程模型、和一套控制消息传送操作的规则和语义。 JMS 消息结构按照 JMS 规范，一个消息包括三部分：标题、属性和主体。  标题：标题指定了消息的 JMS 属性（目标、持久与否、有效期及优先级），这些属性控制了消息传送系统如何传送消息。 属性：属性（可以看作标题的扩充）为可选项，应用程序可以使用属性提供的值根据各种选择标准来过滤消息，属性为可选项。 消息主体：">
+<meta name="twitter:image" content="https://lugavin.github.io/images/architect/distributed-jms.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Gavin's blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://lugavin.github.io/2018/11/01/architect/distributed/jms/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>分布式消息通信 - JMS | Gavin's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gavin's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">路漫漫其修远兮 吾将上下而求索</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-comments">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/comments/" rel="section"><i class="menu-item-icon fa fa-fw fa-send"></i> <br>留言</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lugavin.github.io/2018/11/01/architect/distributed/jms/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gavin Lu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gavin's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">分布式消息通信 - JMS
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-01 09:10:00" itemprop="dateCreated datePublished" datetime="2018-11-01T09:10:00+00:00">2018-11-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2025-06-21 02:09:57" itemprop="dateModified" datetime="2025-06-21T02:09:57+00:00">2025-06-21</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/architect/" itemprop="url" rel="index"><span itemprop="name">architect</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+             <span id="/2018/11/01/architect/distributed/jms/" class="leancloud_visitors" data-flag-title="分布式消息通信 - JMS">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="JMS-规范"><a href="#JMS-规范" class="headerlink" title="JMS 规范"></a><a href="https://docs.oracle.com/cd/E19688-01/817-5020-10/overview.html" target="_blank" rel="noopener">JMS 规范</a></h2><p>JMS 指定了消息结构、编程模型、和一套控制消息传送操作的规则和语义。</p>
+<h3 id="JMS-消息结构"><a href="#JMS-消息结构" class="headerlink" title="JMS 消息结构"></a>JMS 消息结构</h3><p>按照 JMS 规范，一个消息包括三部分：标题、属性和主体。</p>
+<ul>
+<li>标题：标题指定了消息的 JMS 属性（目标、持久与否、有效期及优先级），这些属性控制了消息传送系统如何传送消息。</li>
+<li>属性：属性（可以看作标题的扩充）为可选项，应用程序可以使用属性提供的值根据各种选择标准来过滤消息，属性为可选项。</li>
+<li>消息主体：消息主体包括要交换的实际数据，JMS 支持六种主体类型，包括一种基本消息类型（Message）和五种子类型（BytesMessage、MapMessage、ObjectMessage、StreamMessage 和 TextMessage）。</li>
+</ul>
+<h3 id="JMS-编程模型"><a href="#JMS-编程模型" class="headerlink" title="JMS 编程模型"></a>JMS 编程模型</h3><p>在 JMS 编程模型中，JMS 客户机（组件或应用程序）通过 JMS 消息服务交换消息。消息生成方将消息发送至消息服务，消息使用方则从消息服务接收这些消息。这些消息传送操作是使用一组实现 JMS 应用编程接口 (API) 的对象（由 JMS 提供者提供）来执行的。</p>
+<p><img src="/images/architect/distributed-jms.png" alt="JMS 编程对象"></p>
+<p>在 JMS 编程模型中，JMS 客户机使用 ConnectionFactory 对象创建一个连接，向 JMS 消息服务发送消息以及从 JMS 消息服务接收消息均是通过此连接来进行。Connection 是 JMS 客户机与消息服务的活动连接。创建连接时，将分配通信资源以及验证客户机。这是一个相当重要的对象，大多数客户机均使用一个连接来进行所有的消息传送。</p>
+<p>连接用于创建会话。Session 是一个用于生成和接收消息的单线程上下文。它用于创建发送和接收消息的生成方和使用方，并为所发送的消息定义发送顺序。通过大量的确认选项或事务（可由分布式事务管理器来管理），会话支持可靠的传送。</p>
+<p>JMS 客户机使用 MessageProducer 向指定的物理目标（在 API 中表示为目标对象）发送消息。消息生成方可指定一个默认传送模式（持久性消息或非持久性消息）、优先级和有效期值，以控制生成方向物理目标发送的所有消息。</p>
+<p>同样，JMS 客户机使用 MessageConsumer 对象从指定的物理目标（在 API 中表示为目标对象）接收消息。消息使用方可使用消息选择器，借助它，消息服务可以仅向消息使用方发送与选择标准匹配的那些消息。</p>
+<p>消息使用方可以支持同步或异步消息接收。异步接收可通过向使用方注册 MessageListener 来实现。当会话线程调用 MessageListener 对象的 onMessage() 方法时，客户机将接收到消息。</p>
+<h3 id="被管理对象"><a href="#被管理对象" class="headerlink" title="被管理对象"></a>被管理对象</h3><p>JMS 提供了两种通用类型的被管理对象。连接工厂对象和目标对象。虽然两者都用于封存提供者特有的信息，但在 JMS 客户机中，它们的用途却有很大的差异。连接工厂用于创建至消息服务器的连接，而目标对象用于标识 JMS 消息服务使用的物理目标。</p>
+<h3 id="JMS-消息传送"><a href="#JMS-消息传送" class="headerlink" title="JMS 消息传送"></a>JMS 消息传送</h3><h4 id="消息传送模型"><a href="#消息传送模型" class="headerlink" title="消息传送模型"></a>消息传送模型</h4><p>JMS 支持两种截然不同的消息传送模型：点对点模型和发布/订阅模型。</p>
+<ul>
+<li>点对点（队列目标）：消息从一个生成方传送至一个使用方。在此传送模型中，目标是一个队列。消息首先被传送至队列目标，然后根据队列传送策略从此队列将消息传送至向此队列进行注册的某一个使用方，一次只传送一条消息。可以向队列目标发送消息的生成方的数量没有限制，但每条消息只能发送至、并由一个使用方成功接收。如果没有已向队列目标注册的使用方，队列将保留它收到的消息，并在某个使用方向该队列进行注册时将消息传送给该使用方。</li>
+<li>发布/订阅（主题目标）：消息从一个生成方传送至任意数量的使用方。在此传送模型中，目标是一个主题。消息首先被传送至主题目标，然后传送至所有已订阅此主题的活动使用方。可以向主题目标发送消息的生成方的数量没有限制，并且每个消息可以发送至任意数量的订阅使用方。主题目标也支持长期订阅的概念。长期订阅表示使用方已向主题目标进行注册，但在消息传送时此使用方可以处于非活动状态。当此使用方再次处于活动状态时，它将接收此信息。如果没有已向主题目标注册的使用方，主题不保留其接收到的消息，除非有非活动使用方注册了长期订阅。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>统一域</th>
+<th>点对点域</th>
+<th>发布/订阅域</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Destination（Queue 或 Topic）</td>
+<td>Queue</td>
+<td>Topic</td>
+</tr>
+<tr>
+<td>ConnectionFactory</td>
+<td>QueueConnectionFactory</td>
+<td>TopicConnectionFactory</td>
+</tr>
+<tr>
+<td>Connection</td>
+<td>QueueConnection</td>
+<td>TopicConnection</td>
+</tr>
+<tr>
+<td>Session</td>
+<td>QueueSession</td>
+<td>TopicSession</td>
+</tr>
+<tr>
+<td>MessageProducer</td>
+<td>QueueSender</td>
+<td>TopicPublisher</td>
+</tr>
+<tr>
+<td>MessageConsumer</td>
+<td>QueueReceiver</td>
+<td>TopicSubscriber</td>
+</tr>
+</tbody>
+</table>
+<h4 id="可靠消息传送"><a href="#可靠消息传送" class="headerlink" title="可靠消息传送"></a>可靠消息传送</h4><p>JMS 定义了两种传送模式：持久性消息和非持久性消息。</p>
+<ul>
+<li>持久性消息：保证这些消息只被传送一次和成功接收一次。对于这些消息，可靠性是优先考虑的因素。</li>
+<li>非持久性消息：保证这些消息最多被传送一次。对于这些消息，可靠性并非主要的考虑因素。</li>
+</ul>
+<blockquote>
+<p>对于持久性消息，确保可靠性有两个方面：一个是确保至目标和出自目标的持久性消息传送成功；另一个就是确保在将持久性消息传送至使用方前，消息服务没有丢失持久性消息。</p>
+</blockquote>
+<p>可靠的消息传送的关键在于确保至目标和出自目标的持久性消息传送成功。可通过 MQ 会话支持的两个通用机制：确认或事务（可以是本地事务或分布式事务）来实现此目的。</p>
+<ul>
+<li><p><strong>确认</strong>：可以将会话配置为使用确认来确保可靠传送。对于生成方，这意味着在生成方的 send() 方法返回前，消息服务确认已向其目标发送持久性消息。对于使用方，这意味着在消息服务从该目标删除持久性消息前，客户机确认从此目标发出的持久性消息已传送并已接收。</p>
+</li>
+<li><p><strong>本地事务</strong>：也可以将会话配置为<em>事务</em>，这样，可以将一个或多个消息的生成和/或接收组成原子单元，也就是<em>事务</em>。JMS API 提供了启动、提交或回滚事务的方法。</p>
+</li>
+<li><p><strong>分布式事务</strong>：支持分布式事务是指消息传送客户机可通过 JTA 定义的 XAResource 接口参与分布式事务。此接口定义了实现两阶段提交的许多方法。</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/uploads/wechatpay.png" alt="Gavin Lu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/distributed/" rel="tag"># distributed</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/25/architect/distributed/nio/" rel="next" title="NIO">
+                <i class="fa fa-chevron-left"></i> NIO
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/02/architect/distributed/activemq/" rel="prev" title="分布式消息通信 - ActiveMQ">
+                分布式消息通信 - ActiveMQ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/uploads/avatar.png" alt="Gavin Lu">
+            
+              <p class="site-author-name" itemprop="name">Gavin Lu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/lugavin" title="GitHub &rarr; https://github.com/lugavin" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://bitbucket.org/lugavin" title="Bitbucket &rarr; https://bitbucket.org/lugavin" rel="noopener" target="_blank"><i class="fa fa-fw fa-bitbucket"></i>Bitbucket</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JMS-规范"><span class="nav-number">1.</span> <span class="nav-text">JMS 规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JMS-消息结构"><span class="nav-number">1.1.</span> <span class="nav-text">JMS 消息结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JMS-编程模型"><span class="nav-number">1.2.</span> <span class="nav-text">JMS 编程模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#被管理对象"><span class="nav-number">1.3.</span> <span class="nav-text">被管理对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JMS-消息传送"><span class="nav-number">1.4.</span> <span class="nav-text">JMS 消息传送</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#消息传送模型"><span class="nav-number">1.4.1.</span> <span class="nav-text">消息传送模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可靠消息传送"><span class="nav-number">1.4.2.</span> <span class="nav-text">可靠消息传送</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gavin Lu</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: false,
+        appId: '5IwtIhDDNAEOmFsA0RwltEjE-gzGzoHsz',
+        appKey: 'aep6gMEg10pFmdT7kHu53dPV',
+        placeholder: 'Type your message here',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: true
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

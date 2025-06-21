@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="构建项目管理及自动构建工具。  Apache Maven：Maven使用声明进行构建并进行依赖管理，偏向于使用约定而不是配置进行构建。在大型项目开发中，使用Maven来管理是必不可少的。如果你使用Maven，你可以从Maven中央仓库下载所需要的构件，但这通常不是一个好的做法，你应该在本地架设一个Maven仓库服务器，在代理远程仓库的同时维护本地仓库，以节省带宽和时间，Nexus 就可以满足这样的">
+<meta name="keywords" content="awesome">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java Awesome">
+<meta property="og:url" content="https://lugavin.github.io/2017/05/27/javaee/awesome/index.html">
+<meta property="og:site_name" content="Gavin&#39;s blog">
+<meta property="og:description" content="构建项目管理及自动构建工具。  Apache Maven：Maven使用声明进行构建并进行依赖管理，偏向于使用约定而不是配置进行构建。在大型项目开发中，使用Maven来管理是必不可少的。如果你使用Maven，你可以从Maven中央仓库下载所需要的构件，但这通常不是一个好的做法，你应该在本地架设一个Maven仓库服务器，在代理远程仓库的同时维护本地仓库，以节省带宽和时间，Nexus 就可以满足这样的">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2025-06-21T02:09:57.963Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java Awesome">
+<meta name="twitter:description" content="构建项目管理及自动构建工具。  Apache Maven：Maven使用声明进行构建并进行依赖管理，偏向于使用约定而不是配置进行构建。在大型项目开发中，使用Maven来管理是必不可少的。如果你使用Maven，你可以从Maven中央仓库下载所需要的构件，但这通常不是一个好的做法，你应该在本地架设一个Maven仓库服务器，在代理远程仓库的同时维护本地仓库，以节省带宽和时间，Nexus 就可以满足这样的">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Gavin's blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://lugavin.github.io/2017/05/27/javaee/awesome/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Java Awesome | Gavin's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gavin's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">路漫漫其修远兮 吾将上下而求索</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-comments">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/comments/" rel="section"><i class="menu-item-icon fa fa-fw fa-send"></i> <br>留言</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lugavin.github.io/2017/05/27/javaee/awesome/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gavin Lu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gavin's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java Awesome
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-05-27 18:00:00" itemprop="dateCreated datePublished" datetime="2017-05-27T18:00:00+00:00">2017-05-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2025-06-21 02:09:57" itemprop="dateModified" datetime="2025-06-21T02:09:57+00:00">2025-06-21</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javaee/" itemprop="url" rel="index"><span itemprop="name">javaee</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+             <span id="/2017/05/27/javaee/awesome/" class="leancloud_visitors" data-flag-title="Java Awesome">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h2><p><em>项目管理及自动构建工具。</em></p>
+<ul>
+<li><a href="http://maven.apache.org/" target="_blank" rel="noopener">Apache Maven</a>：Maven使用声明进行构建并进行依赖管理，偏向于使用约定而不是配置进行构建。在大型项目开发中，使用Maven来管理是必不可少的。如果你使用Maven，你可以从Maven中央仓库下载所需要的构件，但这通常不是一个好的做法，你应该在本地架设一个Maven仓库服务器，在代理远程仓库的同时维护本地仓库，以节省带宽和时间，<a href="http://www.sonatype.org/nexus/archived/" target="_blank" rel="noopener">Nexus</a> 就可以满足这样的需要。</li>
+<li><a href="http://www.gradle.org/" target="_blank" rel="noopener">Gradle</a>：Gradle采用增量构建，Gradle通过Groovy编程而不是传统的XML声明进行配置，其可以很好地配合Maven进行依赖管理，并且把Ant脚本当作头等公民。</li>
+</ul>
+<h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><p><em>软件质量评估工具。</em></p>
+<ul>
+<li><a href="https://github.com/checkstyle/checkstyle" target="_blank" rel="noopener">Checkstyle</a>：一个可帮助程序员编写符合规范代码的开发工具。</li>
+<li><a href="https://www.sonarqube.org/" target="_blank" rel="noopener">SonarQube</a>：一个开源的代码质量管理系统，它可以通过使用插件机制与 <a href="https://eclipse.org/" target="_blank" rel="noopener">Eclipse</a> 和 <a href="https://www.atlassian.com/software/jira" target="_blank" rel="noopener">JIRA</a> 等其他外部工具集成，从而实现了对代码的质量的全面自动化分析和管理。</li>
+<li><a href="http://findbugs.sourceforge.net/" target="_blank" rel="noopener">FindBugs</a>：通过静态分析来识别Java程序中潜在Bug。</li>
+<li><a href="https://pmd.github.io/" target="_blank" rel="noopener">PMD</a>：源代码分析器。</li>
+</ul>
+<h2 id="持续集成"><a href="#持续集成" class="headerlink" title="持续集成"></a>持续集成</h2><p><em>支持持续集成、测试和应用发布的工具。</em></p>
+<ul>
+<li><a href="https://jenkins.io/" target="_blank" rel="noopener">Jenkins</a>：提供了基于服务器部署持续集成服务，其前身是 <a href="http://hudson-ci.org/" target="_blank" rel="noopener">Hudson</a> 项目。</li>
+<li><a href="http://www.jetbrains.com/teamcity/" target="_blank" rel="noopener">TeamCity</a>：JetBrains持续集成方案。</li>
+<li><a href="https://travis-ci.org" target="_blank" rel="noopener">Travis</a>：提供托管服务，常用于开源项目。</li>
+<li><a href="https://www.atlassian.com/software/bamboo" target="_blank" rel="noopener">Bamboo</a>：Atlassian的持续集成解决方案，包含很多其它产品。</li>
+<li><a href="https://www.thoughtworks.com/go/" target="_blank" rel="noopener">Go</a>：ThoughtWorks开源持续集成解决方案。</li>
+<li><a href="https://circleci.com/" target="_blank" rel="noopener">CircleCI</a>：提供托管服务，可免费试用。</li>
+<li><a href="https://codeship.com/" target="_blank" rel="noopener">Codeship</a>：提供托管服务，提供有限免费计划。</li>
+</ul>
+<h2 id="IDE"><a href="#IDE" class="headerlink" title="IDE"></a>IDE</h2><p><em>集成开发环境。</em></p>
+<ul>
+<li><a href="http://www.jetbrains.com/idea/" target="_blank" rel="noopener">IntelliJ IDEA</a>：IntelliJ IDEA被认为是当前Java开发效率最快的IDE工具，它集成了开发过程中实用的众多功能，几乎可以不用鼠标便能完成你要做的任何事情，最大程度的加快开发的速度。</li>
+<li><a href="http://www.eclipse.org/" target="_blank" rel="noopener">Eclipse</a>：著名的跨平台开源集成开发环境，以其丰富插件著称。</li>
+<li><a href="https://netbeans.org/" target="_blank" rel="noopener">NetBeans</a>：集成了很多Java SE和Java EE特性，包括数据库访问、服务器、HTML5以及AngularJS。</li>
+</ul>
+<h2 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h2><p><em>提供具体统计算法的工具，其算法可从数据中学习。</em></p>
+<ul>
+<li><a href="http://hadoop.apache.org/" target="_blank" rel="noopener">Apache Hadoop</a>：商用硬件集群上大规模数据存储和处理的开源软件框架。Hadoop是根据谷歌公司发表的MapReduce和Google文件系统的论文自行实现而成。Hadoop实现了名为MapReduce的编程范式：应用程序被分区成许多小部分，而每个部分都能在集群中的任意节点上运行或重新运行。此外，Hadoop还提供了分布式文件系统，用以存储所有计算节点的数据，这为整个集群带来了非常高的带宽。MapReduce(并行计算框架)和HDFS(分布式文件系统)的设计，使得整个框架能够自动处理节点故障。</li>
+<li><a href="http://spark.apache.org/" target="_blank" rel="noopener">Apache Spark</a>：大数据内存计算框架。相对于Hadoop的MapReduce会在运行完工作后将中介数据存放到磁盘中，Spark使用了内存内运算技术，能在数据尚未写入硬盘时即在内存内分析运算。Spark在内存内运行程序的运算速度能做到比Hadoop MapReduce的运算速度快上100倍，即便是运行程序于硬盘时，Spark也能快上10倍速度。Spark允许用户将数据加载至簇内存，并多次对其进行查询，非常适合用于机器学习算法。</li>
+<li><a href="https://mahout.apache.org/" target="_blank" rel="noopener">Apache Mahout</a>：机器学习算法软件包。</li>
+<li><a href="https://www.h2o.ai/" target="_blank" rel="noopener">H2O</a>：用作大数据统计的分析引擎。</li>
+<li><a href="http://www.cs.waikato.ac.nz/ml/weka/" target="_blank" rel="noopener">Weka</a>：用作数据挖掘的算法集合，包括从预处理到可视化的各个层次。</li>
+</ul>
+<h2 id="分布式应用"><a href="#分布式应用" class="headerlink" title="分布式应用"></a>分布式应用</h2><p><em>用来开发分布式、具有容错性应用程序的函数库和框架。</em></p>
+<ul>
+<li><a href="http://zookeeper.apache.org/" target="_blank" rel="noopener">Apache ZooKeeper</a>：使用分布式配置、同步和命名注册为大型分布式系统提供协调服务。</li>
+<li><a href="http://storm.apache.org/" target="_blank" rel="noopener">Apache Storm</a>：分布式实时计算系统。提供与MapReduce作业类似的功能。</li>
+<li><a href="http://akka.io/" target="_blank" rel="noopener">Akka</a>：构建高并发和分布式 JVM 应用程序的工具包。</li>
+<li><a href="http://atomix.io/atomix/" target="_blank" rel="noopener">Atomix</a>：基于事件驱动的容错分布式协调框架。</li>
+<li><a href="https://hazelcast.org/" target="_blank" rel="noopener">Hazelcast</a>：分布式、高可扩展性内存数据网格。</li>
+<li><a href="https://github.com/Netflix/Hystrix" target="_blank" rel="noopener">Hystrix</a>：为分布式系统提供延迟和容错处理。</li>
+<li><a href="http://www.jgroups.org/" target="_blank" rel="noopener">JGroups</a>：一组提供可靠消息传输的工具包，可用来创建集群，集群中的节点可互相发送消息。</li>
+<li><a href="http://www.paralleluniverse.co/quasar/" target="_blank" rel="noopener">Quasar</a>：为JVM提供轻量级线程和Actor。</li>
+</ul>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p><em>简化数据库交互的工具。</em></p>
+<ul>
+<li><a href="https://hbase.apache.org/" target="_blank" rel="noopener">Apache HBase</a>：分布式NoSQL列数据库，类似谷歌公司BigTable。它是Apache软件基金会的Hadoop项目的一部分，运行于HDFS文件系统之上，为 Hadoop 提供类似于BigTable规模的服务。</li>
+<li><a href="https://hive.apache.org/" target="_blank" rel="noopener">Apache Hive</a>：构建于hadoop之上的数据仓库，通过一种类SQL语言HiveQL为用户提供数据的归纳、查询和分析等功能。</li>
+<li><a href="https://prestodb.io/" target="_blank" rel="noopener">Presto</a>：针对大数据的分布式SQL查询引擎。</li>
+<li><a href="http://h2database.com/" target="_blank" rel="noopener">H2</a>：小型SQL数据库，以内存操作著称。</li>
+<li><a href="https://flywaydb.org/" target="_blank" rel="noopener">Flyway</a>：使用Java API轻松完成数据库迁移。</li>
+<li><a href="http://jdbi.org/" target="_blank" rel="noopener">JDBI</a>：便捷的JDBC抽象。</li>
+<li><a href="http://www.jooq.org/" target="_blank" rel="noopener">jOOQ</a>：基于SQL schema生成类型安全代码。</li>
+<li><a href="http://www.querydsl.com/" target="_blank" rel="noopener">Querydsl</a>：针对Java的类型安全统一查询。</li>
+</ul>
+<h2 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h2><p><em>用来部署应用程序的服务器。</em></p>
+<ul>
+<li><a href="http://tomcat.apache.org/" target="_blank" rel="noopener">Apache Tomcat</a>：针对Servlet和JSP的应用服务器，健壮性好且适用性强。</li>
+<li><a href="http://tomee.apache.org/" target="_blank" rel="noopener">Apache TomEE</a>：Tomcat加Java EE。</li>
+<li><a href="http://www.eclipse.org/jetty/" target="_blank" rel="noopener">Jetty</a>：轻量级、小巧的应用服务器，通常用作嵌入式Web容器。</li>
+<li><a href="https://glassfish.java.net/" target="_blank" rel="noopener">GlassFish</a>：Java EE开源参考实现，由Oracle资助开发。</li>
+<li><a href="http://www.wildfly.org/" target="_blank" rel="noopener">WildFly</a>：之前被称作JBoss，由Redhat开发，支持很多Java EE功能。</li>
+</ul>
+<h2 id="消息"><a href="#消息" class="headerlink" title="消息"></a>消息</h2><p><em>在客户端之间进行消息传递，确保协议独立性的工具。</em></p>
+<ul>
+<li><a href="http://kafka.apache.org/" target="_blank" rel="noopener">Apache Kafka</a>：高吞吐量分布式消息系统。</li>
+<li><a href="http://activemq.apache.org/" target="_blank" rel="noopener">Apache ActiveMQ</a>：实现JMS的开源消息代理，可将同步通讯转为异步通讯。</li>
+<li><a href="https://github.com/apache/incubator-rocketmq" target="_blank" rel="noopener">Apache RocketMQ</a>：阿里开源的一款高性能、高吞吐量的消息中间件。</li>
+<li><a href="http://hornetq.jboss.org/" target="_blank" rel="noopener">JBoss HornetQ</a>：清晰、准确、模块化且方便嵌入的消息工具。</li>
+<li><a href="https://github.com/zeromq/jeromq" target="_blank" rel="noopener">JeroMQ</a>：ZeroMQ的纯Java实现。</li>
+</ul>
+<h2 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h2><p><em>文档索引引擎，用于搜索和分析。</em></p>
+<ul>
+<li><a href="https://www.elastic.co/products/elasticsearch" target="_blank" rel="noopener">Elasticsearch</a>：一种分布式、支持REST风格的搜索和分析引擎。</li>
+<li><a href="https://lucene.apache.org/" target="_blank" rel="noopener">Apache Lucene</a>：高性能、功能全面的跨平台文本搜索引擎库。</li>
+<li><a href="http://lucene.apache.org/solr/" target="_blank" rel="noopener">Apache Solr</a>：采用Lucene搜索库为核心，提供全文索引和搜索开源企业平台。</li>
+</ul>
+<h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><p><em>网络编程函数库。</em></p>
+<ul>
+<li><a href="https://mina.apache.org/" target="_blank" rel="noopener">Apache MINA</a>：一个开发高性能和高可伸缩性网络应用程序的网络应用框架，提供了一个抽象的事件驱动的异步 API，可以使用 TCP/IP、UDP/IP、串口和虚拟机内部的管道等传输方式。</li>
+<li><a href="http://netty.io/" target="_blank" rel="noopener">Netty</a>：构建高性能网络应用程序开发框架。</li>
+<li><a href="http://hessian.caucho.com/" target="_blank" rel="noopener">Hessian</a>：一个轻量级的remoting onhttp工具，使用简单的方法提供了RMI的功能，相比WebService，Hessian更简单、快捷。</li>
+<li><a href="https://github.com/javaee/grizzly" target="_blank" rel="noopener">Grizzly</a>：用于网络层的Grizzly NIO框架。</li>
+<li><a href="http://www.grpc.io/" target="_blank" rel="noopener">gRPC</a>：基于protobuf和HTTP/2的RPC框架。</li>
+<li><a href="https://square.github.io/okhttp/" target="_blank" rel="noopener">OkHttp</a>：一个Android和Java应用的HTTP+SPDY客户端。</li>
+</ul>
+<h2 id="网络爬虫"><a href="#网络爬虫" class="headerlink" title="网络爬虫"></a>网络爬虫</h2><p><em>用于分析网站内容的函数库。</em></p>
+<ul>
+<li><a href="http://nutch.apache.org/" target="_blank" rel="noopener">Apache Nutch</a>：可用于生产环境的高度可扩展、可伸缩的网络爬虫。</li>
+<li><a href="https://github.com/yasserg/crawler4j" target="_blank" rel="noopener">Crawler4j</a>：简单的轻量级爬虫。</li>
+<li><a href="https://jsoup.org/" target="_blank" rel="noopener">JSoup</a>：刮取、解析、操作和清理HTML。</li>
+</ul>
+<h2 id="高性能"><a href="#高性能" class="headerlink" title="高性能"></a>高性能</h2><p><em>与高性能计算有关的资源，包括集合以及很多具体功能的函数库。</em></p>
+<ul>
+<li><a href="https://lmax-exchange.github.io/disruptor/" target="_blank" rel="noopener">Disruptor</a>：线程间消息函数库。</li>
+<li><a href="http://fastutil.di.unimi.it/" target="_blank" rel="noopener">fastutil</a>：快速紧凑的Java类型安全集合。</li>
+<li><a href="https://github.com/eclipse/eclipse-collections" target="_blank" rel="noopener">Eclipse Collections</a>：受Smalltalk启发的集合框架。</li>
+<li><a href="https://github.com/leventov/Koloboke" target="_blank" rel="noopener">Koloboke</a>：HashSet和HashMap。</li>
+<li><a href="https://github.com/carrotsearch/hppc" target="_blank" rel="noopener">HPPC</a>：基本类型集合。</li>
+<li><a href="http://javolution.org/" target="_blank" rel="noopener">Javolution</a>：针对实时嵌入式系统的函数库。</li>
+<li><a href="http://trove.starlight-systems.com/" target="_blank" rel="noopener">Trove</a>：基本类型集合。</li>
+</ul>
+<h2 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h2><p><em>用于处理安全、认证、授权或会话管理的函数库。</em></p>
+<ul>
+<li><a href="http://shiro.apache.org/" target="_blank" rel="noopener">Apache Shiro</a>：执行认证、授权、加密和会话管理。</li>
+<li><a href="http://projects.spring.io/spring-security/" target="_blank" rel="noopener">Spring Security</a>：专注认证、授权和多维度攻击防护框架。</li>
+<li><a href="https://cryptomator.org/" target="_blank" rel="noopener">Cryptomator</a>：在云上进行客户端跨平台透明加密。</li>
+<li><a href="http://www.keycloak.org/" target="_blank" rel="noopener">Keycloak</a>：为浏览器应用和RESTful Web Service提供SSO和IDM集成。</li>
+<li><a href="http://picketlink.org/" target="_blank" rel="noopener">PicketLink</a>：一个针对Java应用进行安全和身份认证管理的大型项目，简化了安全和认证管理流程。</li>
+</ul>
+<h2 id="Web框架"><a href="#Web框架" class="headerlink" title="Web框架"></a>Web框架</h2><p><em>用于处理Web应用程序不同层次间通讯的框架。</em></p>
+<ul>
+<li><a href="http://projects.spring.io/spring-framework/" target="_blank" rel="noopener">Spring</a>：旨在简化Java EE的开发过程，提供依赖注入相关组件并支持面向切面编程。</li>
+<li><a href="http://projects.spring.io/spring-boot/" target="_blank" rel="noopener">Spring Boot</a>：微框架，简化了Spring新程序的开发过程。</li>
+<li><a href="https://github.com/gwtproject/gwt" target="_blank" rel="noopener">GWT</a>：GWT(Google Web Toolkit)，一组Web开发工具集，包含在客户端将Java代码转为JavaScript的编译器、XML解析器、RCP API、JUnit集成、国际化支持和GUI控件。</li>
+<li><a href="https://www.primefaces.org/" target="_blank" rel="noopener">PrimeFaces</a>：JSF框架，提供免费版和带技术支持的商业版。</li>
+<li><a href="http://tapestry.apache.org/" target="_blank" rel="noopener">Apache Tapestry</a>：基于组件的框架，使用Java创建动态的、健壮的、高度可扩展的Web应用程序。</li>
+<li><a href="http://wicket.apache.org/" target="_blank" rel="noopener">Apache Wicket</a>：基于组件的Web应用框架，与Tapestry类似带有状态显示GUI。</li>
+<li><a href="https://grails.org/" target="_blank" rel="noopener">Grails</a>：Groovy框架，旨在提供一个高效开发环境，使用约定而非配置，没有XML并支持混入(mixin)。</li>
+<li><a href="https://playframework.com/" target="_blank" rel="noopener">Play</a>：基于 Akka 的一个轻量级、无状态、Web友好的架构。</li>
+<li><a href="https://vaadin.com/home" target="_blank" rel="noopener">Vaadin</a>：基于GWT构建的事件驱动框架，使用服务端架构，客户端使用Ajax。</li>
+<li><a href="http://www.ninjaframework.org/" target="_blank" rel="noopener">Ninja</a>：Java全栈Web开发框架，非常稳固、快速和高效。</li>
+<li><a href="https://ratpack.io/" target="_blank" rel="noopener">Ratpack</a>：一组Java开发函数库，用于构建快速、高效、可扩展且测试完备的HTTP应用程序。</li>
+</ul>
+<h2 id="REST框架"><a href="#REST框架" class="headerlink" title="REST框架"></a>REST框架</h2><p><em>用来创建RESTful服务的框架。</em></p>
+<ul>
+<li><a href="https://jersey.java.net/" target="_blank" rel="noopener">Jersey</a>：JAX-RS参考实现。</li>
+<li><a href="http://resteasy.jboss.org/" target="_blank" rel="noopener">RESTEasy</a>：经过JAX-RS规范完全认证的可移植实现。</li>
+<li><a href="http://www.dropwizard.io/" target="_blank" rel="noopener">Dropwizard</a>：偏向于自己使用的Web框架，用来构建Web应用程序，使用了Jetty、Jackson、Jersey和Metrics。</li>
+<li><a href="http://swagger.io/" target="_blank" rel="noopener">Swagger</a>：Swagger是一个规范且完整的框架，提供描述、生产、消费和可视化RESTful Web Service。</li>
+<li><a href="https://square.github.io/retrofit/" target="_blank" rel="noopener">Retrofit</a>：一个Java类型安全的REST客户端。</li>
+<li><a href="http://sparkjava.com/" target="_blank" rel="noopener">Spark</a>：受到Sinatra启发的Java REST框架。</li>
+</ul>
+<h2 id="ORM框架"><a href="#ORM框架" class="headerlink" title="ORM框架"></a>ORM框架</h2><p><em>处理对象持久化的API。</em></p>
+<ul>
+<li><a href="http://www.mybatis.org/mybatis-3/zh/index.html" target="_blank" rel="noopener">MyBatis</a>：支持定制化 SQL、存储过程以及高级映射的优秀的持久层框架。</li>
+<li><a href="https://cayenne.apache.org/" target="_blank" rel="noopener">Apache Cayenne</a>：为数据访问提供简单、静态的API，还包括用于处理数据库映射、DB逆向工程的GUI映射工具。</li>
+<li><a href="https://ebean-orm.github.io/" target="_blank" rel="noopener">Ebean</a>：支持快速数据访问和编码的ORM框架。</li>
+<li><a href="https://www.eclipse.org/eclipselink/" target="_blank" rel="noopener">EclipseLink</a>：支持许多持久化标准，JPA、JAXB、JCA和SDO。</li>
+<li><a href="http://hibernate.org/orm/" target="_blank" rel="noopener">Hibernate</a>：广泛使用的持久化框架，其技术社区非常活跃。</li>
+</ul>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p><em>测试内容从对象到接口，涵盖性能测试和基准测试工具。</em></p>
+<ul>
+<li><a href="https://visualvm.github.io/" target="_blank" rel="noopener">VisualVM</a>：提供可视化方式查看运行中的应用程序信息。</li>
+<li><a href="http://junit.org/" target="_blank" rel="noopener">JUnit</a>：通用测试框架。</li>
+<li><a href="http://jmeter.apache.org/" target="_blank" rel="noopener">Apache JMeter</a>：功能性测试和性能评测。</li>
+<li><a href="http://arquillian.org/" target="_blank" rel="noopener">Arquillian</a>：集成测试和功能行测试平台，集成Java EE容器。</li>
+<li><a href="https://joel-costigliola.github.io/assertj/" target="_blank" rel="noopener">AssertJ</a>：支持流式断言提高测试的可读性。</li>
+<li><a href="http://openjdk.java.net/projects/code-tools/jmh/" target="_blank" rel="noopener">JMH</a>：JVM微基准测试工具。</li>
+<li><a href="https://github.com/mockito/mockito" target="_blank" rel="noopener">Mockito</a>：在自动化单元测试中创建测试对象，为TDD或BDD提供支持。</li>
+<li><a href="https://github.com/SeleniumHQ/selenium" target="_blank" rel="noopener">Selenium</a>：为Web应用程序提供可移植软件测试框架。</li>
+<li><a href="http://selenide.org/" target="_blank" rel="noopener">Selenide</a>：为Selenium提供精准的周边API，用来编写稳定且可读的UI测试。</li>
+<li><a href="http://testng.org/doc/" target="_blank" rel="noopener">TestNG</a>：测试框架。</li>
+</ul>
+<h2 id="模版引擎"><a href="#模版引擎" class="headerlink" title="模版引擎"></a>模版引擎</h2><p><em>对模板中表达式进行替换的工具。</em></p>
+<ul>
+<li><a href="http://www.thymeleaf.org/" target="_blank" rel="noopener">Thymeleaf</a>：新一代模板引擎，支持XML，可完全取代JSP。</li>
+<li><a href="http://velocity.apache.org/" target="_blank" rel="noopener">Apache Velocity</a>：提供HTML页面模板、Email模板和通用开源代码生成器模板。</li>
+<li><a href="http://freemarker.org/" target="_blank" rel="noopener">FreeMarker</a>：通用模板引擎，不需要任何重量级或自己使用的依赖关系。</li>
+<li><a href="http://jtwig.org/" target="_blank" rel="noopener">Jtwig</a>：模块化、可配置和经过充分测试的模板引擎。</li>
+<li><a href="https://jknack.github.io/handlebars.java/" target="_blank" rel="noopener">Handlebars.java</a>：使用Java编写的模板引擎，逻辑简单，支持语义扩展（semantic Mustache）。</li>
+</ul>
+<h2 id="开发库"><a href="#开发库" class="headerlink" title="开发库"></a>开发库</h2><p><em>从基础层次上改进开发流程。</em></p>
+<ul>
+<li><a href="https://zeroturnaround.com/software/jrebel/" target="_blank" rel="noopener">JRebel</a>：商用软件，无需重新部署可即时重新加载代码及配置。</li>
+<li><a href="https://eclipse.org/aspectj/" target="_blank" rel="noopener">AspectJ</a>：面向切面编程扩展，与程序无缝连接。</li>
+<li><a href="https://github.com/google/auto" target="_blank" rel="noopener">Auto</a>：源代码生成器集合。</li>
+<li><a href="https://projectlombok.org/" target="_blank" rel="noopener">Lombok</a>：代码生成器，旨在减少Java冗余代码。</li>
+<li><a href="http://ssw.jku.at/dcevm/" target="_blank" rel="noopener">DCEVM</a>：通过修改JVM在运行时可无限次重定义已加载的类。</li>
+<li><a href="https://github.com/ReactiveX/RxJava" target="_blank" rel="noopener">RxJava</a>：使用JVM中可观察序列，创建异步、基于事件应用程序的函数库。</li>
+<li><a href="http://vertx.io/" target="_blank" rel="noopener">vert.x</a>：JVM多语言事件驱动应用框架。</li>
+<li><a href="https://github.com/spring-projects/spring-loaded" target="_blank" rel="noopener">Spring Loaded</a>：另一个JVM类重载代理。</li>
+</ul>
+<h2 id="JVM和JDK"><a href="#JVM和JDK" class="headerlink" title="JVM和JDK"></a>JVM和JDK</h2><p><em>目前的JVM、JDK实现。</em></p>
+<ul>
+<li><a href="http://openjdk.java.net/" target="_blank" rel="noopener">OpenJDK</a>：JDK的开源版本。</li>
+<li><a href="https://github.com/ReadyTalk/avian" target="_blank" rel="noopener">Avian</a>：一个轻量级虚拟机和类库。</li>
+<li><a href="https://github.com/codenameone/CodenameOne/tree/master/vm" target="_blank" rel="noopener">ParparVM</a>：在Java中构建本机iOS应用程序的安全、简单、易用的方法。</li>
+<li><a href="http://www.azul.com/downloads/zulu/" target="_blank" rel="noopener">Zulu OpenJDK</a>：经过认证的与Java SE标准完全兼容JDK开源版本。</li>
+</ul>
+<h2 id="编译器"><a href="#编译器" class="headerlink" title="编译器"></a>编译器</h2><p><em>创建分析器、解释器和编译器的框架。</em></p>
+<ul>
+<li><a href="http://www.antlr.org/" target="_blank" rel="noopener">ANTLR</a>：一个基于Java 开发的功能强大的语言识别工具，Antlr 以其简介的语法和高速的运行效率在这类工具中出类拔萃。</li>
+<li><a href="http://jflex.de/" target="_blank" rel="noopener">JFlex</a>：Java编写的Java词法分析器。</li>
+</ul>
+<h2 id="字节码操作"><a href="#字节码操作" class="headerlink" title="字节码操作"></a>字节码操作</h2><p><em>操作Java字节码的函数库。</em></p>
+<ul>
+<li><a href="http://asm.ow2.org/" target="_blank" rel="noopener">ASM</a>：一个通用的Java字节码操作和分析框架。</li>
+<li><a href="https://jboss-javassist.github.io/javassist/" target="_blank" rel="noopener">Javassist</a>：用于在Java中编辑字节码的类库。</li>
+<li><a href="https://github.com/cglib/cglib" target="_blank" rel="noopener">CGlib</a>：一个强大的、高性能和高质量的代码生成库，用于在运行时扩展JAVA类并实现接口。</li>
+<li><a href="http://bytebuddy.net/" target="_blank" rel="noopener">Byte Buddy</a>：一个代码生成和操作库，用于在Java应用程序运行时创建和修改Java类而无需编译器的帮助。</li>
+</ul>
+<h2 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h2><p><em>实现控制反转的函数库。</em></p>
+<ul>
+<li><a href="https://hk2.java.net" target="_blank" rel="noopener">HK2</a>：轻量级动态依赖注入框架。</li>
+<li><a href="https://github.com/google/dagger" target="_blank" rel="noopener">Dagger2</a>：编译期的注入框架，没有使用反射，主要用于Android开发。</li>
+<li><a href="https://github.com/google/guice" target="_blank" rel="noopener">Guice</a>：轻量级注入框架，功能强大可与Dagger媲美。</li>
+</ul>
+<h2 id="工具类"><a href="#工具类" class="headerlink" title="工具类"></a>工具类</h2><p><em>通用工具类函数库。</em></p>
+<ul>
+<li><a href="https://github.com/google/guava" target="_blank" rel="noopener">Guava</a>：集合、缓存、支持基本类型、并发函数库、通用注解、字符串处理、I/O等。</li>
+<li><a href="http://commons.apache.org/" target="_blank" rel="noopener">Apache Commons</a>：提供各种用途的函数，比如配置、验证、集合、文件上传或XML处理等。</li>
+<li><a href="http://www.javatuples.org/" target="_blank" rel="noopener">javatuples</a>：正如名字表示的那样，提供tuple支持，尽管目前tuple的概念还有留有争议。</li>
+</ul>
+<h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><p><em>记录应用程序的日志函数库。</em></p>
+<ul>
+<li><a href="https://logback.qos.ch/" target="_blank" rel="noopener">Logback</a>：Log4j原班人马作品，被证明是一个强健的日志函数库，通过Groovy提供了很多有意思的配置选项。</li>
+<li><a href="https://www.slf4j.org/" target="_blank" rel="noopener">SLF4J</a>：日志抽象层，需要与某个具体日志框架配合使用。</li>
+<li><a href="https://logging.apache.org/log4j/2.x/" target="_blank" rel="noopener">Apache Log4j 2</a>：Log4j的升级版，相比Log4j 1.x 版本有了很大的性能提升，在提供了Logback所能提供的功能的同时还解决了Logback的架构下的固有问题。</li>
+<li><a href="https://www.elastic.co/products/kibana" target="_blank" rel="noopener">Kibana</a>：一个针对Elasticsearch的开源分析及可视化平台，用来搜索、查看交互存储在Elasticsearch索引中的数据。</li>
+<li><a href="https://www.elastic.co/products/logstash" target="_blank" rel="noopener">Logstash</a>：日志文件管理工具。</li>
+</ul>
+<h2 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h2><p><em>简化JSON处理的函数库。</em></p>
+<ul>
+<li><a href="https://github.com/google/gson" target="_blank" rel="noopener">Gson</a>：将Java对象序列化为JSON及反向操作，使用时提供了很好的性能。</li>
+<li><a href="https://github.com/FasterXML/jackson" target="_blank" rel="noopener">Jackson</a>：与GSON类似，但如果需要频繁初始化Jackson库会带来性能问题。</li>
+</ul>
+<h2 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h2><p><em>用来高效处理序列化的函数库。</em></p>
+<ul>
+<li><a href="https://github.com/msgpack/msgpack-java" target="_blank" rel="noopener">MessagePack</a>：一种高效的二进制序列化格式。</li>
+<li><a href="https://github.com/google/flatbuffers" target="_blank" rel="noopener">FlatBuffers</a>：序列化函数库，高效利用内存，无需解包和解析即可高效访问序列化数据。</li>
+<li><a href="https://github.com/EsotericSoftware/kryo" target="_blank" rel="noopener">Kryo</a>：快速和高效的对象图形序列化框架。</li>
+</ul>
+<h2 id="文档处理"><a href="#文档处理" class="headerlink" title="文档处理"></a>文档处理</h2><p><em>用来处理Office格式文档的函数库。</em></p>
+<ul>
+<li><a href="http://poi.apache.org/" target="_blank" rel="noopener">Apache POI</a>：支持OOXML(XLSX、DOCX、PPTX)以及 OLE2(XLS, DOC or PPT)格式的文档。</li>
+<li><a href="https://github.com/documents4j/documents4j" target="_blank" rel="noopener">documents4j</a>：使用第三方转换器进行文档格式转换的API。</li>
+<li><a href="https://www.docx4java.org/trac/docx4j" target="_blank" rel="noopener">docx4j</a>：创建和操作Microsoft Open XML(Word docx，Powerpoint pptx和Excel xlsx)文件的Java库。</li>
+</ul>
+<h2 id="PDF处理"><a href="#PDF处理" class="headerlink" title="PDF处理"></a>PDF处理</h2><p><em>用来帮助创建PDF文件的资源。</em></p>
+<ul>
+<li><a href="http://itextpdf.com/" target="_blank" rel="noopener">iText</a>：一个易于使用的PDF函数库，用来编程创建PDF文件，注意，用于商业用途时需要许可证。</li>
+<li><a href="http://community.jaspersoft.com/project/jasperreports-library" target="_blank" rel="noopener">JasperReports</a>：一个复杂的报表引擎。</li>
+<li><a href="http://dynamicreports.org/" target="_blank" rel="noopener">DynamicReports</a>：JasperReports的精简版。</li>
+<li><a href="https://xmlgraphics.apache.org/fop/" target="_blank" rel="noopener">Apache FOP</a>：从XSL-FO创建PDF。</li>
+<li><a href="https://pdfbox.apache.org/" target="_blank" rel="noopener">Apache PDFBox</a>：用来创建和操作PDF的工具集。</li>
+</ul>
+<h2 id="图像处理"><a href="#图像处理" class="headerlink" title="图像处理"></a>图像处理</h2><p><em>用来帮助创建、评估或操作图形的函数库。</em></p>
+<ul>
+<li><a href="https://github.com/square/picasso" target="_blank" rel="noopener">Picasso</a>：Android下载图像和图像缓存函数库。</li>
+<li><a href="https://github.com/zxing/zxing" target="_blank" rel="noopener">ZXing</a>：多种格式的一维、二维条形码处理函数库。</li>
+</ul>
+<h2 id="游戏开发"><a href="#游戏开发" class="headerlink" title="游戏开发"></a>游戏开发</h2><p><em>游戏开发框架。</em></p>
+<ul>
+<li><a href="http://jmonkeyengine.org/" target="_blank" rel="noopener">jMonkeyEngine</a>：支持现代3D开发的游戏引擎。</li>
+<li><a href="https://libgdx.badlogicgames.com/" target="_blank" rel="noopener">libGDX</a>：全面的跨平台高级开发框架。</li>
+<li><a href="https://www.lwjgl.org/" target="_blank" rel="noopener">LWJGL</a>：抽象了OpenGL、CL、AL等函数库的健壮框架。</li>
+</ul>
+<h2 id="GUI"><a href="#GUI" class="headerlink" title="GUI"></a>GUI</h2><p><em>用来创建现代图形用户界面的函数库。</em></p>
+<ul>
+<li><a href="http://www.eclipse.org/swt/" target="_blank" rel="noopener">SWT</a>：Java开源小部件工具包。</li>
+<li><a href="http://www.oracle.com/technetwork/java/javase/overview/javafx-overview-2158620.html" target="_blank" rel="noopener">JavaFX</a>：Swing的继承者。</li>
+<li><a href="http://gluonhq.com/products/scene-builder/" target="_blank" rel="noopener">Scene Builder</a>：JavaFX虚拟布局工具。</li>
+</ul>
+<h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h2><p><em>使用本机格式分发Java应用程序的工具。</em></p>
+<ul>
+<li><a href="http://launch4j.sourceforge.net/" target="_blank" rel="noopener">Launch4j</a>：将JAR包装为小巧的Windows可执行文件。</li>
+<li><a href="https://github.com/libgdx/packr/" target="_blank" rel="noopener">packr</a>：将程序JAR、资源和JVM打包成Windows、Linux和Mac OS X的本机文件。</li>
+<li><a href="https://bintray.com/" target="_blank" rel="noopener">Bintray</a>：对二进制发布进行版本控制，可与Maven或Gradle配合使用。</li>
+<li><a href="http://izpack.org/" target="_blank" rel="noopener">IzPack</a>：为跨平台部署建立授权工具。</li>
+</ul>
+<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><p><em>其它资源。</em></p>
+<ul>
+<li><a href="https://github.com/iluwatar/java-design-patterns" target="_blank" rel="noopener">Design Patterns</a>：实现并解释了最常见的设计模式。</li>
+<li><a href="https://github.com/google/jimfs" target="_blank" rel="noopener">Jimfs</a>：内存文件系统。</li>
+<li><a href="http://lightadmin.org/" target="_blank" rel="noopener">LightAdmin</a>：可插入式CRUD UI函数库，可用于快速应用开发。</li>
+<li><a href="http://openrefine.org/" target="_blank" rel="noopener">OpenRefine</a>：用来处理混乱数据的工具，包括清理、转换、使用Web Service进行扩展并将其关联到数据库。</li>
+<li><a href="https://robovm.com/" target="_blank" rel="noopener">RoboVM</a>：Java编写原生iOS应用。</li>
+</ul>
+<h2 id="网站"><a href="#网站" class="headerlink" title="网站"></a>网站</h2><p><em>值得关注的网站。</em></p>
+<ul>
+<li><a href="https://www.tutorialspoint.com/index.htm" target="_blank" rel="noopener">TutorialsPoint</a></li>
+<li><a href="http://tutorials.jenkov.com/" target="_blank" rel="noopener">Jenkov.com</a></li>
+<li><a href="http://java.net/" target="_blank" rel="noopener">Java.net</a></li>
+<li><a href="https://www.infoq.com/" target="_blank" rel="noopener">InfoQ</a></li>
+<li><a href="http://algs4.cs.princeton.edu/code/" target="_blank" rel="noopener">Java Algorithms and Clients</a></li>
+<li><a href="https://dzone.com/java-jdk-development-tutorials-tools-news" target="_blank" rel="noopener">Javalobby</a></li>
+<li><a href="http://www.javaworld.com/" target="_blank" rel="noopener">JavaWorld</a></li>
+<li><a href="https://zeroturnaround.com/rebellabs/" target="_blank" rel="noopener">RebelLabs</a></li>
+<li><a href="http://www.theserverside.com/" target="_blank" rel="noopener">TheServerSide.com</a></li>
+<li><a href="https://www.tiobe.com/tiobe-index/" target="_blank" rel="noopener">TIOBE</a></li>
+</ul>
+<blockquote>
+<p>文章翻译自 <a href="https://github.com/akullpp/awesome-java" target="_blank" rel="noopener">akullpp Github</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/uploads/wechatpay.png" alt="Gavin Lu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/awesome/" rel="tag"># awesome</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/27/tools/checkstyle/" rel="next" title="Checkstyle">
+                <i class="fa fa-chevron-left"></i> Checkstyle
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/29/javaee/mybatis/" rel="prev" title="MyBatis">
+                MyBatis <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/uploads/avatar.png" alt="Gavin Lu">
+            
+              <p class="site-author-name" itemprop="name">Gavin Lu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/lugavin" title="GitHub &rarr; https://github.com/lugavin" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://bitbucket.org/lugavin" title="Bitbucket &rarr; https://bitbucket.org/lugavin" rel="noopener" target="_blank"><i class="fa fa-fw fa-bitbucket"></i>Bitbucket</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#构建"><span class="nav-number">1.</span> <span class="nav-text">构建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码分析"><span class="nav-number">2.</span> <span class="nav-text">代码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#持续集成"><span class="nav-number">3.</span> <span class="nav-text">持续集成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IDE"><span class="nav-number">4.</span> <span class="nav-text">IDE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#机器学习"><span class="nav-number">5.</span> <span class="nav-text">机器学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式应用"><span class="nav-number">6.</span> <span class="nav-text">分布式应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库"><span class="nav-number">7.</span> <span class="nav-text">数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器"><span class="nav-number">8.</span> <span class="nav-text">服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息"><span class="nav-number">9.</span> <span class="nav-text">消息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索"><span class="nav-number">10.</span> <span class="nav-text">搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络"><span class="nav-number">11.</span> <span class="nav-text">网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络爬虫"><span class="nav-number">12.</span> <span class="nav-text">网络爬虫</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高性能"><span class="nav-number">13.</span> <span class="nav-text">高性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安全"><span class="nav-number">14.</span> <span class="nav-text">安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web框架"><span class="nav-number">15.</span> <span class="nav-text">Web框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#REST框架"><span class="nav-number">16.</span> <span class="nav-text">REST框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ORM框架"><span class="nav-number">17.</span> <span class="nav-text">ORM框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">18.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模版引擎"><span class="nav-number">19.</span> <span class="nav-text">模版引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发库"><span class="nav-number">20.</span> <span class="nav-text">开发库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM和JDK"><span class="nav-number">21.</span> <span class="nav-text">JVM和JDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译器"><span class="nav-number">22.</span> <span class="nav-text">编译器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字节码操作"><span class="nav-number">23.</span> <span class="nav-text">字节码操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖注入"><span class="nav-number">24.</span> <span class="nav-text">依赖注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工具类"><span class="nav-number">25.</span> <span class="nav-text">工具类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志"><span class="nav-number">26.</span> <span class="nav-text">日志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON"><span class="nav-number">27.</span> <span class="nav-text">JSON</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#序列化"><span class="nav-number">28.</span> <span class="nav-text">序列化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文档处理"><span class="nav-number">29.</span> <span class="nav-text">文档处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PDF处理"><span class="nav-number">30.</span> <span class="nav-text">PDF处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图像处理"><span class="nav-number">31.</span> <span class="nav-text">图像处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#游戏开发"><span class="nav-number">32.</span> <span class="nav-text">游戏开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GUI"><span class="nav-number">33.</span> <span class="nav-text">GUI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布"><span class="nav-number">34.</span> <span class="nav-text">发布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它"><span class="nav-number">35.</span> <span class="nav-text">其它</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网站"><span class="nav-number">36.</span> <span class="nav-text">网站</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gavin Lu</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: false,
+        appId: '5IwtIhDDNAEOmFsA0RwltEjE-gzGzoHsz',
+        appKey: 'aep6gMEg10pFmdT7kHu53dPV',
+        placeholder: 'Type your message here',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: true
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

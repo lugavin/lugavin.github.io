@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Linux Ubuntuhttp://releases.ubuntu.com/jammy/ubuntu-22.04.1-desktop-amd64.isohttp://releases.ubuntu.com/jammy/ubuntu-22.04.1-live-server-amd64.iso Manjarohttps://download.manjaro.org/xfce/21.3.7/manja">
+<meta name="keywords" content="windows">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Software - Windows">
+<meta property="og:url" content="https://lugavin.github.io/2017/05/27/software/windows/index.html">
+<meta property="og:site_name" content="Gavin&#39;s blog">
+<meta property="og:description" content="Linux Ubuntuhttp://releases.ubuntu.com/jammy/ubuntu-22.04.1-desktop-amd64.isohttp://releases.ubuntu.com/jammy/ubuntu-22.04.1-live-server-amd64.iso Manjarohttps://download.manjaro.org/xfce/21.3.7/manja">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2025-06-21T02:09:57.966Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Software - Windows">
+<meta name="twitter:description" content="Linux Ubuntuhttp://releases.ubuntu.com/jammy/ubuntu-22.04.1-desktop-amd64.isohttp://releases.ubuntu.com/jammy/ubuntu-22.04.1-live-server-amd64.iso Manjarohttps://download.manjaro.org/xfce/21.3.7/manja">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Gavin's blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://lugavin.github.io/2017/05/27/software/windows/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Software - Windows | Gavin's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gavin's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">路漫漫其修远兮 吾将上下而求索</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-comments">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/comments/" rel="section"><i class="menu-item-icon fa fa-fw fa-send"></i> <br>留言</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lugavin.github.io/2017/05/27/software/windows/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gavin Lu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gavin's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Software - Windows
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-05-27 08:30:00" itemprop="dateCreated datePublished" datetime="2017-05-27T08:30:00+00:00">2017-05-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2025-06-21 02:09:57" itemprop="dateModified" datetime="2025-06-21T02:09:57+00:00">2025-06-21</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/software/" itemprop="url" rel="index"><span itemprop="name">software</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+             <span id="/2017/05/27/software/windows/" class="leancloud_visitors" data-flag-title="Software - Windows">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a><a href="https://archive.kernel.org/" target="_blank" rel="noopener">Linux</a></h2><ul>
+<li><a href="http://releases.ubuntu.com/" target="_blank" rel="noopener">Ubuntu</a><br><a href="http://releases.ubuntu.com/jammy/ubuntu-22.04.1-desktop-amd64.iso" target="_blank" rel="noopener">http://releases.ubuntu.com/jammy/ubuntu-22.04.1-desktop-amd64.iso</a><br><a href="http://releases.ubuntu.com/jammy/ubuntu-22.04.1-live-server-amd64.iso" target="_blank" rel="noopener">http://releases.ubuntu.com/jammy/ubuntu-22.04.1-live-server-amd64.iso</a></li>
+<li><a href="https://manjaro.org/download/" target="_blank" rel="noopener">Manjaro</a><br><a href="https://download.manjaro.org/xfce/21.3.7/manjaro-xfce-21.3.7-220816-linux515.iso" target="_blank" rel="noopener">https://download.manjaro.org/xfce/21.3.7/manjaro-xfce-21.3.7-220816-linux515.iso</a><br><a href="https://download.manjaro.org/kde/21.3.7/manjaro-kde-21.3.7-220816-linux515.iso" target="_blank" rel="noopener">https://download.manjaro.org/kde/21.3.7/manjaro-kde-21.3.7-220816-linux515.iso</a><br><a href="https://download.manjaro.org/gnome/21.3.7/manjaro-gnome-21.3.7-220816-linux515.iso" target="_blank" rel="noopener">https://download.manjaro.org/gnome/21.3.7/manjaro-gnome-21.3.7-220816-linux515.iso</a></li>
+</ul>
+<h2 id="Microsoft"><a href="#Microsoft" class="headerlink" title="Microsoft"></a>Microsoft</h2><ul>
+<li>Office Professional Plus 2007<br><a href="ed2k://|file|cn_office_professional_plus_2007_dvd_X12-38713.iso|694059008|CFAE350F8A9028110D12D61D9AEC1315|/" target="_blank" rel="noopener">http://download.msdn.microsoft.com/pr/cn_office_professional_plus_2007_dvd_X12-38713.iso</a></li>
+<li>Windows 7 Professional SP1 VL<br><a href="ed2k://|file|cn_windows_7_professional_with_sp1_vl_build_x86_dvd_u_677939.iso|2502909952|935E5B4B754527BE3C238FA6ABDD9B86|/" target="_blank" rel="noopener">http://download.msdn.microsoft.com/pr/cn_windows_7_professional_with_sp1_vl_build_x86_dvd_u_677939.iso</a><br><a href="ed2k://|file|cn_windows_7_professional_with_sp1_vl_build_x64_dvd_u_677816.iso|3266004992|5A52F4CCEFA71797D58389B397038B2F|/" target="_blank" rel="noopener">http://download.msdn.microsoft.com/pr/cn_windows_7_professional_with_sp1_vl_build_x64_dvd_u_677816.iso</a></li>
+<li>Windows 8 Professional VL<br><a href="ed2k://|file|cn_windows_8_pro_vl_x86_dvd_917720.iso|2595137536|E87CEF7B8B4EFB12B0A7397795209301|/" target="_blank" rel="noopener">http://download.msdn.microsoft.com/pr/cn_windows_8_pro_vl_x86_dvd_917720.iso</a><br><a href="ed2k://|file|cn_windows_8_pro_vl_x64_dvd_917773.iso|3558014976|7956620A80428F37D4F2989CB5CF3B5A|/" target="_blank" rel="noopener">http://download.msdn.microsoft.com/pr/cn_windows_8_pro_vl_x64_dvd_917773.iso</a></li>
+<li>Windows 8.1 Professional VL<br><a href="ed2k://|file|cn_windows_8_1_pro_vl_x86_dvd_2972620.iso|3049981952|5B396C3A0BA99617647D9AFE8403AFA5|/" target="_blank" rel="noopener">http://download.msdn.microsoft.com/pr/cn_windows_8_1_pro_vl_x86_dvd_2972620.iso</a><br><a href="ed2k://|file|cn_windows_8_1_pro_vl_x64_dvd_2971907.iso|4032598016|1FDA520B3E8880E2FB00B20439E0826E|/" target="_blank" rel="noopener">http://download.msdn.microsoft.com/pr/cn_windows_8_1_pro_vl_x64_dvd_2971907.iso</a></li>
+<li>Windows 10 Enterprise<br><a href="ed2k://|file|cn_windows_10_enterprise_ltsc_2019_x86_dvd_1814dbab.iso|3196803072|2D39C54A2E99BAC308191C74A15B3237|/" target="_blank" rel="noopener">http://download.msdn.microsoft.com/pr/cn_windows_10_enterprise_ltsc_2019_x86_dvd_1814dbab.iso</a><br><a href="ed2k://|file|cn_windows_10_enterprise_ltsc_2019_x64_dvd_9c09ff24.iso|4478906368|E7C526499308841A4A6D116C857DB669|/" target="_blank" rel="noopener">http://download.msdn.microsoft.com/pr/cn_windows_10_enterprise_ltsc_2019_x64_dvd_9c09ff24.iso</a></li>
+<li><a href="https://www.catalog.update.microsoft.com/Search.aspx?q=KB4520062" target="_blank" rel="noopener">Windows 10 Version 1809 Cumulative Update</a><br><a href="http://download.windowsupdate.com/d/msdownload/update/software/updt/2019/10/windows10.0-kb4520062-x86_04995cd1c84f7b454d8ac1163bde69b49d7ed592.msu" target="_blank" rel="noopener">http://download.windowsupdate.com/d/msdownload/update/software/updt/2019/10/windows10.0-kb4520062-x86_04995cd1c84f7b454d8ac1163bde69b49d7ed592.msu</a><br><a href="http://download.windowsupdate.com/d/msdownload/update/software/updt/2019/10/windows10.0-kb4520062-x64_9f2a827f11f945d19bd26de6f113f611a38bb8a1.msu" target="_blank" rel="noopener">http://download.windowsupdate.com/d/msdownload/update/software/updt/2019/10/windows10.0-kb4520062-x64_9f2a827f11f945d19bd26de6f113f611a38bb8a1.msu</a></li>
+</ul>
+<h2 id="Adobe"><a href="#Adobe" class="headerlink" title="Adobe"></a><a href="ftp://ftp.adobe.com/pub/adobe/" target="_blank" rel="noopener">Adobe</a></h2><ul>
+<li><a href="https://helpx.adobe.com/cn/creative-suite/kb/cs4-product-downloads.html" target="_blank" rel="noopener">Adobe Master Collection CS4</a><br><a href="http://trials2.adobe.com/Applications/MastCol/CS4/Win/ADBESTAMCS4_LS1.7z" target="_blank" rel="noopener">http://trials2.adobe.com/Applications/MastCol/CS4/Win/ADBESTAMCS4_LS1.7z</a><br><a href="http://trials2.adobe.com/Applications/MastCol/CS4/Mac/ADBESTAMCS4_LS1.dmg" target="_blank" rel="noopener">http://trials2.adobe.com/Applications/MastCol/CS4/Mac/ADBESTAMCS4_LS1.dmg</a></li>
+<li><a href="https://helpx.adobe.com/cn/creative-suite/kb/cs5-product-downloads.html" target="_blank" rel="noopener">Adobe Master Collection CS5</a><br><a href="http://trials2.adobe.com/AdobeProducts/STAM/CS5/win32/MasterCollection_CS5_LS1.7z" target="_blank" rel="noopener">http://trials2.adobe.com/AdobeProducts/STAM/CS5/win32/MasterCollection_CS5_LS1.7z</a><br><a href="http://trials2.adobe.com/AdobeProducts/STAM/CS5/osx10/MasterCollection_CS5_LS1.dmg" target="_blank" rel="noopener">http://trials2.adobe.com/AdobeProducts/STAM/CS5/osx10/MasterCollection_CS5_LS1.dmg</a></li>
+<li><a href="https://helpx.adobe.com/cn/creative-suite/kb/cs5-5-product-downloads.html" target="_blank" rel="noopener">Adobe Master Collection CS5.5</a><br><a href="http://trials3.adobe.com/AdobeProducts/STAM/CS5_5/win32/MasterCollection_CS5_5_LS1.7z" target="_blank" rel="noopener">http://trials3.adobe.com/AdobeProducts/STAM/CS5_5/win32/MasterCollection_CS5_5_LS1.7z</a><br><a href="http://trials3.adobe.com/AdobeProducts/STAM/CS5_5/osx10/MasterCollection_CS5_5_LS1.dmg" target="_blank" rel="noopener">http://trials3.adobe.com/AdobeProducts/STAM/CS5_5/osx10/MasterCollection_CS5_5_LS1.dmg</a></li>
+<li><a href="https://helpx.adobe.com/cn/download-install/kb/cs5-5-product-downloads.html" target="_blank" rel="noopener">Adobe After Effects</a><br><a href="http://trials.adobe.com/Applications/AfterEffects/CS4/Win/ADBEAFETCS4_LS7.7z" target="_blank" rel="noopener">http://trials.adobe.com/Applications/AfterEffects/CS4/Win/ADBEAFETCS4_LS7.7z</a><br><a href="http://trials.adobe.com/Applications/AfterEffects/CS4/Mac/ADBEAFETCS4_LS7.dmg" target="_blank" rel="noopener">http://trials.adobe.com/Applications/AfterEffects/CS4/Mac/ADBEAFETCS4_LS7.dmg</a><br><a href="http://trials2.adobe.com/AdobeProducts/AEFT/10/win64/AfterEffects_10_LS7.7z" target="_blank" rel="noopener">http://trials2.adobe.com/AdobeProducts/AEFT/10/win64/AfterEffects_10_LS7.7z</a><br><a href="http://trials2.adobe.com/dlm/AdobeProducts/AEFT/10/osx10-64/AfterEffects_10_LS7.dmg" target="_blank" rel="noopener">http://trials2.adobe.com/dlm/AdobeProducts/AEFT/10/osx10-64/AfterEffects_10_LS7.dmg</a><br><a href="http://trials3.adobe.com/AdobeProducts/AEFT/10_5/win64/AfterEffects_10_5_LS7.7z" target="_blank" rel="noopener">http://trials3.adobe.com/AdobeProducts/AEFT/10_5/win64/AfterEffects_10_5_LS7.7z</a><br><a href="http://trials3.adobe.com/AdobeProducts/AEFT/10_5/osx10-64/AfterEffects_10_5_LS7.dmg" target="_blank" rel="noopener">http://trials3.adobe.com/AdobeProducts/AEFT/10_5/osx10-64/AfterEffects_10_5_LS7.dmg</a></li>
+<li><a href="https://helpx.adobe.com/cn/download-install/kb/cs5-5-product-downloads.html" target="_blank" rel="noopener">Adobe Premiere Pro</a><br><a href="http://trials.adobe.com/Applications/PremierePro/CS4/Win/ADBEPPROCS4_LS7.7z" target="_blank" rel="noopener">http://trials.adobe.com/Applications/PremierePro/CS4/Win/ADBEPPROCS4_LS7.7z</a><br><a href="http://trials2.adobe.com/AdobeProducts/PPRO/5/win32/PremierePro_5_LS7.7z" target="_blank" rel="noopener">http://trials2.adobe.com/AdobeProducts/PPRO/5/win32/PremierePro_5_LS7.7z</a><br><a href="http://trials2.adobe.com/AdobeProducts/PPRO/5_5/win32/PremierePro_5_5_LS7.7z" target="_blank" rel="noopener">http://trials2.adobe.com/AdobeProducts/PPRO/5_5/win32/PremierePro_5_5_LS7.7z</a><br><a href="http://trials2.adobe.com/dlm/Applications/PremierePro/CS4/Mac/ADBEPPROCS4_LS7.dmg" target="_blank" rel="noopener">http://trials2.adobe.com/dlm/Applications/PremierePro/CS4/Mac/ADBEPPROCS4_LS7.dmg</a><br><a href="http://trials2.adobe.com/dlm/AdobeProducts/PPRO/5/osx10/PremierePro_5_LS7.dmg" target="_blank" rel="noopener">http://trials2.adobe.com/dlm/AdobeProducts/PPRO/5/osx10/PremierePro_5_LS7.dmg</a><br><a href="http://trials3.adobe.com/AdobeProducts/PPRO/5_5/osx10/PremierePro_5_5_LS7.dmg" target="_blank" rel="noopener">http://trials3.adobe.com/AdobeProducts/PPRO/5_5/osx10/PremierePro_5_5_LS7.dmg</a></li>
+<li><a href="https://helpx.adobe.com/cn/download-install/kb/cs5-5-product-downloads.html" target="_blank" rel="noopener">Adobe Photoshop</a><br><a href="http://trials.adobe.com/Applications/Photoshop/CS4/Win/ADBEPHSPCS4_LS3.7z" target="_blank" rel="noopener">http://trials.adobe.com/Applications/Photoshop/CS4/Win/ADBEPHSPCS4_LS3.7z</a><br><a href="http://trials2.adobe.com/AdobeProducts/PHSP/12/win32/Photoshop_12_LS3.7z" target="_blank" rel="noopener">http://trials2.adobe.com/AdobeProducts/PHSP/12/win32/Photoshop_12_LS3.7z</a><br><a href="http://trials2.adobe.com/AdobeProducts/PHSP/12_1/win32/Photoshop_12_1_LS3.7z" target="_blank" rel="noopener">http://trials2.adobe.com/AdobeProducts/PHSP/12_1/win32/Photoshop_12_1_LS3.7z</a><br><a href="http://trials2.adobe.com/dlm/Applications/Photoshop/CS4/Mac/ADBEPHSPCS4_LS1.dmg" target="_blank" rel="noopener">http://trials2.adobe.com/dlm/Applications/Photoshop/CS4/Mac/ADBEPHSPCS4_LS1.dmg</a><br><a href="http://trials2.adobe.com/dlm/AdobeProducts/PHSP/12/osx10/Photoshop_12_LS1.dmg" target="_blank" rel="noopener">http://trials2.adobe.com/dlm/AdobeProducts/PHSP/12/osx10/Photoshop_12_LS1.dmg</a><br><a href="http://trials3.adobe.com/AdobeProducts/PHSP/12_1/osx10/Photoshop_12_1_LS1.dmg" target="_blank" rel="noopener">http://trials3.adobe.com/AdobeProducts/PHSP/12_1/osx10/Photoshop_12_1_LS1.dmg</a></li>
+<li><a href="https://helpx.adobe.com/cn/download-install/kb/cs5-5-product-downloads.html" target="_blank" rel="noopener">Adobe Flash Professional</a><br><a href="http://trials.adobe.com/Applications/FlashPro/CS4/Win/ADBEFLPRCS4_LS3.7z" target="_blank" rel="noopener">http://trials.adobe.com/Applications/FlashPro/CS4/Win/ADBEFLPRCS4_LS3.7z</a><br><a href="http://trials2.adobe.com/AdobeProducts/FLPR/11/win32/FlashPro_11_LS3.7z" target="_blank" rel="noopener">http://trials2.adobe.com/AdobeProducts/FLPR/11/win32/FlashPro_11_LS3.7z</a><br><a href="http://trials2.adobe.com/AdobeProducts/FLPR/11_5/win32/FlashPro_11_5_LS3.exe" target="_blank" rel="noopener">http://trials2.adobe.com/AdobeProducts/FLPR/11_5/win32/FlashPro_11_5_LS3.exe</a><br><a href="http://trials.adobe.com/Applications/FlashPro/CS4/Mac/ADBEFLPRCS4_LS1.dmg" target="_blank" rel="noopener">http://trials.adobe.com/Applications/FlashPro/CS4/Mac/ADBEFLPRCS4_LS1.dmg</a><br><a href="http://trials2.adobe.com/dlm/AdobeProducts/FLPR/11/osx10/FlashPro_11_LS1.dmg" target="_blank" rel="noopener">http://trials2.adobe.com/dlm/AdobeProducts/FLPR/11/osx10/FlashPro_11_LS1.dmg</a><br><a href="http://trials3.adobe.com/AdobeProducts/FLPR/11_5/osx10/FlashPro_11_5_LS1.dmg" target="_blank" rel="noopener">http://trials3.adobe.com/AdobeProducts/FLPR/11_5/osx10/FlashPro_11_5_LS1.dmg</a></li>
+<li><a href="https://helpx.adobe.com/cn/download-install/kb/cs5-5-product-downloads.html" target="_blank" rel="noopener">Adobe Dreamweaver</a><br><a href="http://trials.adobe.com/Applications/Dreamweaver/CS4/Win/ADBEDRWVCS4_LS3.7z" target="_blank" rel="noopener">http://trials.adobe.com/Applications/Dreamweaver/CS4/Win/ADBEDRWVCS4_LS3.7z</a><br><a href="http://trials2.adobe.com/AdobeProducts/DRWV/11/win32/Dreamweaver_11_LS3.exe" target="_blank" rel="noopener">http://trials2.adobe.com/AdobeProducts/DRWV/11/win32/Dreamweaver_11_LS3.exe</a><br><a href="http://trials2.adobe.com/dlm/AdobeProducts/DRWV/11_5/win32/Dreamweaver_11_5_LS3.exe" target="_blank" rel="noopener">http://trials2.adobe.com/dlm/AdobeProducts/DRWV/11_5/win32/Dreamweaver_11_5_LS3.exe</a><br><a href="http://trials2.adobe.com/dlm/Applications/Dreamweaver/CS4/Mac/ADBEDRWVCS4_LS1.dmg" target="_blank" rel="noopener">http://trials2.adobe.com/dlm/Applications/Dreamweaver/CS4/Mac/ADBEDRWVCS4_LS1.dmg</a><br><a href="http://trials2.adobe.com/dlm/AdobeProducts/DRWV/11/osx10/Dreamweaver_11_LS1.dmg" target="_blank" rel="noopener">http://trials2.adobe.com/dlm/AdobeProducts/DRWV/11/osx10/Dreamweaver_11_LS1.dmg</a><br><a href="http://trials3.adobe.com/AdobeProducts/DRWV/11_5/osx10/Dreamweaver_11_5_LS1.dmg" target="_blank" rel="noopener">http://trials3.adobe.com/AdobeProducts/DRWV/11_5/osx10/Dreamweaver_11_5_LS1.dmg</a></li>
+<li><a href="https://helpx.adobe.com/cn/download-install/kb/cs5-5-product-downloads.html" target="_blank" rel="noopener">Adobe Fireworks</a><br><a href="http://trials.adobe.com/Applications/Fireworks/CS4/Win/ADBEFWKSCS4_LS3.7z" target="_blank" rel="noopener">http://trials.adobe.com/Applications/Fireworks/CS4/Win/ADBEFWKSCS4_LS3.7z</a><br><a href="http://trials2.adobe.com/AdobeProducts/FWKS/11/win32/Fireworks_11_LS3.exe" target="_blank" rel="noopener">http://trials2.adobe.com/AdobeProducts/FWKS/11/win32/Fireworks_11_LS3.exe</a><br><a href="http://trials2.adobe.com/dlm/AdobeProducts/FWKS/11/win32/Fireworks_11_LS1.exe" target="_blank" rel="noopener">http://trials2.adobe.com/dlm/AdobeProducts/FWKS/11/win32/Fireworks_11_LS1.exe</a><br><a href="http://trials.adobe.com/dlm/Applications/Fireworks/CS4/Mac/ADBEFWKSCS4_LS1.dmg" target="_blank" rel="noopener">http://trials.adobe.com/dlm/Applications/Fireworks/CS4/Mac/ADBEFWKSCS4_LS1.dmg</a><br><a href="http://trials2.adobe.com/dlm/AdobeProducts/FWKS/11/osx10/Fireworks_11_LS1.dmg" target="_blank" rel="noopener">http://trials2.adobe.com/dlm/AdobeProducts/FWKS/11/osx10/Fireworks_11_LS1.dmg</a><br><a href="http://trials2.adobe.com/dlm/AdobeProducts/FWKS/11/osx10/Fireworks_11_LS1.dmg" target="_blank" rel="noopener">http://trials2.adobe.com/dlm/AdobeProducts/FWKS/11/osx10/Fireworks_11_LS1.dmg</a></li>
+<li><a href="https://helpx.adobe.com/cn/download-install/kb/cs5-5-product-downloads.html" target="_blank" rel="noopener">Adobe Illustrator</a><br><a href="http://trials.adobe.com/Applications/Illustrator/CS4/Win/ADBEILSTCS4_LS3.7z" target="_blank" rel="noopener">http://trials.adobe.com/Applications/Illustrator/CS4/Win/ADBEILSTCS4_LS3.7z</a><br><a href="http://trials2.adobe.com/AdobeProducts/ILST/15/win32/Illustrator_15_LS3.7z" target="_blank" rel="noopener">http://trials2.adobe.com/AdobeProducts/ILST/15/win32/Illustrator_15_LS3.7z</a><br><a href="http://trials2.adobe.com/AdobeProducts/ILST/15_1/win32/Illustrator_15_1_LS3.7z" target="_blank" rel="noopener">http://trials2.adobe.com/AdobeProducts/ILST/15_1/win32/Illustrator_15_1_LS3.7z</a><br><a href="http://trials2.adobe.com/dlm/Applications/Illustrator/CS4/Mac/ADBEILSTCS4_LS1.dmg" target="_blank" rel="noopener">http://trials2.adobe.com/dlm/Applications/Illustrator/CS4/Mac/ADBEILSTCS4_LS1.dmg</a><br><a href="http://trials2.adobe.com/dlm/AdobeProducts/ILST/15/osx10/Illustrator_15_LS1.dmg" target="_blank" rel="noopener">http://trials2.adobe.com/dlm/AdobeProducts/ILST/15/osx10/Illustrator_15_LS1.dmg</a><br><a href="http://trials3.adobe.com/AdobeProducts/ILST/15_1/osx10/Illustrator_15_1_LS1.dmg" target="_blank" rel="noopener">http://trials3.adobe.com/AdobeProducts/ILST/15_1/osx10/Illustrator_15_1_LS1.dmg</a></li>
+<li><a href="https://helpx.adobe.com/cn/download-install/kb/cs5-5-product-downloads.html" target="_blank" rel="noopener">Adobe InDesign</a><br><a href="http://trials.adobe.com/Applications/InDesign/CS4/Win/ADBEIDSNCS4_LS3.7z" target="_blank" rel="noopener">http://trials.adobe.com/Applications/InDesign/CS4/Win/ADBEIDSNCS4_LS3.7z</a><br><a href="http://trials2.adobe.com/AdobeProducts/IDSN/7/win32/InDesign_7_LS3.7z" target="_blank" rel="noopener">http://trials2.adobe.com/AdobeProducts/IDSN/7/win32/InDesign_7_LS3.7z</a><br><a href="http://trials2.adobe.com/AdobeProducts/IDSN/7_5/win32/InDesign_7_5_LS3.7z" target="_blank" rel="noopener">http://trials2.adobe.com/AdobeProducts/IDSN/7_5/win32/InDesign_7_5_LS3.7z</a><br><a href="http://trials.adobe.com/dlm/Applications/InDesign/CS4/Mac/ADBEIDSNCS4_LS1.dmg" target="_blank" rel="noopener">http://trials.adobe.com/dlm/Applications/InDesign/CS4/Mac/ADBEIDSNCS4_LS1.dmg</a><br><a href="http://trials2.adobe.com/AdobeProducts/IDSN/7/osx10/InDesign_7_LS1.dmg" target="_blank" rel="noopener">http://trials2.adobe.com/AdobeProducts/IDSN/7/osx10/InDesign_7_LS1.dmg</a><br><a href="http://trials3.adobe.com/AdobeProducts/IDSN/7_5/osx10/InDesign_7_5_LS1.dmg" target="_blank" rel="noopener">http://trials3.adobe.com/AdobeProducts/IDSN/7_5/osx10/InDesign_7_5_LS1.dmg</a></li>
+<li><a href="https://helpx.adobe.com/cn/download-install/kb/cs5-5-product-downloads.html" target="_blank" rel="noopener">Adobe InCopy</a><br><a href="http://trials.adobe.com/Applications/InCopy/CS4/Win/ADBEAICYCS4_LS1.7z" target="_blank" rel="noopener">http://trials.adobe.com/Applications/InCopy/CS4/Win/ADBEAICYCS4_LS1.7z</a><br><a href="http://trials2.adobe.com/AdobeProducts/AICY/7_5/win32/InCopy_7_5_LS3.7z" target="_blank" rel="noopener">http://trials2.adobe.com/AdobeProducts/AICY/7_5/win32/InCopy_7_5_LS3.7z</a><br><a href="http://trials3.adobe.com/AdobeProducts/AICY/7_5/win32/InCopy_7_5_LS1.7z" target="_blank" rel="noopener">http://trials3.adobe.com/AdobeProducts/AICY/7_5/win32/InCopy_7_5_LS1.7z</a><br><a href="http://trials.adobe.com/dlm/Applications/InCopy/CS4/Mac/ADBEAICYCS4_LS1.dmg" target="_blank" rel="noopener">http://trials.adobe.com/dlm/Applications/InCopy/CS4/Mac/ADBEAICYCS4_LS1.dmg</a><br><a href="http://trials2.adobe.com/dlm/AdobeProducts/AICY/7/osx10/InCopy_7_LS1.dmg" target="_blank" rel="noopener">http://trials2.adobe.com/dlm/AdobeProducts/AICY/7/osx10/InCopy_7_LS1.dmg</a><br><a href="http://trials3.adobe.com/AdobeProducts/AICY/7_5/osx10/InCopy_7_5_LS1.dmg" target="_blank" rel="noopener">http://trials3.adobe.com/AdobeProducts/AICY/7_5/osx10/InCopy_7_5_LS1.dmg</a></li>
+<li><a href="https://helpx.adobe.com/cn/acrobat/kb/acrobat-downloads.html" target="_blank" rel="noopener">Adobe Acrobat X Pro</a><br><a href="http://trials2.adobe.com/AdobeProducts/APRO/10/win32/AcrobatPro_10_Web_WWEFD.exe" target="_blank" rel="noopener">http://trials2.adobe.com/AdobeProducts/APRO/10/win32/AcrobatPro_10_Web_WWEFD.exe</a><br><a href="http://trials2.adobe.com/AdobeProducts/APRO/10/osx10/AcrobatPro_10_Web_WWEFD.dmg" target="_blank" rel="noopener">http://trials2.adobe.com/AdobeProducts/APRO/10/osx10/AcrobatPro_10_Web_WWEFD.dmg</a></li>
+</ul>
+<h2 id="Jetbrains"><a href="#Jetbrains" class="headerlink" title="Jetbrains"></a>Jetbrains</h2><ul>
+<li><a href="https://www.jetbrains.com/idea/download/other.html" target="_blank" rel="noopener">IntelliJ IDEA</a><br><a href="https://download.jetbrains.com/idea/ideaIU-2021.1.3.win.zip" target="_blank" rel="noopener">https://download.jetbrains.com/idea/ideaIU-2021.1.3.win.zip</a><br><a href="https://download.jetbrains.com/idea/ideaIU-2021.1.3.dmg" target="_blank" rel="noopener">https://download.jetbrains.com/idea/ideaIU-2021.1.3.dmg</a><br><a href="https://download.jetbrains.com/idea/ideaIU-2021.1.3-aarch64.dmg" target="_blank" rel="noopener">https://download.jetbrains.com/idea/ideaIU-2021.1.3-aarch64.dmg</a><br><a href="https://download.jetbrains.com/idea/ideaIU-2021.1.3.tar.gz" target="_blank" rel="noopener">https://download.jetbrains.com/idea/ideaIU-2021.1.3.tar.gz</a></li>
+<li><a href="https://www.jetbrains.com/go/download/other.html" target="_blank" rel="noopener">GoLand</a><br><a href="https://download.jetbrains.com/go/goland-2021.1.3.win.zip" target="_blank" rel="noopener">https://download.jetbrains.com/go/goland-2021.1.3.win.zip</a><br><a href="https://download.jetbrains.com/go/goland-2021.1.3.dmg" target="_blank" rel="noopener">https://download.jetbrains.com/go/goland-2021.1.3.dmg</a><br><a href="https://download.jetbrains.com/go/goland-2021.1.3-aarch64.dmg" target="_blank" rel="noopener">https://download.jetbrains.com/go/goland-2021.1.3-aarch64.dmg</a><br><a href="https://download.jetbrains.com/go/goland-2021.1.3.tar.gz" target="_blank" rel="noopener">https://download.jetbrains.com/go/goland-2021.1.3.tar.gz</a></li>
+<li><a href="https://www.jetbrains.com/pycharm/download/other.html" target="_blank" rel="noopener">PyCharm</a><br><a href="https://download.jetbrains.com/python/pycharm-professional-2021.1.3.exe" target="_blank" rel="noopener">https://download.jetbrains.com/python/pycharm-professional-2021.1.3.exe</a><br><a href="https://download.jetbrains.com/python/pycharm-professional-2021.1.3.dmg" target="_blank" rel="noopener">https://download.jetbrains.com/python/pycharm-professional-2021.1.3.dmg</a><br><a href="https://download.jetbrains.com/python/pycharm-professional-2021.1.3-aarch64.dmg" target="_blank" rel="noopener">https://download.jetbrains.com/python/pycharm-professional-2021.1.3-aarch64.dmg</a><br><a href="https://download.jetbrains.com/python/pycharm-professional-2021.1.3.tar.gz" target="_blank" rel="noopener">https://download.jetbrains.com/python/pycharm-professional-2021.1.3.tar.gz</a></li>
+<li><a href="https://www.jetbrains.com/webstorm/download/other.html" target="_blank" rel="noopener">WebStorm</a><br><a href="https://download.jetbrains.com/webstorm/WebStorm-2021.1.3.win.zip" target="_blank" rel="noopener">https://download.jetbrains.com/webstorm/WebStorm-2021.1.3.win.zip</a><br><a href="https://download.jetbrains.com/webstorm/WebStorm-2021.1.3.dmg" target="_blank" rel="noopener">https://download.jetbrains.com/webstorm/WebStorm-2021.1.3.dmg</a><br><a href="https://download.jetbrains.com/webstorm/WebStorm-2021.1.3-aarch64.dmg" target="_blank" rel="noopener">https://download.jetbrains.com/webstorm/WebStorm-2021.1.3-aarch64.dmg</a><br><a href="https://download.jetbrains.com/webstorm/WebStorm-2021.1.3.tar.gz" target="_blank" rel="noopener">https://download.jetbrains.com/webstorm/WebStorm-2021.1.3.tar.gz</a></li>
+</ul>
+<h2 id="Downloader"><a href="#Downloader" class="headerlink" title="Downloader"></a>Downloader</h2><ul>
+<li><a href="https://github.com/agalwood/Motrix/releases" target="_blank" rel="noopener">Motrix</a><br><a href="https://github.com/agalwood/Motrix/releases/download/v1.6.11/Motrix-1.6.11-win.zip" target="_blank" rel="noopener">https://github.com/agalwood/Motrix/releases/download/v1.6.11/Motrix-1.6.11-win.zip</a><br><a href="https://github.com/agalwood/Motrix/releases/download/v1.6.11/Motrix-1.6.11.dmg" target="_blank" rel="noopener">https://github.com/agalwood/Motrix/releases/download/v1.6.11/Motrix-1.6.11.dmg</a><br><a href="https://github.com/agalwood/Motrix/releases/download/v1.6.11/Motrix-1.6.11-arm64.dmg" target="_blank" rel="noopener">https://github.com/agalwood/Motrix/releases/download/v1.6.11/Motrix-1.6.11-arm64.dmg</a></li>
+<li><a href="http://mirror2.internetdownloadmanager.com/a/rn/" target="_blank" rel="noopener">Internet Download Manager</a><br><a href="http://mirror2.internetdownloadmanager.com/a/rn/17209/idman608.exe" target="_blank" rel="noopener">http://mirror2.internetdownloadmanager.com/a/rn/17209/idman608.exe</a><br><a href="http://mirror3.internetdownloadmanager.com/a/rn/22260/idman608.exe" target="_blank" rel="noopener">http://mirror3.internetdownloadmanager.com/a/rn/22260/idman608.exe</a><br><a href="http://mirror3.tonec.com/a/rn/22260/idman608.exe" target="_blank" rel="noopener">http://mirror3.tonec.com/a/rn/22260/idman608.exe</a></li>
+<li>Thunder<br><a href="http://down.sandai.net/mini/ThunderMini1.5.3.288.exe" target="_blank" rel="noopener">http://down.sandai.net/mini/ThunderMini1.5.3.288.exe</a><br><a href="http://down.sandai.net/thunderspeed/ThunderSpeed1.0.35.366.exe" target="_blank" rel="noopener">http://down.sandai.net/thunderspeed/ThunderSpeed1.0.35.366.exe</a></li>
+</ul>
+<h2 id="Browser"><a href="#Browser" class="headerlink" title="Browser"></a>Browser</h2><ul>
+<li><a href="https://cloud.google.com/chrome-enterprise/browser/download/" target="_blank" rel="noopener">Chrome</a><br><a href="https://dl.google.com/edgedl/chrome/install/GoogleChromeStandaloneEnterprise.msi" target="_blank" rel="noopener">https://dl.google.com/edgedl/chrome/install/GoogleChromeStandaloneEnterprise.msi</a><br><a href="https://dl.google.com/edgedl/chrome/install/GoogleChromeStandaloneEnterprise64.msi" target="_blank" rel="noopener">https://dl.google.com/edgedl/chrome/install/GoogleChromeStandaloneEnterprise64.msi</a><br><a href="https://dl.google.com/dl/chrome/mac/universal/stable/gcea/googlechrome.dmg" target="_blank" rel="noopener">https://dl.google.com/dl/chrome/mac/universal/stable/gcea/googlechrome.dmg</a><br><a href="https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb" target="_blank" rel="noopener">https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb</a></li>
+<li><a href="https://chrome.google.com/webstore/category/extensions" target="_blank" rel="noopener">Chrome Extensions</a><br><a href="https://chrome.google.com/webstore/detail/bitwarden-free-password/nngceckbapebfimnlniiiahkandclblb" target="_blank" rel="noopener">https://chrome.google.com/webstore/detail/bitwarden-free-password/nngceckbapebfimnlniiiahkandclblb</a><br><a href="https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm" target="_blank" rel="noopener">https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm</a><br><a href="https://chrome.google.com/webstore/detail/ai-translator-and-youtube/mjdbhokoopacimoekfgkcoogikbfgngb" target="_blank" rel="noopener">https://chrome.google.com/webstore/detail/ai-translator-and-youtube/mjdbhokoopacimoekfgkcoogikbfgngb</a></li>
+</ul>
+<h2 id="Editor"><a href="#Editor" class="headerlink" title="Editor"></a>Editor</h2><ul>
+<li><a href="https://www.sublimetext.com/" target="_blank" rel="noopener">SublimeText</a><br><a href="https://download.sublimetext.com/sublime_text_build_4126.zip" target="_blank" rel="noopener">https://download.sublimetext.com/sublime_text_build_4126.zip</a><br><a href="https://download.sublimetext.com/sublime_text_build_4126_x64.zip" target="_blank" rel="noopener">https://download.sublimetext.com/sublime_text_build_4126_x64.zip</a><br><a href="https://download.sublimetext.com/sublime_text_build_4126_mac.zip" target="_blank" rel="noopener">https://download.sublimetext.com/sublime_text_build_4126_mac.zip</a><br><a href="https://download.sublimetext.com/sublime_text_build_4126_x64.tar.xz" target="_blank" rel="noopener">https://download.sublimetext.com/sublime_text_build_4126_x64.tar.xz</a></li>
+<li><a href="https://typora.io/releases/all" target="_blank" rel="noopener">Typora</a><br><a href="https://download.typora.io/windows/typora-setup-x64-1.4.8.exe" target="_blank" rel="noopener">https://download.typora.io/windows/typora-setup-x64-1.4.8.exe</a><br><a href="https://download.typora.io/mac/Typora-1.4.8.dmg" target="_blank" rel="noopener">https://download.typora.io/mac/Typora-1.4.8.dmg</a><br><a href="https://download.typora.io/linux/Typora-linux-x64-1.4.8.tar.gz" target="_blank" rel="noopener">https://download.typora.io/linux/Typora-linux-x64-1.4.8.tar.gz</a></li>
+<li><a href="https://download.anytype.io/" target="_blank" rel="noopener">Anytype</a><br><a href="https://github.com/anyproto/anytype-ts/releases/download/v0.42.4/Anytype.Setup.0.42.4.exe" target="_blank" rel="noopener">https://github.com/anyproto/anytype-ts/releases/download/v0.42.4/Anytype.Setup.0.42.4.exe</a><br><a href="https://github.com/anyproto/anytype-ts/releases/download/v0.42.4/Anytype-0.42.4-mac-x64.dmg" target="_blank" rel="noopener">https://github.com/anyproto/anytype-ts/releases/download/v0.42.4/Anytype-0.42.4-mac-x64.dmg</a><br><a href="https://github.com/anyproto/anytype-ts/releases/download/v0.42.4/Anytype-0.42.4-mac-arm64.dmg" target="_blank" rel="noopener">https://github.com/anyproto/anytype-ts/releases/download/v0.42.4/Anytype-0.42.4-mac-arm64.dmg</a><br><a href="https://github.com/anyproto/anytype-ts/releases/download/v0.42.4/anytype-0.42.4.tar.gz" target="_blank" rel="noopener">https://github.com/anyproto/anytype-ts/releases/download/v0.42.4/anytype-0.42.4.tar.gz</a></li>
+<li><a href="https://code.visualstudio.com/download" target="_blank" rel="noopener">VSCode</a><br><a href="https://vscode.cdn.azure.cn/stable/5235c6bb189b60b01b1f49062f4ffa42384f8c91/VSCode-win32-ia32-1.74.0.zip" target="_blank" rel="noopener">https://vscode.cdn.azure.cn/stable/5235c6bb189b60b01b1f49062f4ffa42384f8c91/VSCode-win32-ia32-1.74.0.zip</a><br><a href="https://vscode.cdn.azure.cn/stable/5235c6bb189b60b01b1f49062f4ffa42384f8c91/VSCode-win32-x64-1.74.0.zip" target="_blank" rel="noopener">https://vscode.cdn.azure.cn/stable/5235c6bb189b60b01b1f49062f4ffa42384f8c91/VSCode-win32-x64-1.74.0.zip</a><br><a href="https://vscode.cdn.azure.cn/stable/5235c6bb189b60b01b1f49062f4ffa42384f8c91/VSCode-darwin-universal.zip" target="_blank" rel="noopener">https://vscode.cdn.azure.cn/stable/5235c6bb189b60b01b1f49062f4ffa42384f8c91/VSCode-darwin-universal.zip</a><br><a href="https://vscode.cdn.azure.cn/stable/5235c6bb189b60b01b1f49062f4ffa42384f8c91/code-stable-x64-1670260359.tar.gz" target="_blank" rel="noopener">https://vscode.cdn.azure.cn/stable/5235c6bb189b60b01b1f49062f4ffa42384f8c91/code-stable-x64-1670260359.tar.gz</a></li>
+</ul>
+<h2 id="System"><a href="#System" class="headerlink" title="System"></a>System</h2><ul>
+<li><a href="https://www.7-zip.org/download.html" target="_blank" rel="noopener">7-Zip</a><br><a href="https://www.7-zip.org/a/7z2201.msi" target="_blank" rel="noopener">https://www.7-zip.org/a/7z2201.msi</a><br><a href="https://www.7-zip.org/a/7z2201-x64.msi" target="_blank" rel="noopener">https://www.7-zip.org/a/7z2201-x64.msi</a></li>
+<li><a href="https://www.bandisoft.com/bandizip/old/6/" target="_blank" rel="noopener">Bandizip</a><br><a href="https://dl.bandisoft.com/bandizip.old/BANDIZIP6-PORTABLE.ZIP" target="_blank" rel="noopener">https://dl.bandisoft.com/bandizip.old/BANDIZIP6-PORTABLE.ZIP</a><br><a href="https://dl.bandisoft.com/bandizip/BANDIZIP-PORTABLE-GL-32BIT.ZIP" target="_blank" rel="noopener">https://dl.bandisoft.com/bandizip/BANDIZIP-PORTABLE-GL-32BIT.ZIP</a><br><a href="https://dl.bandisoft.com/bandizip/BANDIZIP-PORTABLE-GL-64BIT.ZIP" target="_blank" rel="noopener">https://dl.bandisoft.com/bandizip/BANDIZIP-PORTABLE-GL-64BIT.ZIP</a></li>
+<li><a href="https://github.com/Bioruebe/UniExtract2/releases" target="_blank" rel="noopener">UniExtract</a><br><a href="https://github.com/Bioruebe/UniExtract2/releases/download/v2.0.0-rc.3/UniExtractRC3.zip" target="_blank" rel="noopener">https://github.com/Bioruebe/UniExtract2/releases/download/v2.0.0-rc.3/UniExtractRC3.zip</a></li>
+<li><a href="http://www.voidtools.com/support/everything/previous_versions/" target="_blank" rel="noopener">Everything</a><br><a href="https://www.voidtools.com/Everything-1.4.1.965.x86.zip" target="_blank" rel="noopener">https://www.voidtools.com/Everything-1.4.1.965.x86.zip</a><br><a href="https://www.voidtools.com/Everything-1.4.1.965.x64.zip" target="_blank" rel="noopener">https://www.voidtools.com/Everything-1.4.1.965.x64.zip</a></li>
+<li><a href="https://www.glarysoft.com/downloads/" target="_blank" rel="noopener">Glary Utilities</a><br><a href="http://download.glarysoft.com/guportable.zip" target="_blank" rel="noopener">http://download.glarysoft.com/guportable.zip</a></li>
+<li><a href="https://www.revouninstaller.com/revo-uninstaller-free-download/" target="_blank" rel="noopener">Revo Uninstaller</a><br><a href="https://download.revouninstaller.com/download/RevoUninstaller_Portable.zip" target="_blank" rel="noopener">https://download.revouninstaller.com/download/RevoUninstaller_Portable.zip</a></li>
+<li><a href="https://github.com/Klocman/Bulk-Crap-Uninstaller/releases/" target="_blank" rel="noopener">BCUninstaller</a><br><a href="https://github.com/Klocman/Bulk-Crap-Uninstaller/releases/download/v5.4/BCUninstaller_5.4_portable.zip" target="_blank" rel="noopener">https://github.com/Klocman/Bulk-Crap-Uninstaller/releases/download/v5.4/BCUninstaller_5.4_portable.zip</a></li>
+</ul>
+<h2 id="Security"><a href="#Security" class="headerlink" title="Security"></a>Security</h2><ul>
+<li><a href="https://www.huorong.cn/person5.html" target="_blank" rel="noopener">Huorong Sysdiag</a><br><a href="https://down7.huorong.cn/sysdiag-all-5.0.73.1-2023.01.15.1.exe" target="_blank" rel="noopener">https://down7.huorong.cn/sysdiag-all-5.0.73.1-2023.01.15.1.exe</a></li>
+<li><a href="https://www.sordum.org/" target="_blank" rel="noopener">Firewall App Blocker</a><br><a href="https://www.sordum.org/files/firewall-app-blocker/fab.zip" target="_blank" rel="noopener">https://www.sordum.org/files/firewall-app-blocker/fab.zip</a></li>
+<li><a href="https://undelete360.com/download.html" target="_blank" rel="noopener">Undelete 360</a><br><a href="https://undelete360.com/files/undelete-360.exe" target="_blank" rel="noopener">https://undelete360.com/files/undelete-360.exe</a></li>
+<li><a href="http://keir.net/hash.html" target="_blank" rel="noopener">Hash</a><br><a href="http://keir.net/download/hash.zip" target="_blank" rel="noopener">http://keir.net/download/hash.zip</a></li>
+</ul>
+<h2 id="File-Compare"><a href="#File-Compare" class="headerlink" title="File Compare"></a>File Compare</h2><ul>
+<li><a href="https://www.devart.com/codecompare/download.html" target="_blank" rel="noopener">Code Compare</a><br><a href="https://www.devart.com/codecompare/codecompare.exe" target="_blank" rel="noopener">https://www.devart.com/codecompare/codecompare.exe</a><br><a href="https://www.devart.com/codecompare/codecompare-4.1.78.exe" target="_blank" rel="noopener">https://www.devart.com/codecompare/codecompare-4.1.78.exe</a></li>
+<li><a href="https://www.scootersoftware.com/download.php" target="_blank" rel="noopener">Beyond Compare</a><br><a href="http://www.scootersoftware.com/BCompare-3.3.13.18981.exe" target="_blank" rel="noopener">http://www.scootersoftware.com/BCompare-3.3.13.18981.exe</a><br><a href="http://www.scootersoftware.com/bcompare-3.3.13.18981_i386.deb" target="_blank" rel="noopener">http://www.scootersoftware.com/bcompare-3.3.13.18981_i386.deb</a></li>
+</ul>
+<h2 id="Utility"><a href="#Utility" class="headerlink" title="Utility"></a>Utility</h2><ul>
+<li><a href="https://github.com/ventoy/Ventoy/releases" target="_blank" rel="noopener">Ventoy</a><br><a href="https://github.com/ventoy/Ventoy/releases/download/v1.0.99/ventoy-1.0.99-windows.zip" target="_blank" rel="noopener">https://github.com/ventoy/Ventoy/releases/download/v1.0.99/ventoy-1.0.99-windows.zip</a></li>
+<li><a href="https://github.com/pbatard/rufus/releases/" target="_blank" rel="noopener">Rufus</a><br><a href="https://github.com/pbatard/rufus/releases/download/v4.5/rufus-4.5p.exe" target="_blank" rel="noopener">https://github.com/pbatard/rufus/releases/download/v4.5/rufus-4.5p.exe</a></li>
+<li><a href="https://www.balena.io/etcher/" target="_blank" rel="noopener">Etcher</a><br><a href="https://github.com/balena-io/etcher/releases/download/v1.19.21/balenaEtcher-win32-x64-1.19.21.zip" target="_blank" rel="noopener">https://github.com/balena-io/etcher/releases/download/v1.19.21/balenaEtcher-win32-x64-1.19.21.zip</a><br><a href="https://github.com/balena-io/etcher/releases/download/v1.19.21/balenaEtcher-1.19.21-x64.dmg" target="_blank" rel="noopener">https://github.com/balena-io/etcher/releases/download/v1.19.21/balenaEtcher-1.19.21-x64.dmg</a><br><a href="https://github.com/balena-io/etcher/releases/download/v1.19.21/balenaEtcher-1.19.21-arm64.dmg" target="_blank" rel="noopener">https://github.com/balena-io/etcher/releases/download/v1.19.21/balenaEtcher-1.19.21-arm64.dmg</a><br><a href="https://github.com/balena-io/etcher/releases/download/v1.19.21/balenaEtcher-linux-x64-1.19.21.zip" target="_blank" rel="noopener">https://github.com/balena-io/etcher/releases/download/v1.19.21/balenaEtcher-linux-x64-1.19.21.zip</a></li>
+<li><a href="https://github.com/laomms/PidKeyBatch" target="_blank" rel="noopener">PidKeyBatch</a><br><a href="https://github.com/laomms/PidKeyTool/releases/download/3.5.7/PidKeyTool.v3.57.zip" target="_blank" rel="noopener">https://github.com/laomms/PidKeyTool/releases/download/3.5.7/PidKeyTool.v3.57.zip</a></li>
+</ul>
+<h2 id="Video"><a href="#Video" class="headerlink" title="Video"></a>Video</h2><ul>
+<li><a href="https://videoconverter.wondershare.com/gl/video-converter-desktop.html" target="_blank" rel="noopener">UniConverter</a><br><a href="http://download.wondershare.com/cbs_down/video-converter-ultimate_full495.exe" target="_blank" rel="noopener">http://download.wondershare.com/cbs_down/video-converter-ultimate_full495.exe</a><br><a href="http://download.wondershare.com/cbs_down/video-converter-ultimate-mac_full735.dmg" target="_blank" rel="noopener">http://download.wondershare.com/cbs_down/video-converter-ultimate-mac_full735.dmg</a></li>
+<li><a href="https://shotcut.org/download/" target="_blank" rel="noopener">Shotcut</a><br><a href="https://github.com/mltframework/shotcut/releases/download/v22.12.21/shotcut-win64-221221.zip" target="_blank" rel="noopener">https://github.com/mltframework/shotcut/releases/download/v22.12.21/shotcut-win64-221221.zip</a><br><a href="https://github.com/mltframework/shotcut/releases/download/v22.12.21/shotcut-macos-221221.dmg" target="_blank" rel="noopener">https://github.com/mltframework/shotcut/releases/download/v22.12.21/shotcut-macos-221221.dmg</a><br><a href="https://github.com/mltframework/shotcut/releases/download/v22.12.21/shotcut-macos-ARM64-221221.dmg" target="_blank" rel="noopener">https://github.com/mltframework/shotcut/releases/download/v22.12.21/shotcut-macos-ARM64-221221.dmg</a></li>
+</ul>
+<h2 id="Music"><a href="#Music" class="headerlink" title="Music"></a>Music</h2><ul>
+<li><a href="https://www.foobar2000.org/download" target="_blank" rel="noopener">foobar2000</a><br><a href="https://www.foobar2000.org/files/foobar2000_v2.1.5.exe" target="_blank" rel="noopener">https://www.foobar2000.org/files/foobar2000_v2.1.5.exe</a><br><a href="https://www.foobar2000.org/files/foobar2000-x64_v2.1.5.exe" target="_blank" rel="noopener">https://www.foobar2000.org/files/foobar2000-x64_v2.1.5.exe</a><br><a href="https://www.foobar2000.org/components/view/foo_input_dts" target="_blank" rel="noopener">https://www.foobar2000.org/components/view/foo_input_dts</a><br><a href="https://www.foobar2000.org/components/view/foo_input_monkey" target="_blank" rel="noopener">https://www.foobar2000.org/components/view/foo_input_monkey</a></li>
+</ul>
+<h2 id="Photo"><a href="#Photo" class="headerlink" title="Photo"></a>Photo</h2><ul>
+<li><a href="https://www.theinpaint.com/download.html" target="_blank" rel="noopener">Inpaint</a><br><a href="https://www.theinpaint.com/download/InpaintSetup.exe" target="_blank" rel="noopener">https://www.theinpaint.com/download/InpaintSetup.exe</a><br><a href="https://www.theinpaint.com/download/Inpaint.dmg" target="_blank" rel="noopener">https://www.theinpaint.com/download/Inpaint.dmg</a><br><a href="https://www.theinpaint.com/download/BatchInpaintSetup.exe" target="_blank" rel="noopener">https://www.theinpaint.com/download/BatchInpaintSetup.exe</a><br><a href="https://www.theinpaint.com/download/BatchInpaint.dmg" target="_blank" rel="noopener">https://www.theinpaint.com/download/BatchInpaint.dmg</a></li>
+<li><a href="https://download.gimp.org/mirror/pub/gimp/" target="_blank" rel="noopener">GIMP</a><br><a href="https://download.gimp.org/pub/gimp/v2.10/windows/gimp-2.10.6-setup.exe" target="_blank" rel="noopener">https://download.gimp.org/pub/gimp/v2.10/windows/gimp-2.10.6-setup.exe</a><br><a href="https://download.gimp.org/pub/gimp/v2.10/osx/gimp-2.10.6-x86_64.dmg" target="_blank" rel="noopener">https://download.gimp.org/pub/gimp/v2.10/osx/gimp-2.10.6-x86_64.dmg</a><br><a href="https://download.gimp.org/pub/gimp/v2.10/gimp-2.10.6.tar.bz2" target="_blank" rel="noopener">https://download.gimp.org/pub/gimp/v2.10/gimp-2.10.6.tar.bz2</a></li>
+<li><a href="https://files.kde.org/krita/" target="_blank" rel="noopener">Krita</a><br><a href="https://download.kde.org/stable/krita/4.1.5/krita-x86-4.1.5.zip" target="_blank" rel="noopener">https://download.kde.org/stable/krita/4.1.5/krita-x86-4.1.5.zip</a><br><a href="https://download.kde.org/stable/krita/4.1.5/krita-x64-4.1.5.zip" target="_blank" rel="noopener">https://download.kde.org/stable/krita/4.1.5/krita-x64-4.1.5.zip</a><br><a href="https://download.kde.org/stable/krita/4.1.5/krita-4.1.5.1.dmg" target="_blank" rel="noopener">https://download.kde.org/stable/krita/4.1.5/krita-4.1.5.1.dmg</a><br><a href="https://download.kde.org/stable/krita/4.1.5/krita-4.1.5-x86_64.appimage" target="_blank" rel="noopener">https://download.kde.org/stable/krita/4.1.5/krita-4.1.5-x86_64.appimage</a></li>
+<li><a href="https://medibangpaint.com/zh_CN/app-download/" target="_blank" rel="noopener">MediBang Paint Pro</a><br><a href="https://medibangpaint.com/static/installer/MediBangPaintPro/MediBangPaintProSetup-20.1-32bit.exe" target="_blank" rel="noopener">https://medibangpaint.com/static/installer/MediBangPaintPro/MediBangPaintProSetup-20.1-32bit.exe</a><br><a href="https://medibangpaint.com/static/installer/MediBangPaintPro/MediBangPaintProSetup-20.1-64bit.exe" target="_blank" rel="noopener">https://medibangpaint.com/static/installer/MediBangPaintPro/MediBangPaintProSetup-20.1-64bit.exe</a><br><a href="https://medibangpaint.com/static/installer/MediBangPaintPro/MediBangPaintPro-20.1.dmg" target="_blank" rel="noopener">https://medibangpaint.com/static/installer/MediBangPaintPro/MediBangPaintPro-20.1.dmg</a></li>
+</ul>
+<h2 id="Screen-Recorder"><a href="#Screen-Recorder" class="headerlink" title="Screen Recorder"></a>Screen Recorder</h2><ul>
+<li><a href="http://www.faststone.org/FSCapturerDownload.htm" target="_blank" rel="noopener">FastStone Capture</a><br><a href="http://www.faststonesoft.net/DN/FSCapture90.zip" target="_blank" rel="noopener">http://www.faststonesoft.net/DN/FSCapture90.zip</a></li>
+<li><a href="https://www.screentogif.com/" target="_blank" rel="noopener">ScreenToGif</a><br><a href="https://github.com/NickeManarin/ScreenToGif/releases/download/2.14.1/ScreenToGif.2.14.1.Portable.zip" target="_blank" rel="noopener">https://github.com/NickeManarin/ScreenToGif/releases/download/2.14.1/ScreenToGif.2.14.1.Portable.zip</a></li>
+</ul>
+<h2 id="Diagram"><a href="#Diagram" class="headerlink" title="Diagram"></a>Diagram</h2><ul>
+<li><a href="https://balsamiq.com/download/" target="_blank" rel="noopener">Balsamiq Mockups</a><br><a href="https://builds.balsamiq.com/mockups-desktop/Balsamiq_Mockups_3.5.17_bundled.zip" target="_blank" rel="noopener">https://builds.balsamiq.com/mockups-desktop/Balsamiq_Mockups_3.5.17_bundled.zip</a><br><a href="https://builds.balsamiq.com/mockups-desktop/Balsamiq_Mockups_3.5.17.dmg" target="_blank" rel="noopener">https://builds.balsamiq.com/mockups-desktop/Balsamiq_Mockups_3.5.17.dmg</a></li>
+</ul>
+<h2 id="SDK"><a href="#SDK" class="headerlink" title="SDK"></a>SDK</h2><ul>
+<li><a href="https://golang.google.cn/dl/" target="_blank" rel="noopener">Go</a><br><a href="https://dl.google.com/go/go1.17.8.windows-386.zip" target="_blank" rel="noopener">https://dl.google.com/go/go1.17.8.windows-386.zip</a><br><a href="https://dl.google.com/go/go1.17.8.windows-amd64.zip" target="_blank" rel="noopener">https://dl.google.com/go/go1.17.8.windows-amd64.zip</a><br><a href="https://dl.google.com/go/go1.17.8.darwin-amd64.tar.gz" target="_blank" rel="noopener">https://dl.google.com/go/go1.17.8.darwin-amd64.tar.gz</a><br><a href="https://dl.google.com/go/go1.17.8.darwin-arm64.tar.gz" target="_blank" rel="noopener">https://dl.google.com/go/go1.17.8.darwin-arm64.tar.gz</a><br><a href="https://dl.google.com/go/go1.17.8.linux-386.tar.gz" target="_blank" rel="noopener">https://dl.google.com/go/go1.17.8.linux-386.tar.gz</a><br><a href="https://dl.google.com/go/go1.17.8.linux-amd64.tar.gz" target="_blank" rel="noopener">https://dl.google.com/go/go1.17.8.linux-amd64.tar.gz</a></li>
+<li><a href="https://nodejs.org/dist/" target="_blank" rel="noopener">Node</a><br><a href="https://nodejs.org/dist/v16.18.0/node-v16.18.0-win-x86.zip" target="_blank" rel="noopener">https://nodejs.org/dist/v16.18.0/node-v16.18.0-win-x86.zip</a><br><a href="https://nodejs.org/dist/v16.18.0/node-v16.18.0-win-x64.zip" target="_blank" rel="noopener">https://nodejs.org/dist/v16.18.0/node-v16.18.0-win-x64.zip</a><br><a href="https://nodejs.org/dist/v16.18.0/node-v16.18.0-darwin-x64.tar.gz" target="_blank" rel="noopener">https://nodejs.org/dist/v16.18.0/node-v16.18.0-darwin-x64.tar.gz</a><br><a href="https://nodejs.org/dist/v16.18.0/node-v16.18.0-darwin-arm64.tar.gz" target="_blank" rel="noopener">https://nodejs.org/dist/v16.18.0/node-v16.18.0-darwin-arm64.tar.gz</a><br><a href="https://nodejs.org/dist/v16.18.0/node-v16.18.0-linux-x64.tar.gz" target="_blank" rel="noopener">https://nodejs.org/dist/v16.18.0/node-v16.18.0-linux-x64.tar.gz</a></li>
+<li><a href="https://www.python.org/ftp/python/" target="_blank" rel="noopener">Python</a><br><a href="https://www.python.org/ftp/python/2.7.15/python-2.7.15.msi" target="_blank" rel="noopener">https://www.python.org/ftp/python/2.7.15/python-2.7.15.msi</a><br><a href="https://www.python.org/ftp/python/2.7.15/python-2.7.15.amd64.msi" target="_blank" rel="noopener">https://www.python.org/ftp/python/2.7.15/python-2.7.15.amd64.msi</a><br><a href="https://www.python.org/ftp/python/2.7.15/python-2.7.15-macosx10.9.pkg" target="_blank" rel="noopener">https://www.python.org/ftp/python/2.7.15/python-2.7.15-macosx10.9.pkg</a><br><a href="https://www.python.org/ftp/python/2.7.15/Python-2.7.15.tgz" target="_blank" rel="noopener">https://www.python.org/ftp/python/2.7.15/Python-2.7.15.tgz</a><br><a href="https://www.python.org/ftp/python/3.4.4/python-3.4.4.msi" target="_blank" rel="noopener">https://www.python.org/ftp/python/3.4.4/python-3.4.4.msi</a><br><a href="https://www.python.org/ftp/python/3.4.4/python-3.4.4.amd64.msi" target="_blank" rel="noopener">https://www.python.org/ftp/python/3.4.4/python-3.4.4.amd64.msi</a><br><a href="https://www.python.org/ftp/python/3.4.4/python-3.4.4-macosx10.6.pkg" target="_blank" rel="noopener">https://www.python.org/ftp/python/3.4.4/python-3.4.4-macosx10.6.pkg</a><br><a href="https://www.python.org/ftp/python/3.4.4/Python-3.4.4.tgz" target="_blank" rel="noopener">https://www.python.org/ftp/python/3.4.4/Python-3.4.4.tgz</a></li>
+<li><a href="https://jdk.java.net/archive/" target="_blank" rel="noopener">OpenJDK</a><br><a href="https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_windows-x64_bin.zip" target="_blank" rel="noopener">https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_windows-x64_bin.zip</a><br><a href="https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_osx-x64_bin.tar.gz" target="_blank" rel="noopener">https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_osx-x64_bin.tar.gz</a><br><a href="https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz" target="_blank" rel="noopener">https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz</a></li>
+</ul>
+<h2 id="Decompiler"><a href="#Decompiler" class="headerlink" title="Decompiler"></a>Decompiler</h2><ul>
+<li><a href="http://jd.benow.ca/" target="_blank" rel="noopener">Java Decompiler</a><br><a href="https://github.com/java-decompiler/jd-gui/releases/download/v1.6.6/jd-gui-1.6.6.jar" target="_blank" rel="noopener">https://github.com/java-decompiler/jd-gui/releases/download/v1.6.6/jd-gui-1.6.6.jar</a></li>
+<li><a href="https://github.com/Konloch/bytecode-viewer/releases" target="_blank" rel="noopener">Bytecode Viewer</a><br><a href="https://github.com/Konloch/bytecode-viewer/releases/download/v2.9.22/Bytecode-Viewer-2.9.22.jar" target="_blank" rel="noopener">https://github.com/Konloch/bytecode-viewer/releases/download/v2.9.22/Bytecode-Viewer-2.9.22.jar</a></li>
+<li><a href="http://www.angusj.com/resourcehacker/" target="_blank" rel="noopener">Resource Hacker</a><br><a href="http://www.angusj.com/resourcehacker/resource_hacker.zip" target="_blank" rel="noopener">http://www.angusj.com/resourcehacker/resource_hacker.zip</a></li>
+</ul>
+<h2 id="Database"><a href="#Database" class="headerlink" title="Database"></a>Database</h2><ul>
+<li><a href="https://www.navicat.com.cn/products" target="_blank" rel="noopener">Navicat</a><br><a href="https://download.navicat.com/download/navicat101_premium_en.exe" target="_blank" rel="noopener">https://download.navicat.com/download/navicat101_premium_en.exe</a><br><a href="https://download.navicat.com/download/navicat101_premium_en.dmg" target="_blank" rel="noopener">https://download.navicat.com/download/navicat101_premium_en.dmg</a></li>
+<li><a href="https://tableplus.com/download/" target="_blank" rel="noopener">TablePlus</a><br><a href="https://download.tableplus.com/windows/5.0.1/TablePlusSetup.exe" target="_blank" rel="noopener">https://download.tableplus.com/windows/5.0.1/TablePlusSetup.exe</a><br><a href="https://download.tableplus.com/macos/468/TablePlus.dmg" target="_blank" rel="noopener">https://download.tableplus.com/macos/468/TablePlus.dmg</a></li>
+<li><a href="https://github.com/beekeeper-studio/beekeeper-studio/releases" target="_blank" rel="noopener">Beekeeper Studio</a><br><a href="https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v3.7.10/Beekeeper-Studio-3.7.10-portable.exe" target="_blank" rel="noopener">https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v3.7.10/Beekeeper-Studio-3.7.10-portable.exe</a><br><a href="https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v3.7.10/Beekeeper-Studio-3.7.10-mac.zip" target="_blank" rel="noopener">https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v3.7.10/Beekeeper-Studio-3.7.10-mac.zip</a><br><a href="https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v3.7.10/Beekeeper-Studio-3.7.10-arm64-mac.zip" target="_blank" rel="noopener">https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v3.7.10/Beekeeper-Studio-3.7.10-arm64-mac.zip</a></li>
+<li><a href="https://www.allroundautomations.com/try-it-free/" target="_blank" rel="noopener">PLSQL Developer</a><br><a href="http://files.allroundautomations.com/plsqldev1401x32.msi" target="_blank" rel="noopener">http://files.allroundautomations.com/plsqldev1401x32.msi</a><br><a href="http://files.allroundautomations.com/plsqldev1401x64.msi" target="_blank" rel="noopener">http://files.allroundautomations.com/plsqldev1401x64.msi</a></li>
+<li><a href="https://github.com/qishibo/AnotherRedisDesktopManager/releases/" target="_blank" rel="noopener">Redis Desktop Manager</a><br><a href="https://github.com/qishibo/AnotherRedisDesktopManager/releases/download/v1.5.9/Another-Redis-Desktop-Manager.1.5.9.exe" target="_blank" rel="noopener">https://github.com/qishibo/AnotherRedisDesktopManager/releases/download/v1.5.9/Another-Redis-Desktop-Manager.1.5.9.exe</a><br><a href="https://github.com/qishibo/AnotherRedisDesktopManager/releases/download/v1.5.9/Another-Redis-Desktop-Manager.1.5.9.dmg" target="_blank" rel="noopener">https://github.com/qishibo/AnotherRedisDesktopManager/releases/download/v1.5.9/Another-Redis-Desktop-Manager.1.5.9.dmg</a><br><a href="https://github.com/qishibo/AnotherRedisDesktopManager/releases/download/v1.5.9/Another-Redis-Desktop-Manager-M1-arm64-1.5.9.dmg" target="_blank" rel="noopener">https://github.com/qishibo/AnotherRedisDesktopManager/releases/download/v1.5.9/Another-Redis-Desktop-Manager-M1-arm64-1.5.9.dmg</a></li>
+</ul>
+<h2 id="Server"><a href="#Server" class="headerlink" title="Server"></a>Server</h2><ul>
+<li><a href="https://nginx.org/download/" target="_blank" rel="noopener">Nginx</a><br><a href="https://nginx.org/download/nginx-1.12.0.zip" target="_blank" rel="noopener">https://nginx.org/download/nginx-1.12.0.zip</a><br><a href="https://nginx.org/download/nginx-1.12.0.tar.gz" target="_blank" rel="noopener">https://nginx.org/download/nginx-1.12.0.tar.gz</a></li>
+</ul>
+<h2 id="SCM"><a href="#SCM" class="headerlink" title="SCM"></a>SCM</h2><ul>
+<li><a href="https://git-scm.com/download/" target="_blank" rel="noopener">Git</a><br><a href="https://github.com/git-for-windows/git/releases/download/v2.38.1.windows.1/PortableGit-2.38.1-32-bit.7z.exe" target="_blank" rel="noopener">https://github.com/git-for-windows/git/releases/download/v2.38.1.windows.1/PortableGit-2.38.1-32-bit.7z.exe</a><br><a href="https://github.com/git-for-windows/git/releases/download/v2.38.1.windows.1/PortableGit-2.38.1-64-bit.7z.exe" target="_blank" rel="noopener">https://github.com/git-for-windows/git/releases/download/v2.38.1.windows.1/PortableGit-2.38.1-64-bit.7z.exe</a></li>
+<li><a href="https://www.sourcetreeapp.com/download-archives" target="_blank" rel="noopener">Sourcetree</a><br><a href="https://product-downloads.atlassian.com/software/sourcetree/windows/ga/SourceTreeSetup-3.4.12.exe" target="_blank" rel="noopener">https://product-downloads.atlassian.com/software/sourcetree/windows/ga/SourceTreeSetup-3.4.12.exe</a><br><a href="https://product-downloads.atlassian.com/software/sourcetree/ga/Sourcetree_4.2.3_252.zip" target="_blank" rel="noopener">https://product-downloads.atlassian.com/software/sourcetree/ga/Sourcetree_4.2.3_252.zip</a></li>
+</ul>
+<h2 id="Programming"><a href="#Programming" class="headerlink" title="Programming"></a>Programming</h2><ul>
+<li><a href="https://www.docker.com/products/docker-desktop" target="_blank" rel="noopener">Docker Desktop</a><br><a href="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe" target="_blank" rel="noopener">https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe</a><br><a href="https://desktop.docker.com/mac/main/amd64/Docker.dmg" target="_blank" rel="noopener">https://desktop.docker.com/mac/main/amd64/Docker.dmg</a><br><a href="https://desktop.docker.com/mac/main/arm64/Docker.dmg" target="_blank" rel="noopener">https://desktop.docker.com/mac/main/arm64/Docker.dmg</a></li>
+<li><a href="https://mobaxterm.mobatek.net/download-home-edition.html" target="_blank" rel="noopener">MobaXterm</a><br><a href="https://download.mobatek.net/2032020060430358/MobaXterm_Portable_v20.3.zip" target="_blank" rel="noopener">https://download.mobatek.net/2032020060430358/MobaXterm_Portable_v20.3.zip</a></li>
+<li><a href="https://www.ieinspector.com/download.html" target="_blank" rel="noopener">HttpAnalyzer</a><br><a href="https://scaleway.ieinspector.com/download/HttpAnalyzerStd_V7.6.4.exe" target="_blank" rel="noopener">https://scaleway.ieinspector.com/download/HttpAnalyzerStd_V7.6.4.exe</a><br><a href="https://scaleway.ieinspector.com/download/HttpAnalyzerFull_V7.6.4.exe" target="_blank" rel="noopener">https://scaleway.ieinspector.com/download/HttpAnalyzerFull_V7.6.4.exe</a></li>
+<li><a href="https://www.kafkatool.com/download.html" target="_blank" rel="noopener">Offset Explorer</a><br><a href="https://www.kafkatool.com/download2/offsetexplorer.exe" target="_blank" rel="noopener">https://www.kafkatool.com/download2/offsetexplorer.exe</a><br><a href="https://www.kafkatool.com/download2/offsetexplorer_64bit.exe" target="_blank" rel="noopener">https://www.kafkatool.com/download2/offsetexplorer_64bit.exe</a><br><a href="https://www.kafkatool.com/download2/offsetexplorer.dmg" target="_blank" rel="noopener">https://www.kafkatool.com/download2/offsetexplorer.dmg</a></li>
+</ul>
+<h2 id="Engineering"><a href="#Engineering" class="headerlink" title="Engineering"></a>Engineering</h2><ul>
+<li><a href="https://help.sonatype.com/repomanager3/download" target="_blank" rel="noopener">Nexus</a><br><a href="https://download.sonatype.com/nexus/3/latest-win64.zip" target="_blank" rel="noopener">https://download.sonatype.com/nexus/3/latest-win64.zip</a><br><a href="https://download.sonatype.com/nexus/3/latest-mac.tgz" target="_blank" rel="noopener">https://download.sonatype.com/nexus/3/latest-mac.tgz</a><br><a href="https://download.sonatype.com/nexus/3/latest-unix.tar.gz" target="_blank" rel="noopener">https://download.sonatype.com/nexus/3/latest-unix.tar.gz</a></li>
+<li><a href="http://mirrors.jenkins.io/war-stable/" target="_blank" rel="noopener">Jenkins</a><br><a href="http://mirrors.jenkins.io/war-stable/2.138.3/jenkins.war" target="_blank" rel="noopener">http://mirrors.jenkins.io/war-stable/2.138.3/jenkins.war</a></li>
+<li><a href="https://www.sonarqube.org/" target="_blank" rel="noopener">SonarQube</a><br><a href="https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.4.zip" target="_blank" rel="noopener">https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.4.zip</a></li>
+<li><a href="https://www.atlassian.com/software/jira/download-archives" target="_blank" rel="noopener">JIRA</a><br><a href="https://downloads.atlassian.com/software/jira/downloads/atlassian-jira-6.1.zip" target="_blank" rel="noopener">https://downloads.atlassian.com/software/jira/downloads/atlassian-jira-6.1.zip</a><br><a href="https://downloads.atlassian.com/software/jira/downloads/atlassian-jira-6.2.zip" target="_blank" rel="noopener">https://downloads.atlassian.com/software/jira/downloads/atlassian-jira-6.2.zip</a><br><a href="https://downloads.atlassian.com/software/jira/downloads/atlassian-jira-6.3.zip" target="_blank" rel="noopener">https://downloads.atlassian.com/software/jira/downloads/atlassian-jira-6.3.zip</a><br><a href="https://downloads.atlassian.com/software/jira/downloads/atlassian-jira-6.4.zip" target="_blank" rel="noopener">https://downloads.atlassian.com/software/jira/downloads/atlassian-jira-6.4.zip</a></li>
+</ul>
+<h2 id="Testing"><a href="#Testing" class="headerlink" title="Testing"></a>Testing</h2><ul>
+<li><a href="https://archive.apache.org/dist/jmeter/" target="_blank" rel="noopener">JMeter</a><br><a href="https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.0.zip" target="_blank" rel="noopener">https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.0.zip</a><br><a href="https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.0.tgz" target="_blank" rel="noopener">https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.0.tgz</a></li>
+</ul>
+<h2 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h2><ul>
+<li><a href="https://github.com/hiddify/hiddify-next/releases/" target="_blank" rel="noopener">Hiddify</a><br><a href="https://github.com/hiddify/hiddify-next/releases/download/v2.0.5/Hiddify-Windows-Portable-x64.zip" target="_blank" rel="noopener">https://github.com/hiddify/hiddify-next/releases/download/v2.0.5/Hiddify-Windows-Portable-x64.zip</a><br><a href="https://github.com/hiddify/hiddify-next/releases/download/v2.0.5/Hiddify-MacOS.dmg" target="_blank" rel="noopener">https://github.com/hiddify/hiddify-next/releases/download/v2.0.5/Hiddify-MacOS.dmg</a></li>
+<li><a href="https://github.com/KaringX/karing/releases/" target="_blank" rel="noopener">Karing</a><br><a href="https://github.com/KaringX/karing/releases/download/v1.0.27.353/karing_1.0.27.353_windows_x64.zip" target="_blank" rel="noopener">https://github.com/KaringX/karing/releases/download/v1.0.27.353/karing_1.0.27.353_windows_x64.zip</a></li>
+</ul>
+<h2 id="Trading"><a href="#Trading" class="headerlink" title="Trading"></a>Trading</h2><ul>
+<li><a href="https://www.aicoin.com/zh-CN/download" target="_blank" rel="noopener">AICoin</a><br><a href="https://static.aicoinstorge.com/windows/aicoin-v1.8.7-i32.exe" target="_blank" rel="noopener">https://static.aicoinstorge.com/windows/aicoin-v1.8.7-i32.exe</a><br><a href="https://static.aicoinstorge.com/windows/aicoin-v1.8.6-x64.exe" target="_blank" rel="noopener">https://static.aicoinstorge.com/windows/aicoin-v1.8.6-x64.exe</a><br><a href="https://static.aicoinstorge.com/mac/aicoin-v1.8.6.dmg" target="_blank" rel="noopener">https://static.aicoinstorge.com/mac/aicoin-v1.8.6.dmg</a></li>
+<li><a href="https://www.moomoo.com/us/hans/download/" target="_blank" rel="noopener">Moomoo</a><br><a href="https://softwarefile.moomoo.com/moomoo_12.25.11258.exe" target="_blank" rel="noopener">https://softwarefile.moomoo.com/moomoo_12.25.11258.exe</a><br><a href="https://softwarefile.moomoo.com/moomoo_12.16.3508_Website.dmg" target="_blank" rel="noopener">https://softwarefile.moomoo.com/moomoo_12.16.3508_Website.dmg</a></li>
+</ul>
+<h2 id="Translator"><a href="#Translator" class="headerlink" title="Translator"></a>Translator</h2><ul>
+<li><a href="http://quest-app.appspot.com/download" target="_blank" rel="noopener">QTranslate</a><br><a href="http://qtranslate2.appspot.com/QTranslate.6.10.0.zip" target="_blank" rel="noopener">http://qtranslate2.appspot.com/QTranslate.6.10.0.zip</a></li>
+<li><a href="https://www.eudic.net/v4/en/app/download" target="_blank" rel="noopener">Eudic</a><br><a href="https://www.eudic.net/download/eudic_win.zip?v=2022-11-10" target="_blank" rel="noopener">https://www.eudic.net/download/eudic_win.zip?v=2022-11-10</a><br><a href="https://static.frdic.com/pkg/eudicmac.dmg?v=2022-11-13" target="_blank" rel="noopener">https://static.frdic.com/pkg/eudicmac.dmg?v=2022-11-13</a></li>
+<li><a href="http://cp.iciba.com/pc-company/" target="_blank" rel="noopener">PowerWord</a><br><a href="http://download.iciba.com/pc/enterprise2016/PowerWord2016Enterprise.zip" target="_blank" rel="noopener">http://download.iciba.com/pc/enterprise2016/PowerWord2016Enterprise.zip</a><br><a href="http://download.iciba.com/pc/enterprise2016/PowerWord2016EnterpriseP.zip" target="_blank" rel="noopener">http://download.iciba.com/pc/enterprise2016/PowerWord2016EnterpriseP.zip</a></li>
+</ul>
+<h2 id="Office"><a href="#Office" class="headerlink" title="Office"></a>Office</h2><ul>
+<li><a href="https://www.sumatrapdfreader.org/download-prev.html" target="_blank" rel="noopener">SumatraPDF</a><br><a href="https://www.sumatrapdfreader.org/dl/rel/3.4.5/SumatraPDF-3.4.5.zip" target="_blank" rel="noopener">https://www.sumatrapdfreader.org/dl/rel/3.4.5/SumatraPDF-3.4.5.zip</a><br><a href="https://www.sumatrapdfreader.org/dl/rel/3.4.5/SumatraPDF-3.4.5-64.zip" target="_blank" rel="noopener">https://www.sumatrapdfreader.org/dl/rel/3.4.5/SumatraPDF-3.4.5-64.zip</a></li>
+<li><a href="https://www.updf.cn/updf/" target="_blank" rel="noopener">UPDF</a><br><a href="https://download.superace.com/updf/installer/win/web/updf-8010100000-win-installer.exe" target="_blank" rel="noopener">https://download.superace.com/updf/installer/win/web/updf-8010100000-win-installer.exe</a><br><a href="https://download.superace.com/package/updf/cn/mac/seo/intel/updf-50049_mac-full.dmg" target="_blank" rel="noopener">https://download.superace.com/package/updf/cn/mac/seo/intel/updf-50049_mac-full.dmg</a><br><a href="https://download.superace.com/package/updf/cn/mac/seo/apple/updf-50049_mac-full.dmg" target="_blank" rel="noopener">https://download.superace.com/package/updf/cn/mac/seo/apple/updf-50049_mac-full.dmg</a></li>
+<li><a href="https://ep.wps.cn/download" target="_blank" rel="noopener">WPS Pro</a><br><a href="http://wpspro.support.wps.cn/gov/guangdong/chaozhou/installation/WPS%20Office%202019%20%E4%B8%93%E4%B8%9A%E7%89%88%EF%BC%88%E6%BD%AE%E5%B7%9E%E5%B8%82%E5%85%9A%E6%94%BF%E6%9C%BA%E5%85%B3%E5%8D%95%E4%BD%8D%EF%BC%89.exe" target="_blank" rel="noopener">WPS2019Pro_GDCZ</a><br><a href="http://wpspro.support.wps.cn/gov/guangdong/huizhou/installation/WPS%20Office%202019%E4%B8%93%E4%B8%9A%E7%89%88%EF%BC%88%E6%83%A0%E5%B7%9E%E5%B8%82%E7%9B%B4%E6%9C%BA%E5%85%B3%E5%8D%95%E4%BD%8D%EF%BC%89.exe" target="_blank" rel="noopener">WPS2019Pro_GDHZ</a><br><a href="http://wpspro.support.wps.cn/gov/guangdong/maoming/installation/WPS%20Office%202019%20%E4%B8%93%E4%B8%9A%E7%89%88%EF%BC%88%E8%8C%82%E5%90%8D%E5%B8%82%E5%85%9A%E6%94%BF%E6%9C%BA%E5%85%B3%E5%8D%95%E4%BD%8D%EF%BC%89.exe" target="_blank" rel="noopener">WPS2019Pro_GDMM</a>  </li>
+</ul>
+<h2 id="Baidu"><a href="#Baidu" class="headerlink" title="Baidu"></a>Baidu</h2><ul>
+<li><a href="https://yun.baidu.com/disk/version" target="_blank" rel="noopener">BaiduNetdisk</a><br><a href="http://issuecdn.baidupcs.com/issue/netdisk/yunguanjia/BaiduNetdisk_6.2.0.exe" target="_blank" rel="noopener">http://issuecdn.baidupcs.com/issue/netdisk/yunguanjia/BaiduNetdisk_6.2.0.exe</a><br><a href="http://issuecdn.baidupcs.com/issue/netdisk/MACguanjia/BaiduNetdisk_mac_2.2.3.dmg" target="_blank" rel="noopener">http://issuecdn.baidupcs.com/issue/netdisk/MACguanjia/BaiduNetdisk_mac_2.2.3.dmg</a></li>
+<li><a href="https://fanyi.baidu.com/appdownload/download.html" target="_blank" rel="noopener">BaiduTranslate</a><br><a href="https://fanyiapp.cdn.bcebos.com/fanyi-client/pkg/win/1.5.4/%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91_Setup_1.5.4.exe" target="_blank" rel="noopener">https://fanyiapp.cdn.bcebos.com/fanyi-client/pkg/win/1.5.4/%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91_Setup_1.5.4.exe</a><br><a href="https://fanyiapp.cdn.bcebos.com/fanyi-client/pkg/mac/1.5.4/%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91-1.5.4.pkg" target="_blank" rel="noopener">https://fanyiapp.cdn.bcebos.com/fanyi-client/pkg/mac/1.5.4/%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91-1.5.4.pkg</a><br><a href="https://fanyiapp.cdn.bcebos.com/fanyi-client/pkg/mac/1.5.4/%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91-1.5.4-arm64.pkg" target="_blank" rel="noopener">https://fanyiapp.cdn.bcebos.com/fanyi-client/pkg/mac/1.5.4/%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91-1.5.4-arm64.pkg</a></li>
+</ul>
+<h2 id="Alibaba"><a href="#Alibaba" class="headerlink" title="Alibaba"></a>Alibaba</h2><ul>
+<li><a href="https://tms.dingtalk.com/markets/dingtalk/download" target="_blank" rel="noopener">DingTalk</a><br><a href="https://download.alicdn.com/dingtalk-desktop/win_installer/Release/DingTalk_v4.6.25.10026.exe" target="_blank" rel="noopener">https://download.alicdn.com/dingtalk-desktop/win_installer/Release/DingTalk_v4.6.25.10026.exe</a><br><a href="https://download.alicdn.com/dingtalk-desktop/mac_dmg/Release/DingTalk_v4.6.25.0.dmg" target="_blank" rel="noopener">https://download.alicdn.com/dingtalk-desktop/mac_dmg/Release/DingTalk_v4.6.25.0.dmg</a></li>
+</ul>
+<h2 id="Tencent"><a href="#Tencent" class="headerlink" title="Tencent"></a>Tencent</h2><ul>
+<li><a href="https://weixin.qq.com/" target="_blank" rel="noopener">WeChat</a><br><a href="https://dldir1.qq.com/weixin/Windows/WeChatSetup.exe" target="_blank" rel="noopener">https://dldir1.qq.com/weixin/Windows/WeChatSetup.exe</a><br><a href="https://dldir1.qq.com/weixin/mac/WeChatMac.dmg" target="_blank" rel="noopener">https://dldir1.qq.com/weixin/mac/WeChatMac.dmg</a></li>
+<li><a href="https://transmart.qq.com/zh-CN/download/" target="_blank" rel="noopener">TranSmart</a><br><a href="https://cdn.transmart.qq.com/installation_pro/TranSmart_Alpha0.8.12(20221214)_windows.exe" target="_blank" rel="noopener">https://cdn.transmart.qq.com/installation_pro/TranSmart_Alpha0.8.12(20221214)_windows.exe</a><br><a href="https://cdn.transmart.qq.com/installation_pro/TranSmart_Alpha0.8.12(20221214)_mac_x86.dmg" target="_blank" rel="noopener">https://cdn.transmart.qq.com/installation_pro/TranSmart_Alpha0.8.12(20221214)_mac_x86.dmg</a><br><a href="https://cdn.transmart.qq.com/installation_pro/TranSmart_Alpha0.8.12(20221214)_mac_arm64.dmg" target="_blank" rel="noopener">https://cdn.transmart.qq.com/installation_pro/TranSmart_Alpha0.8.12(20221214)_mac_arm64.dmg</a></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/uploads/wechatpay.png" alt="Gavin Lu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/windows/" rel="tag"># windows</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/27/tools/hexo/" rel="next" title="Hexo">
+                <i class="fa fa-chevron-left"></i> Hexo
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/27/tools/microsoft/" rel="prev" title="Microsoft">
+                Microsoft <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/uploads/avatar.png" alt="Gavin Lu">
+            
+              <p class="site-author-name" itemprop="name">Gavin Lu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/lugavin" title="GitHub &rarr; https://github.com/lugavin" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://bitbucket.org/lugavin" title="Bitbucket &rarr; https://bitbucket.org/lugavin" rel="noopener" target="_blank"><i class="fa fa-fw fa-bitbucket"></i>Bitbucket</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux"><span class="nav-number">1.</span> <span class="nav-text">Linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Microsoft"><span class="nav-number">2.</span> <span class="nav-text">Microsoft</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adobe"><span class="nav-number">3.</span> <span class="nav-text">Adobe</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jetbrains"><span class="nav-number">4.</span> <span class="nav-text">Jetbrains</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Downloader"><span class="nav-number">5.</span> <span class="nav-text">Downloader</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Browser"><span class="nav-number">6.</span> <span class="nav-text">Browser</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Editor"><span class="nav-number">7.</span> <span class="nav-text">Editor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#System"><span class="nav-number">8.</span> <span class="nav-text">System</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Security"><span class="nav-number">9.</span> <span class="nav-text">Security</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#File-Compare"><span class="nav-number">10.</span> <span class="nav-text">File Compare</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Utility"><span class="nav-number">11.</span> <span class="nav-text">Utility</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Video"><span class="nav-number">12.</span> <span class="nav-text">Video</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Music"><span class="nav-number">13.</span> <span class="nav-text">Music</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Photo"><span class="nav-number">14.</span> <span class="nav-text">Photo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Screen-Recorder"><span class="nav-number">15.</span> <span class="nav-text">Screen Recorder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Diagram"><span class="nav-number">16.</span> <span class="nav-text">Diagram</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SDK"><span class="nav-number">17.</span> <span class="nav-text">SDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Decompiler"><span class="nav-number">18.</span> <span class="nav-text">Decompiler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Database"><span class="nav-number">19.</span> <span class="nav-text">Database</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Server"><span class="nav-number">20.</span> <span class="nav-text">Server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SCM"><span class="nav-number">21.</span> <span class="nav-text">SCM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Programming"><span class="nav-number">22.</span> <span class="nav-text">Programming</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Engineering"><span class="nav-number">23.</span> <span class="nav-text">Engineering</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Testing"><span class="nav-number">24.</span> <span class="nav-text">Testing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Proxy"><span class="nav-number">25.</span> <span class="nav-text">Proxy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Trading"><span class="nav-number">26.</span> <span class="nav-text">Trading</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Translator"><span class="nav-number">27.</span> <span class="nav-text">Translator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Office"><span class="nav-number">28.</span> <span class="nav-text">Office</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Baidu"><span class="nav-number">29.</span> <span class="nav-text">Baidu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Alibaba"><span class="nav-number">30.</span> <span class="nav-text">Alibaba</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tencent"><span class="nav-number">31.</span> <span class="nav-text">Tencent</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gavin Lu</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: false,
+        appId: '5IwtIhDDNAEOmFsA0RwltEjE-gzGzoHsz',
+        appKey: 'aep6gMEg10pFmdT7kHu53dPV',
+        placeholder: 'Type your message here',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: true
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

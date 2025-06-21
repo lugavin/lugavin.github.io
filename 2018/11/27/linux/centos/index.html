@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="网络配置12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455##修改IP为静态IP$ vi /etc/sysconfig/network-scripts/ifcfg-eno16777736##网卡自动启动ONBOOT=yes##DHCP改成静态BOO">
+<meta name="keywords" content="centos">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux - CentOS">
+<meta property="og:url" content="https://lugavin.github.io/2018/11/27/linux/centos/index.html">
+<meta property="og:site_name" content="Gavin&#39;s blog">
+<meta property="og:description" content="网络配置12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455##修改IP为静态IP$ vi /etc/sysconfig/network-scripts/ifcfg-eno16777736##网卡自动启动ONBOOT=yes##DHCP改成静态BOO">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2025-06-21T02:09:57.965Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux - CentOS">
+<meta name="twitter:description" content="网络配置12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455##修改IP为静态IP$ vi /etc/sysconfig/network-scripts/ifcfg-eno16777736##网卡自动启动ONBOOT=yes##DHCP改成静态BOO">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Gavin's blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://lugavin.github.io/2018/11/27/linux/centos/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Linux - CentOS | Gavin's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gavin's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">路漫漫其修远兮 吾将上下而求索</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-comments">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/comments/" rel="section"><i class="menu-item-icon fa fa-fw fa-send"></i> <br>留言</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lugavin.github.io/2018/11/27/linux/centos/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gavin Lu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gavin's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux - CentOS
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-27 18:00:00" itemprop="dateCreated datePublished" datetime="2018-11-27T18:00:00+00:00">2018-11-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2025-06-21 02:09:57" itemprop="dateModified" datetime="2025-06-21T02:09:57+00:00">2025-06-21</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+             <span id="/2018/11/27/linux/centos/" class="leancloud_visitors" data-flag-title="Linux - CentOS">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#修改IP为静态IP</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vi /etc/sysconfig/network-scripts/ifcfg-eno16777736</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#网卡自动启动</span></span></span><br><span class="line">ONBOOT=yes</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#DHCP改成静态</span></span></span><br><span class="line">BOOTPROTO=static</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#静态IP</span></span></span><br><span class="line">IPADDR=192.168.8.128</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#网关</span></span></span><br><span class="line">GATEWAY=192.168.8.1</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#子网掩码</span></span></span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#设置DNS</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vi /etc/NetworkManager/NetworkManager.conf</span></span><br><span class="line"></span><br><span class="line">[main]</span><br><span class="line">plugins=ifcfg-rh</span><br><span class="line">dns=none</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> vi /etc/resolv.conf</span></span><br><span class="line"></span><br><span class="line">nameserver 114.114.114.114</span><br><span class="line">nameserver 8.8.8.8</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#修改主机名</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hostnamectl <span class="built_in">set</span>-hostname linux128</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cat /etc/hostname</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#修改主机名到IP的映射(相当于配置了一个本地的DNS)</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vi /etc/hosts</span></span><br><span class="line"></span><br><span class="line">127.0.0.1       localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::1             localhost localhost.localdomain localhost6 localhost6.localdomain6</span><br><span class="line"></span><br><span class="line">192.168.8.128   linux128</span><br><span class="line">192.168.8.129   linux129</span><br><span class="line">192.168.8.130   linux130</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#重启网卡</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> systemctl restart network</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#防火墙启用、停用、开机启动、禁止开机启动、查看状态</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> systemctl &#123;start|stop|<span class="built_in">enable</span>|<span class="built_in">disable</span>|status&#125; firewalld.service</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#查看当前模式</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> systemctl get-default</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#设置默认启动图形界面</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> systemctl <span class="built_in">set</span>-default graphical.target</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#设置默认启动命令行</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> systemctl <span class="built_in">set</span>-default multi-user.target</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#重启、关机、待机、休眠</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> systemctl &#123;reboot|poweroff|<span class="built_in">suspend</span>|hibernate&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="常用软件安装"><a href="#常用软件安装" class="headerlink" title="常用软件安装"></a>常用软件安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#查看所有已安装的软件包</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> yum list installed</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#更新所有已安装的软件包</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> yum upgrade</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#查看当前时间</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> date <span class="string">"+%Y-%m-%d %H:%M:%S"</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#同步网络时间</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> yum -y install ntpdate</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ntpdate ntp1.aliyun.com</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装文件传输工具</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> yum -y install curl wget scp</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装Nmap</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> yum install nmap</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#检查开放端口</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> nmap 127.0.0.1</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装GCC编译器</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> yum list|grep gcc</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> yum install gcc</span></span><br></pre></td></tr></table></figure>
+<h2 id="开发软件安装"><a href="#开发软件安装" class="headerlink" title="开发软件安装"></a>开发软件安装</h2><h3 id="Zookeeper"><a href="#Zookeeper" class="headerlink" title="Zookeeper"></a><a href="https://www.apache.org/dist/zookeeper/" target="_blank" rel="noopener">Zookeeper</a></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> scp -o port=22 zookeeper-3.3.6.tar.gz root@192.168.8.128:/opt/zookeeper-3.3.6.tar.gz</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> tar -zxvf zookeeper-3.3.6.tar.gz</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mkdir /usr/<span class="built_in">local</span>/zookeeper</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mv zookeeper-3.3.6 /usr/<span class="built_in">local</span>/zookeeper</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/zookeeper/zookeeper-3.3.6</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mkdir data logs</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#修改配置</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cp conf/zoo_sample.cfg conf/zoo.cfg</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vi conf/zoo.cfg</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#临时数据存放目录</span></span></span><br><span class="line">dataDir=/usr/local/zookeeper/zookeeper-3.3.6/data</span><br><span class="line">dataLogDir=/usr/local/zookeeper/zookeeper-3.3.6/logs</span><br><span class="line">clientPort=2181</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#书写格式：server.服务器编号=服务器地址：通信端口：选举端口</span></span></span><br><span class="line">server.1=192.168.8.128:2888:3888</span><br><span class="line">server.2=192.168.8.129:2888:3888</span><br><span class="line">server.3=192.168.8.130:2888:3888</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#创建myid文件并写入服务器编号</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> touch data/myid</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#server.1</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> 1 &gt; data/myid</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#server.2</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> 2 &gt; data/myid</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#server.3</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> 3 &gt; data/myid</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#启动&amp;检查运行状态</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./bin/zkServer.sh &#123;start|restart|status|stop&#125;</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cat zookeeper.out</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#设置开机启动</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vi /etc/systemd/system/zookeeper.service</span></span><br><span class="line"></span><br><span class="line">[Unit]</span><br><span class="line">Description=zooKeeper</span><br><span class="line">After=syslog.target network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">SyslogIdentifier=zookeeper</span><br><span class="line">TimeoutStartSec=10min</span><br><span class="line">Environment="JAVA_HOME=/usr/local/jdk/jdk1.8.0_77"</span><br><span class="line">ExecStart=/usr/local/zookeeper/zookeeper-3.3.6/bin/zkServer.sh start</span><br><span class="line">ExecStop=/usr/local/zookeeper/zookeeper-3.3.6/bin/zkServer.sh stop</span><br><span class="line">ExecReload=/usr/local/zookeeper/zookeeper-3.3.6/bin/zkServer.sh restart</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#重新加载配置文件让配置生效</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> systemctl daemon-reload</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#启用、停用、开机启动、禁止开机启动、查看状态</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> systemctl &#123;start|stop|<span class="built_in">enable</span>|<span class="built_in">disable</span>|status&#125; zookeeper.service</span></span><br></pre></td></tr></table></figure>
+<h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a><a href="http://download.redis.io/releases/" target="_blank" rel="noopener">Redis</a></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> wgwt http://download.redis.io/releases/redis-5.0.0.tar.gz</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> tar -zxvf redis-5.0.0.tar.gz</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mkdir /usr/<span class="built_in">local</span>/redis</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> redis-5.0.0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装依赖库</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> yum install tcl</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#编译安装(若没有指定安装目录默认安装在/usr/local/bin目录下)</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> make &amp;&amp; make PREFIX=/usr/<span class="built_in">local</span>/redis/redis-5.0.0 install</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#修改配置</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cp redis.conf /usr/<span class="built_in">local</span>/redis/redis-5.0.0</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/redis/redis-5.0.0</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vi redis.conf</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#允许远程访问(默认只能本机访问)</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">bind</span> 127.0.0.1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#允许其他主机连接到该Redis</span></span></span><br><span class="line">protected-mode no</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#启用后台运行</span></span></span><br><span class="line">daemonize yes</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#启用集群</span></span></span><br><span class="line">cluster-enabled yes</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#启动&amp;测试</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./bin/redis-server redis.conf</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./bin/redis-cli -h 127.0.0.1 -p 6379</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装ruby环境</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> yum install ruby</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装ruby-redis-client</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> wget https://rubygems.org/downloads/redis-3.2.1.gem</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> gem install redis-3.2.1.gem</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#执行redis-trib.rb脚本创建集群</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cp /opt/redis-3.2.1/src/redis-trib.rb /usr/<span class="built_in">local</span>/redis/redis-5.0.0</span></span><br><span class="line">./redis-trib.rb create --replicas 0 192.168.8.128:6379 192.168.8.129:6379 192.168.8.130:6379</span><br></pre></td></tr></table></figure>
+<h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a><a href="https://downloads.mysql.com/archives/community/" target="_blank" rel="noopener">MySQL</a></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#检查是否安装mariadb</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> rpm -qa | grep mariadb</span></span><br><span class="line">mariadb-libs-5.5.50-1.el7_2.x86_64</span><br><span class="line"><span class="meta">$</span><span class="bash"> rpm -e --nodeps mariadb-libs-5.5.50-1.el7_2.x86_64</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> tar -xvf mysql-8.0.15-linux-glibc2.12-x86_64.tar.xz</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mv mysql-8.0.15-linux-glibc2.12-x86_64 /usr/<span class="built_in">local</span>/mysql</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/mysql</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> vi my.cnf</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> This will be passed to all mysql clients</span></span><br><span class="line">[client]</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#设置mysql客户端连接服务端时默认使用的端口</span></span></span><br><span class="line">port=3306</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#设置mysql客户端默认字符集</span></span></span><br><span class="line">default_character_set=utf8mb4</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> The MySQL server</span></span><br><span class="line">[mysqld]</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#服务端使用的端口</span></span></span><br><span class="line">port=3306</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#允许的最大连接数</span></span></span><br><span class="line">max_connections=10000</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#允许的连接失败次数</span></span></span><br><span class="line">max_connect_errors=10</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#允许的数据包大小</span></span></span><br><span class="line">max_allowed_packet=64M</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#服务端使用的字符集默认为utf8</span></span></span><br><span class="line">character_set_server=utf8mb4</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#创建新表时默认的存储引擎</span></span></span><br><span class="line">default_storage_engine=INNODB</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#设置mysql事务隔离级别</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">transaction_isolation=REPEATABLE-READ</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#设置默认的密码加密方式</span></span></span><br><span class="line">default_authentication_plugin=mysql_native_password</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#设置mysql的安装目录</span></span></span><br><span class="line">basedir=/usr/local/mysql</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#设置mysql数据库数据的存放目录</span></span></span><br><span class="line">datadir=/usr/local/mysql/data</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#添加用户组</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> groupadd mysql</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#添加用户(-s /bin/false 参数指定mysql用户仅拥有所有权而无登录权限)</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> useradd -r -g mysql -s /bin/<span class="literal">false</span> mysql</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#修改目录拥有者</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> chown -R mysql:mysql ./</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#数据库初始化</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./bin/mysqld --initialize --console</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#随机生成的临时密码(后面登录使用)</span></span></span><br><span class="line">[Server] A temporary password is generated for root@localhost: J&amp;el*7Q37h?Z</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#设置文件拥有者(u)、组用户(g)、其他用户(o)的目录权限：读(r=4)、写(w=2)、执行(x=1)</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> chmod -R 777 /usr/<span class="built_in">local</span>/mysql/data</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#启动mysql服务</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./support-files/mysql.server &#123;start|stop|restart|reload|force-reload|status&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./bin/mysql -uroot -p</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#修改root用户密码</span></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> ALTER USER <span class="string">'root'</span>@<span class="string">'localhost'</span> IDENTIFIED WITH mysql_native_password BY <span class="string">'root'</span>;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#设置允许远程登录</span></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> use mysql;</span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> UPDATE user SET host = <span class="string">'%'</span> WHERE user = <span class="string">'root'</span>;</span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> flush privileges;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#重启mysql服务</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./support-files/mysql.server restart</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#设置开机启动</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vi /etc/systemd/system/mysql.service</span></span><br><span class="line"></span><br><span class="line">[Unit]</span><br><span class="line">Description=mysql</span><br><span class="line">Documentation=http://dev.mysql.com/doc/refman/en/using-systemd.html</span><br><span class="line">After=network.target remote-fs.target nss-lookup.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">User=mysql</span><br><span class="line">Group=mysql</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/usr/local/mysql/support-files/mysql.server start</span><br><span class="line">ExecStop=/usr/local/mysql/support-files/mysql.server stop</span><br><span class="line">ExecReload=/usr/local/mysql/support-files/mysql.server reload</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#重新加载配置文件让配置生效</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> systemctl daemon-reload</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#启用、停用、开机启动、禁止开机启动、查看状态</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> systemctl &#123;start|stop|<span class="built_in">enable</span>|<span class="built_in">disable</span>|status&#125; mysql.service</span></span><br></pre></td></tr></table></figure>
+<h4 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a><a href="https://dev.mysql.com/doc/refman/8.0/en/replication-howto.html" target="_blank" rel="noopener">主从复制</a></h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vi my.cnf</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#Master(192.168.8.129)配置</span></span></span><br><span class="line"></span><br><span class="line">[mysqld]</span><br><span class="line">log_bin=mysql-bin</span><br><span class="line">server_id=1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#重启服务</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./support-files/mysql.server restart</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./bin/mysql -uroot -p</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#创建用于同步的账号并授权</span></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> CREATE USER <span class="string">'repl'</span>@<span class="string">'192.168.8.130'</span> IDENTIFIED BY <span class="string">'repl'</span>;</span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> GRANT REPLICATION SLAVE ON *.* TO <span class="string">'repl'</span>@<span class="string">'192.168.8.130'</span>;</span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> flush privileges;</span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> show master status;</span></span><br><span class="line">+------------------+----------+--------------+------------------+-------------------+</span><br><span class="line">| File             | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |</span><br><span class="line">+------------------+----------+--------------+------------------+-------------------+</span><br><span class="line">| mysql-bin.000001 |     1679 |              |                  |                   |</span><br><span class="line">+------------------+----------+--------------+------------------+-------------------+</span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> SHOW VARIABLES LIKE <span class="string">'server_id'</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#Slave(192.168.8.130)配置</span></span></span><br><span class="line"></span><br><span class="line">[mysqld]</span><br><span class="line">log_bin=mysql-bin</span><br><span class="line">server_id=2</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#重启服务</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./support-files/mysql.server restart</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./bin/mysql -uroot -p</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#执行同步语句</span></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> CHANGE MASTER TO master_host=<span class="string">'192.168.8.129'</span>, master_port=3306, master_user=<span class="string">'repl'</span>, master_password=<span class="string">'repl'</span>, master_log_file=<span class="string">'mysql-bin.000001'</span>, master_log_pos=1679;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#启动slave同步进程</span></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> start slave;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#查看slave状态</span></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> show slave status\G</span></span><br></pre></td></tr></table></figure>
+<h4 id="主主复制"><a href="#主主复制" class="headerlink" title="主主复制"></a>主主复制</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vi my.cnf</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#Master1(192.168.8.129)配置</span></span></span><br><span class="line"></span><br><span class="line">[mysqld]</span><br><span class="line">log_bin=mysql-bin</span><br><span class="line">server_id=1</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#启用全局事务ID</span></span></span><br><span class="line">gtid_mode=ON</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#强制事务一致</span></span></span><br><span class="line">enforce_gtid_consistency=true</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#需要同步的数据库</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">binlog_do_db=<span class="built_in">test</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#不需要同步的数据库</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">binlog_ignore_db=mysql</span></span><br><span class="line">replicate_wild_ignore_table=mysql.%</span><br><span class="line">replicate_wild_ignore_table=information_schema.%</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#生成奇数的自增(offset: 起始值, increment: 自增幅度)</span></span></span><br><span class="line">auto_increment_offset=1</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#注意：当需要加入新的服务器时，这种方法难以扩展，考虑使用Snowflake算法代替自增ID</span></span></span><br><span class="line">auto_increment_increment=2</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#重启服务</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./support-files/mysql.server restart</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./bin/mysql -uroot -p</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#创建用于同步的账号并授权</span></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> CREATE USER <span class="string">'repl'</span>@<span class="string">'192.168.8.130'</span> IDENTIFIED BY <span class="string">'repl'</span>;</span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> GRANT REPLICATION SLAVE ON *.* TO <span class="string">'repl'</span>@<span class="string">'192.168.8.130'</span>;</span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> flush privileges;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#执行同步语句(master_auto_position=&#123;0|1&#125;表示是否基于GTID实现)</span></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> CHANGE MASTER TO master_host=<span class="string">'192.168.8.130'</span>, master_port=3306, master_user=<span class="string">'repl'</span>, master_password=<span class="string">'repl'</span>, master_auto_position=1;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#启动slave同步进程</span></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> start slave;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#查看slave状态</span></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> show slave status\G</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#Master2(192.168.8.130)配置</span></span></span><br><span class="line"></span><br><span class="line">[mysqld]</span><br><span class="line">log_bin=mysql-bin</span><br><span class="line">server_id=2</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#启用全局事务ID</span></span></span><br><span class="line">gtid_mode=ON</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#强制事务一致</span></span></span><br><span class="line">enforce_gtid_consistency=true</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#需要同步的数据库</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">binlog_do_db=<span class="built_in">test</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#不需要同步的数据库</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">binlog_ignore_db=mysql</span></span><br><span class="line">replicate_wild_ignore_table=mysql.%</span><br><span class="line">replicate_wild_ignore_table=information_schema.%</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#生成偶数的自增(offset: 起始值, increment: 自增幅度)</span></span></span><br><span class="line">auto_increment_offset=2</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#注意：当需要加入新的服务器时，这种方法难以扩展，考虑使用Snowflake算法代替自增ID</span></span></span><br><span class="line">auto_increment_increment=2</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#重启服务</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./support-files/mysql.server restart</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./bin/mysql -uroot -p</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#创建用于同步的账号并授权</span></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> CREATE USER <span class="string">'repl'</span>@<span class="string">'192.168.8.129'</span> IDENTIFIED BY <span class="string">'repl'</span>;</span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> GRANT REPLICATION SLAVE ON *.* TO <span class="string">'repl'</span>@<span class="string">'192.168.8.129'</span>;</span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> flush privileges;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#执行同步语句(master_auto_position=&#123;0|1&#125;表示是否基于GTID实现)</span></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> CHANGE MASTER TO master_host=<span class="string">'192.168.8.129'</span>, master_port=3306, master_user=<span class="string">'repl'</span>, master_password=<span class="string">'repl'</span>, master_auto_position=1;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#启动slave同步进程</span></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> start slave;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#查看slave状态</span></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> show slave status\G</span></span><br></pre></td></tr></table></figure>
+<h3 id="Keepalived"><a href="#Keepalived" class="headerlink" title="Keepalived"></a><a href="https://www.keepalived.org/software/" target="_blank" rel="noopener">Keepalived</a></h3><p>Keepalived是一个高性能的服务器高可用或热备解决方案，Keepalived主要用来解决服务器单点故障问题的，通过与Nginx、HAProxy等反向代理的负载均衡服务器配合可实现Web服务端的高可用。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> wget https://www.keepalived.org/software/keepalived-2.0.17.tar.gz</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> tar -zxvf keepalived-2.0.17.tar.gz</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> keepalived-2.0.17</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装依赖库</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> yum -y install openssl-devel</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#配置安装路径</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./configure --prefix=/usr/<span class="built_in">local</span>/keepalived</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#编译安装</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> make &amp;&amp; make install</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/keepalived</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cp etc/keepalived/keepalived.conf keepalived.conf</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vi keepalived.conf</span></span><br><span class="line"></span><br><span class="line">! Configuration File for keepalived</span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    #初始状态为MASTER(当出现其他机器时，最高优先级的会被选为MASTER)</span><br><span class="line">    state MASTER</span><br><span class="line">    #网络接口</span><br><span class="line">    interface eno16777736</span><br><span class="line">    #优先级</span><br><span class="line">    priority 100</span><br><span class="line">    #发VRRP包的时间间隔(即多久进行一次MASTER选举)</span><br><span class="line">    advert_int 1</span><br><span class="line">    #虚拟路由标识(同一集群内需一样)</span><br><span class="line">    virtual_router_id 50</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 1111</span><br><span class="line">    &#125;</span><br><span class="line">    #指定VIP地址</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        192.168.8.188</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">virtual_server 192.168.8.188 3306 &#123;</span><br><span class="line">    #设置运行状态检测时间(单位为秒)</span><br><span class="line">    delay_loop 6</span><br><span class="line">    #设置调度算法</span><br><span class="line">    lb_algo rr</span><br><span class="line">    #设置LVS实现负载均衡的机制</span><br><span class="line">    lb_kind DR</span><br><span class="line">    #会话保持时间(单位为秒)</span><br><span class="line">    persistence_timeout 50</span><br><span class="line">    #转发协议类型</span><br><span class="line">    protocol TCP</span><br><span class="line"></span><br><span class="line">    real_server 192.168.8.129 3306 &#123;</span><br><span class="line">        #服务节点的权值</span><br><span class="line">        weight 1</span><br><span class="line">        TCP_CHECK &#123;</span><br><span class="line">            #连接超时时间</span><br><span class="line">            connect_timeout 3</span><br><span class="line">            #重连间隔时间</span><br><span class="line">            delay_before_retry 3</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#启动服务(默认使用/etc/keepalived/keepalived.conf配置文件)</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./sbin/keepalived -D -f /usr/<span class="built_in">local</span>/keepalived/keepalived.conf</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#查看VIP绑定状态验证是否安装成功</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ip addr</span></span><br><span class="line"></span><br><span class="line">inet 192.168.8.129/24 brd 192.168.8.255 scope global eno16777736</span><br><span class="line">inet 192.168.8.188/32 scope global eno16777736</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#设置开机启动</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vi /etc/systemd/system/keepalived.service</span></span><br><span class="line"></span><br><span class="line">[Unit]</span><br><span class="line">Description=keepalived</span><br><span class="line">After=network.target remote-fs.target nss-lookup.target</span><br><span class="line"> </span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">PIDFile=/var/run/keepalived.pid</span><br><span class="line">ExecStart=/usr/local/keepalived/sbin/keepalived -D -f /usr/local/keepalived/keepalived.conf</span><br><span class="line">ExecStop=/bin/kill -s QUIT $MAINPID</span><br><span class="line">ExecReload=/bin/kill -s HUP $MAINPID</span><br><span class="line"> </span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#重新加载配置文件让配置生效</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> systemctl daemon-reload</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#启用、停用、开机启动、禁止开机启动、查看状态</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> systemctl &#123;start|stop|<span class="built_in">enable</span>|<span class="built_in">disable</span>|status&#125; keepalived.service</span></span><br></pre></td></tr></table></figure>
+<h4 id="MySQL高可用"><a href="#MySQL高可用" class="headerlink" title="MySQL高可用"></a>MySQL高可用</h4><p>Keepalived实现高可用的基本思路：集群中的MASTER和BACKUP角色能进行切换，是由priority和weight共同决定的。例如，初始状态时，MASTER节点的priority为100，BACKUP节点的priority为90，各个节点通过脚本监控各自的服务是否正常，如果监控到服务发生异常，则priority减少weight，这样，最大priority值的节点就会被选举为MASTER节点。所以，为了保证脚本执行成功或失败后能触发MASTER和BACKUP切换，通常设置weight的值大于MASTER与BACKUP节点的priority值之差。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vi keepalived.conf</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#Master(192.168.8.129)配置</span></span></span><br><span class="line"></span><br><span class="line">! Configuration File for keepalived</span><br><span class="line"></span><br><span class="line">global_defs &#123;</span><br><span class="line">    script_user mysql</span><br><span class="line">    enable_script_security</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">监控mysql服务的脚本</span></span><br><span class="line">vrrp_script check_mysql &#123;</span><br><span class="line">    #脚本内容或脚本文件</span><br><span class="line">    script /usr/local/keepalived/check_mysql.sh</span><br><span class="line">    #执行脚本间隔时间(默认1秒)</span><br><span class="line">    interval 1</span><br><span class="line">    #按此权重调整优先级(当mysql服务不可用时，该节点权值减少10，这样权值为95的节点就会成为MASTER)</span><br><span class="line">    weight -10</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    #初始状态为MASTER(当出现其他机器时，最高优先级的会被选为MASTER)</span><br><span class="line">    state MASTER</span><br><span class="line">    #网络接口</span><br><span class="line">    interface eno16777736</span><br><span class="line">    #优先级</span><br><span class="line">    priority 100</span><br><span class="line">    advert_int 1</span><br><span class="line">    virtual_router_id 50</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 1111</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        192.168.8.188</span><br><span class="line">    &#125;</span><br><span class="line">    #服务运行状态检测脚本</span><br><span class="line">    track_script &#123;</span><br><span class="line">        check_mysql</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">virtual_server 192.168.8.188 3306 &#123;</span><br><span class="line">    delay_loop 6</span><br><span class="line">    lb_algo rr</span><br><span class="line">    lb_kind DR</span><br><span class="line">    persistence_timeout 50</span><br><span class="line">    protocol TCP</span><br><span class="line"></span><br><span class="line">    real_server 192.168.8.129 3306 &#123;</span><br><span class="line">        weight 1</span><br><span class="line">        TCP_CHECK &#123;</span><br><span class="line">            connect_timeout 3</span><br><span class="line">            delay_before_retry 3</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#Backup(192.168.8.130)配置</span></span></span><br><span class="line"></span><br><span class="line">! Configuration File for keepalived</span><br><span class="line"></span><br><span class="line">global_defs &#123;</span><br><span class="line">    script_user mysql</span><br><span class="line">    enable_script_security</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">监控mysql服务的脚本</span></span><br><span class="line">vrrp_script check_mysql &#123;</span><br><span class="line">    #脚本内容或脚本文件</span><br><span class="line">    script /usr/local/keepalived/check_mysql.sh</span><br><span class="line">    #执行脚本间隔时间(默认1秒)</span><br><span class="line">    interval 1</span><br><span class="line">    #按此权重调整优先级(当mysql服务不可用时，该节点权值减少10，这样权值为95的节点就会成为MASTER)</span><br><span class="line">    weight -10</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    #初始状态为BACKUP(当出现其他机器时，最高优先级的会被选为MASTER)</span><br><span class="line">    state BACKUP</span><br><span class="line">    #网络接口</span><br><span class="line">    interface ens33</span><br><span class="line">    #优先级</span><br><span class="line">    priority 95</span><br><span class="line">    advert_int 1</span><br><span class="line">    virtual_router_id 50</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 1111</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        192.168.8.188</span><br><span class="line">    &#125;</span><br><span class="line">    #服务运行状态检测脚本</span><br><span class="line">    track_script &#123;</span><br><span class="line">        check_mysql</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">virtual_server 192.168.8.188 3306 &#123;</span><br><span class="line">    delay_loop 6</span><br><span class="line">    lb_algo rr</span><br><span class="line">    lb_kind DR</span><br><span class="line">    persistence_timeout 50</span><br><span class="line">    protocol TCP</span><br><span class="line"></span><br><span class="line">    real_server 192.168.8.130 3306 &#123;</span><br><span class="line">        weight 1</span><br><span class="line">        TCP_CHECK &#123;</span><br><span class="line">            connect_timeout 3</span><br><span class="line">            delay_before_retry 3</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#检测脚本</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> vi check_mysql.sh</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">counter=`ps aux | grep mysql | grep -v grep | wc -l`</span><br><span class="line">if [ $counter == 0 ]</span><br><span class="line">then</span><br><span class="line">    echo "Failure: MySQL is not running."</span><br><span class="line">    exit 1</span><br><span class="line">else</span><br><span class="line">    echo "Success: MySQL is running."</span><br><span class="line">    exit 0</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> chown -R mysql:mysql ./</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> chmod 755 check_mysql.sh</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#默认Keepalived日志存放在系统日志</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> tail -50f /var/<span class="built_in">log</span>/messages</span></span><br></pre></td></tr></table></figure>
+<h3 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装Erlang运行环境</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> wget https://github.com/rabbitmq/erlang-rpm/releases/download/v21.3.8.5/erlang-21.3.8.5-1.el7.x86_64.rpm</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装依赖</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> yum -y install openssl-devel</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#查看是否可以重定位(是否可加参数--prefix=&lt;dir&gt;安装到指定目录)</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> rpm -qpi erlang-21.3.8.5-1.el7.x86_64.rpm | head</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> rpm -i erlang-21.3.8.5-1.el7.x86_64.rpm</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装RabbitMQ</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> wget https://github.com/rabbitmq/rabbitmq-server/releases/download/v3.7.15/rabbitmq-server-generic-unix-3.7.15.tar.xz</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> tar -xvf rabbitmq-server-generic-unix-3.7.15.tar.xz</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mv rabbitmq_server-3.7.15 /usr/<span class="built_in">local</span>/rabbitmq</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/rabbitmq</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#添加配置文件</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vi etc/rabbitmq/rabbitmq.conf</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># See https://github.com/rabbitmq/rabbitmq-server/blob/master/docs/rabbitmq.conf.example</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># Allow access to the guest user from anywhere on the network.</span></span></span><br><span class="line">loopback_users.guest = false</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> vi etc/rabbitmq/rabbitmq-env.conf</span></span><br><span class="line"></span><br><span class="line">HOME=/usr/local/rabbitmq</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Specifies new style config file location</span></span><br><span class="line"><span class="meta">#</span><span class="bash">CONFIG_FILE=/usr/<span class="built_in">local</span>/rabbitmq/etc/rabbitmq/rabbitmq.conf</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装插件</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./sbin/rabbitmq-plugins <span class="built_in">enable</span> rabbitmq_management rabbitmq_web_stomp rabbitmq_stomp</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#启动服务</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./sbin/rabbitmq-server</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#设置开机启动</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vi /etc/systemd/system/rabbitmq-server.service</span></span><br><span class="line"></span><br><span class="line">[Unit]</span><br><span class="line">Description=rabbitmq-server</span><br><span class="line">Documentation=https://github.com/rabbitmq/rabbitmq-server/blob/master/docs/rabbitmq-server.service.example</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">Environment="HOME=/usr/local/rabbitmq"</span><br><span class="line">ExecStart=/usr/local/rabbitmq/sbin/rabbitmq-server</span><br><span class="line">ExecStop=/usr/local/rabbitmq/sbin/rabbitmqctl stop</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#重新加载配置文件让配置生效</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> systemctl daemon-reload</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#启用、停用、开机启动、禁止开机启动、查看状态</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> systemctl &#123;start|stop|<span class="built_in">enable</span>|<span class="built_in">disable</span>|status&#125; rabbitmq-server.service</span></span><br></pre></td></tr></table></figure>
+<h4 id="RabbitMQ集群"><a href="#RabbitMQ集群" class="headerlink" title="RabbitMQ集群"></a>RabbitMQ集群</h4><p>在集群默认模式下，集群中的各个节点保存有相同的元数据（队列的结构），而消息实体只存在其中一个节点上，当该节点发生故障后，其他节点就无法获取到还未消费的消息实体。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#RabbitMQ集群依赖Erlang集群，而Erlang集群为保证不同节点可相互通信必须共享相同的Cookie</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#拷贝Master节点的.erlang.cookie文件到各Backup节点</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> scp .erlang.cookie root@192.168.8.129:/usr/<span class="built_in">local</span>/rabbitmq/.erlang.cookie</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> scp .erlang.cookie root@192.168.8.130:/usr/<span class="built_in">local</span>/rabbitmq/.erlang.cookie</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#启动集群中的各个节点</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./sbin/rabbitmq-server -detached</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#查看Master节点集群状态</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./sbin/rabbitmqctl cluster_status</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#将各Backup节点加入到Master节点组成集群</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./sbin/rabbitmqctl stop_app</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./sbin/rabbitmqctl join_cluster rabbit@linux128</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./sbin/rabbitmqctl start_app</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#设置集群名称</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./sbin/rabbitmqctl set_cluster_name rabbitmq-cluster</span></span><br></pre></td></tr></table></figure>
+<h4 id="RabbitMQ镜像队列"><a href="#RabbitMQ镜像队列" class="headerlink" title="RabbitMQ镜像队列"></a>RabbitMQ镜像队列</h4><p>RabbitMQ的镜像队列机制是最简单的队列HA方案，它通过在集群的基础上增加<em>ha-mode</em>、<em>ha-param</em>等policy选项，可以根据需求将集群中的队列镜像到多个节点上，从而实现高可用，消除集群模式中队列内容单点故障带来的风险。该模式和普通模式不同之处在于，消息实体会主动在镜像节点间同步，而不是在客户端取数据时临时拉取。当然，该模式带来的副作用也很明显，除了降低系统性能外，如果镜像队列数量过多，加之大量的消息进入，集群内部的网络带宽将会被这种同步通讯大大消耗掉，所以通常在对可靠性要求较高的场合中适用。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#将所有队列设置为镜像队列</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./sbin/rabbitmqctl set_policy ha-all <span class="string">"^"</span> <span class="string">'&#123;"ha-mode":"all"&#125;'</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="HAProxy"><a href="#HAProxy" class="headerlink" title="HAProxy"></a><a href="https://www.haproxy.org/download/" target="_blank" rel="noopener">HAProxy</a></h3><p>HAProxy是可靠的、高性能的用于为基于TCP或HTTP的应用程序提供高可用、负载均衡和代理服务的解决方案，和Nginx（只支持HTTP）负载均衡类似。负载均衡是解决<code>高性能</code>、<code>单点故障（高可用）</code>、<code>扩展性（水平伸缩）</code>的终极解决方案。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> wget https://www.haproxy.org/download/2.0/src/haproxy-2.0.1.tar.gz</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> tar -zxvf haproxy-2.0.1.tar.gz</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> haproxy-2.0.1</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#查看linux内核版本</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> uname -r</span></span><br><span class="line"></span><br><span class="line">3.10.0-327.36.1.el7.x86_64</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#编译(参数TARGET=linux310指定内核版本)</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> make TARGET=linux310 ARCH=x86_64</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> make PREFIX=/usr/<span class="built_in">local</span>/haproxy install</span></span><br></pre></td></tr></table></figure>
+<h4 id="RabbitMQ负载均衡"><a href="#RabbitMQ负载均衡" class="headerlink" title="RabbitMQ负载均衡"></a>RabbitMQ负载均衡</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vi /usr/<span class="built_in">local</span>/haproxy/haproxy.cfg</span></span><br><span class="line"></span><br><span class="line">global</span><br><span class="line">    daemon</span><br><span class="line">    log 127.0.0.1 local0</span><br><span class="line">    log 127.0.0.1 local1 notice</span><br><span class="line">    maxconn 4096</span><br><span class="line">    chroot  /usr/local/haproxy</span><br><span class="line">    pidfile /usr/local/haproxy/haproxy.pid</span><br><span class="line"></span><br><span class="line">defaults</span><br><span class="line">    log               global</span><br><span class="line">    retries           3</span><br><span class="line">    maxconn           2000</span><br><span class="line">    timeout connect   5s</span><br><span class="line">    timeout client    50s</span><br><span class="line">    timeout server    50s</span><br><span class="line"></span><br><span class="line">listen rabbitmq_cluster</span><br><span class="line">    bind 127.0.0.1:5671</span><br><span class="line">    mode tcp</span><br><span class="line">    balance roundrobin</span><br><span class="line">    server linux128 192.168.8.128:5672 check inter 5000 rise 2 fall 2</span><br><span class="line">    server linux129 192.168.8.129:5672 check inter 5000 rise 2 fall 2</span><br><span class="line">    server linux130 192.168.8.130:5672 check inter 5000 rise 2 fall 2</span><br><span class="line"></span><br><span class="line">listen monitor</span><br><span class="line">    bind 192.168.8.131:8100</span><br><span class="line">    mode http</span><br><span class="line">    stats enable</span><br><span class="line">    stats uri /rabbitmq</span><br><span class="line">    stats refresh 5s</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#检查文件是否书写正确</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./sbin/haproxy -f haproxy.cfg -c</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#启动服务</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./sbin/haproxy -f haproxy.cfg</span></span><br></pre></td></tr></table></figure>
+<h3 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a><a href="https://nginx.org/download/" target="_blank" rel="noopener">Nginx</a></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> wget http://nginx.org/download/nginx-1.18.0.tar.gz</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> tar -zxvf nginx-1.18.0.tar.gz</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mkdir /usr/<span class="built_in">local</span>/nginx</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> nginx-1.18.0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装依赖库</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> yum install pcre pcre-devel</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> yum install zlib zlib-devel</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#配置安装路径</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./configure --prefix=/usr/<span class="built_in">local</span>/nginx/nginx-1.18.0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#编译安装</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> make &amp;&amp; make install</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#启动&amp;测试</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/nginx/nginx-1.18.0/</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./sbin/nginx</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> curl http://127.0.0.1</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#设置开机启动</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vi /etc/systemd/system/nginx.service</span></span><br><span class="line"></span><br><span class="line">[Unit]</span><br><span class="line">Description=nginx</span><br><span class="line">After=network.target remote-fs.target nss-lookup.target</span><br><span class="line"> </span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/usr/local/nginx/nginx-1.18.0/sbin/nginx</span><br><span class="line">ExecStop=/usr/local/nginx/nginx-1.18.0/sbin/nginx -s stop</span><br><span class="line">ExecReload=/usr/local/nginx/nginx-1.18.0/sbin/nginx -s reload</span><br><span class="line"> </span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#重新加载配置文件让配置生效</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> systemctl daemon-reload</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#启用、停用、开机启动、禁止开机启动、查看状态</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> systemctl &#123;start|stop|<span class="built_in">enable</span>|<span class="built_in">disable</span>|status&#125; nginx.service</span></span><br></pre></td></tr></table></figure>
+<h4 id="Nginx高可用"><a href="#Nginx高可用" class="headerlink" title="Nginx高可用"></a>Nginx高可用</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vi keepalived.conf</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#Master(192.168.8.129)配置</span></span></span><br><span class="line"></span><br><span class="line">! Configuration File for keepalived</span><br><span class="line"></span><br><span class="line">global_defs &#123;</span><br><span class="line">    script_user nginx</span><br><span class="line">    enable_script_security</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">监控nginx服务的脚本</span></span><br><span class="line">vrrp_script check_nginx &#123;</span><br><span class="line">    #脚本内容或脚本文件</span><br><span class="line">    script /usr/local/keepalived/check_nginx.sh</span><br><span class="line">    #执行脚本间隔时间(默认1秒)</span><br><span class="line">    interval 1</span><br><span class="line">    #按此权重调整优先级(当nginx服务不可用时，该节点权值减少10，这样权值为95的节点就会成为MASTER)</span><br><span class="line">    weight -10</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    #初始状态为MASTER(当出现其他机器时，最高优先级的会被选为MASTER)</span><br><span class="line">    state MASTER</span><br><span class="line">    #网络接口</span><br><span class="line">    interface eno16777736</span><br><span class="line">    #优先级(最高优先级的会被选为MASTER)</span><br><span class="line">    priority 100</span><br><span class="line">    #发VRRP包的时间间隔(即多久进行一次MASTER选举)</span><br><span class="line">    advert_int 1</span><br><span class="line">    #虚拟路由标识(同一集群内需一样)</span><br><span class="line">    virtual_router_id 50</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 1111</span><br><span class="line">    &#125;</span><br><span class="line">    #指定VIP地址</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        192.168.8.188</span><br><span class="line">    &#125;</span><br><span class="line">    #服务运行状态检测脚本</span><br><span class="line">    track_script &#123;</span><br><span class="line">        check_nginx</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#Backup(192.168.8.130)配置</span></span></span><br><span class="line"></span><br><span class="line">! Configuration File for keepalived</span><br><span class="line"></span><br><span class="line">global_defs &#123;</span><br><span class="line">    script_user nginx</span><br><span class="line">    enable_script_security</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">监控nginx服务的脚本</span></span><br><span class="line">vrrp_script check_nginx &#123;</span><br><span class="line">    #脚本内容或脚本文件</span><br><span class="line">    script /usr/local/keepalived/check_nginx.sh</span><br><span class="line">    #执行脚本间隔时间(默认1秒)</span><br><span class="line">    interval 1</span><br><span class="line">    #按此权重调整优先级(当nginx服务不可用时，该节点权值减少10，这样权值为95的节点就会成为MASTER)</span><br><span class="line">    weight -10</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    #设为BACKUP将根据优先级决定是MASTER还是SLAVE</span><br><span class="line">    state BACKUP</span><br><span class="line">    #网络接口</span><br><span class="line">    interface ens33</span><br><span class="line">    #优先级(最高优先级的会被选为MASTER)</span><br><span class="line">    priority 95</span><br><span class="line">    #发VRRP包的时间间隔(即多久进行一次MASTER选举)</span><br><span class="line">    advert_int 1</span><br><span class="line">    #虚拟路由标识(同一集群内需一样)</span><br><span class="line">    virtual_router_id 50</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 1111</span><br><span class="line">    &#125;</span><br><span class="line">    #指定VIP地址</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        192.168.8.188</span><br><span class="line">    &#125;</span><br><span class="line">    #服务运行状态检测脚本</span><br><span class="line">    track_script &#123;</span><br><span class="line">        check_nginx</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#检测脚本</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> vi check_nginx.sh</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">counter=`ps -C nginx --no-heading|wc -l`</span><br><span class="line">if [ $counter == 0 ]</span><br><span class="line">then</span><br><span class="line">    echo "Failure: Nginx is not running..."</span><br><span class="line">    exit 2</span><br><span class="line">else</span><br><span class="line">    echo "Success: Nginx is running..."</span><br><span class="line">    exit 0</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h4 id="Nginx负载均衡"><a href="#Nginx负载均衡" class="headerlink" title="Nginx负载均衡"></a>Nginx负载均衡</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vi nginx.conf</span></span><br><span class="line"></span><br><span class="line">worker_processes  1;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line"></span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line"></span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line"></span><br><span class="line">    upstream tomcat_cluster &#123;</span><br><span class="line">        #weight: 设置权重(值越大被访问到的几率越大)</span><br><span class="line">        #max_fails: 与服务器通信失败后进行几次重试(默认为1)</span><br><span class="line">        #fail_timeout: 超过失败重试次数后在多长时间内不可用(默认为10秒)</span><br><span class="line">        server 192.168.8.129:8080 weight=5 max_fails=1 fail_timeout=10;</span><br><span class="line">        server 192.168.8.130:8080 weight=1 max_fails=1 fail_timeout=10;</span><br><span class="line">        #备份服务器(当所有主服务器全都不可用时才会起作用)</span><br><span class="line">        server 192.168.8.128:8080 backup;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  localhost;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            root   html;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location ~ \.xhtml$ &#123;</span><br><span class="line">            proxy_pass            http://tomcat_cluster;</span><br><span class="line">            proxy_redirect        off;</span><br><span class="line">            proxy_set_header      Host $http_host;</span><br><span class="line">            proxy_set_header      X-Real-IP $remote_addr;</span><br><span class="line">            proxy_set_header      X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">            proxy_connect_timeout 60s;</span><br><span class="line">            proxy_send_timeout    60s;</span><br><span class="line">            proxy_read_timeout    60s;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        error_page   500 502 503 504  /50x.html;</span><br><span class="line">        location = /50x.html &#123;</span><br><span class="line">            root   html;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> systemctl reload nginx</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> curl http://192.168.8.188/examples/websocket/index.xhtml</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/uploads/wechatpay.png" alt="Gavin Lu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/centos/" rel="tag"># centos</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/26/linux/vmware/" rel="next" title="Linux - VMware">
+                <i class="fa fa-chevron-left"></i> Linux - VMware
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/28/architect/distributed/nginx/" rel="prev" title="反向代理 - Nginx">
+                反向代理 - Nginx <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/uploads/avatar.png" alt="Gavin Lu">
+            
+              <p class="site-author-name" itemprop="name">Gavin Lu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/lugavin" title="GitHub &rarr; https://github.com/lugavin" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://bitbucket.org/lugavin" title="Bitbucket &rarr; https://bitbucket.org/lugavin" rel="noopener" target="_blank"><i class="fa fa-fw fa-bitbucket"></i>Bitbucket</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#网络配置"><span class="nav-number">1.</span> <span class="nav-text">网络配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用软件安装"><span class="nav-number">2.</span> <span class="nav-text">常用软件安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发软件安装"><span class="nav-number">3.</span> <span class="nav-text">开发软件安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Zookeeper"><span class="nav-number">3.1.</span> <span class="nav-text">Zookeeper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis"><span class="nav-number">3.2.</span> <span class="nav-text">Redis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL"><span class="nav-number">3.3.</span> <span class="nav-text">MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主从复制"><span class="nav-number">3.3.1.</span> <span class="nav-text">主从复制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主主复制"><span class="nav-number">3.3.2.</span> <span class="nav-text">主主复制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Keepalived"><span class="nav-number">3.4.</span> <span class="nav-text">Keepalived</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL高可用"><span class="nav-number">3.4.1.</span> <span class="nav-text">MySQL高可用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ"><span class="nav-number">3.5.</span> <span class="nav-text">RabbitMQ</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RabbitMQ集群"><span class="nav-number">3.5.1.</span> <span class="nav-text">RabbitMQ集群</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RabbitMQ镜像队列"><span class="nav-number">3.5.2.</span> <span class="nav-text">RabbitMQ镜像队列</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HAProxy"><span class="nav-number">3.6.</span> <span class="nav-text">HAProxy</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RabbitMQ负载均衡"><span class="nav-number">3.6.1.</span> <span class="nav-text">RabbitMQ负载均衡</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nginx"><span class="nav-number">3.7.</span> <span class="nav-text">Nginx</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Nginx高可用"><span class="nav-number">3.7.1.</span> <span class="nav-text">Nginx高可用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Nginx负载均衡"><span class="nav-number">3.7.2.</span> <span class="nav-text">Nginx负载均衡</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gavin Lu</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: false,
+        appId: '5IwtIhDDNAEOmFsA0RwltEjE-gzGzoHsz',
+        appKey: 'aep6gMEg10pFmdT7kHu53dPV',
+        placeholder: 'Type your message here',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: true
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

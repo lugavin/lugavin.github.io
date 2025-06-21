@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="概述在微服务架构中，随着服务的逐步拆分，数据库私有已经成为共识，这也导致所面临的分布式事务问题成为微服务落地过程中一个非常难以逾越的障碍，但是目前尚没有一个完整通用的解决方案。 其实不仅仅是在微服务架构中，随着用户访问量的逐渐上涨，数据库甚至是服务的分片、分区、水平拆分、垂直拆分已经逐渐成为较为常用的提升瓶颈的解决方案，因此越来越多的原子操作变成了跨库甚至是跨服务的事务操作，最终结果是在对高性能、">
+<meta name="keywords" content="distributed">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分布式事务">
+<meta property="og:url" content="https://lugavin.github.io/2018/12/27/architect/distributed/transaction/index.html">
+<meta property="og:site_name" content="Gavin&#39;s blog">
+<meta property="og:description" content="概述在微服务架构中，随着服务的逐步拆分，数据库私有已经成为共识，这也导致所面临的分布式事务问题成为微服务落地过程中一个非常难以逾越的障碍，但是目前尚没有一个完整通用的解决方案。 其实不仅仅是在微服务架构中，随着用户访问量的逐渐上涨，数据库甚至是服务的分片、分区、水平拆分、垂直拆分已经逐渐成为较为常用的提升瓶颈的解决方案，因此越来越多的原子操作变成了跨库甚至是跨服务的事务操作，最终结果是在对高性能、">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://lugavin.github.io/images/architect/distributed-transaction.png">
+<meta property="og:image" content="https://lugavin.github.io/images/architect/distributed-transaction-rocketmq.png">
+<meta property="og:updated_time" content="2025-06-21T02:09:57.961Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="分布式事务">
+<meta name="twitter:description" content="概述在微服务架构中，随着服务的逐步拆分，数据库私有已经成为共识，这也导致所面临的分布式事务问题成为微服务落地过程中一个非常难以逾越的障碍，但是目前尚没有一个完整通用的解决方案。 其实不仅仅是在微服务架构中，随着用户访问量的逐渐上涨，数据库甚至是服务的分片、分区、水平拆分、垂直拆分已经逐渐成为较为常用的提升瓶颈的解决方案，因此越来越多的原子操作变成了跨库甚至是跨服务的事务操作，最终结果是在对高性能、">
+<meta name="twitter:image" content="https://lugavin.github.io/images/architect/distributed-transaction.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Gavin's blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://lugavin.github.io/2018/12/27/architect/distributed/transaction/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>分布式事务 | Gavin's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gavin's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">路漫漫其修远兮 吾将上下而求索</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-comments">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/comments/" rel="section"><i class="menu-item-icon fa fa-fw fa-send"></i> <br>留言</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lugavin.github.io/2018/12/27/architect/distributed/transaction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gavin Lu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gavin's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">分布式事务
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-27 09:00:00" itemprop="dateCreated datePublished" datetime="2018-12-27T09:00:00+00:00">2018-12-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2025-06-21 02:09:57" itemprop="dateModified" datetime="2025-06-21T02:09:57+00:00">2025-06-21</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/architect/" itemprop="url" rel="index"><span itemprop="name">architect</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+             <span id="/2018/12/27/architect/distributed/transaction/" class="leancloud_visitors" data-flag-title="分布式事务">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>在微服务架构中，随着服务的逐步拆分，数据库私有已经成为共识，这也导致所面临的分布式事务问题成为微服务落地过程中一个非常难以逾越的障碍，但是目前尚没有一个完整通用的解决方案。</p>
+<p>其实不仅仅是在微服务架构中，随着用户访问量的逐渐上涨，数据库甚至是服务的分片、分区、水平拆分、垂直拆分已经逐渐成为较为常用的提升瓶颈的解决方案，因此越来越多的原子操作变成了<code>跨库</code>甚至是<code>跨服务</code>的事务操作，最终结果是在对高性能、高扩展性、高可用性的追求的道路上，我们开始逐渐放松对一致性的追求，但是在很多场景下，尤其是账务、电商等业务中，不可避免的存在着一致性问题，使得我们不得不去探寻一种机制，用以在分布式环境中保证事务的一致性。</p>
+<p>微服务使得单体架构扩展为分布式架构，在扩展的过程中，逐渐丧失了单体架构中数据源单一、可以直接依赖于数据库进行事务操作的能力。而关系型数据库中，提供了强大的事务处理能力，可以满足<code>ACID</code>特性，这种特性保证了数据操作的强一致性，这也是分布式环境中弱一致性以及最终一致性能够得以实现的基础。</p>
+<p>在讨论分布式事务之前，我们得先弄清楚本地事务和全局事务的概念以及它们的使用场景。</p>
+<h3 id="本地事务"><a href="#本地事务" class="headerlink" title="本地事务"></a>本地事务</h3><blockquote>
+<p>本地事务：在单个数据库的本地并且限制在单个进程内的事务（本地事务不涉及多个数据来源），事务由资源管理器（如DBMS）本地管理，而Spring为我们提供了非常方便的声明式事务管理，但是默认的Spring事务只支持单数据源，而实际上一个应用往往需要进行<code>跨库</code>甚至是<code>跨服务</code>的事务操作，这个时候就要依靠分布式事务。</p>
+</blockquote>
+<ul>
+<li>优点<ol>
+<li>支持严格的ACID属性</li>
+<li>可靠</li>
+<li>高效</li>
+<li>状态可以只在资源管理器中维护</li>
+<li>应用编程模型简单</li>
+</ol>
+</li>
+<li>缺点<ol>
+<li>不具备分布式事务处理能力</li>
+<li>隔离的最小单位由资源管理器决定，如数据库中的一条记录</li>
+</ol>
+</li>
+</ul>
+<h3 id="全局事务"><a href="#全局事务" class="headerlink" title="全局事务"></a>全局事务</h3><blockquote>
+<p>全局事务：由全局事务管理器管理和协调的事务，可以跨越多个资源（如数据库或JMS队列）和进程，全局事务管理器一般使用XA二阶段提交协议与数据库进行交互，事务由全局事务管理器全局管理。</p>
+</blockquote>
+<ul>
+<li>优点：严格的ACID</li>
+<li>缺点：效率非常低（微服务架构下已不太适用）<ol>
+<li>全局事务方式下，全局事务管理器（TM）通过XA接口使用二阶段提交协议（2PC）与资源层（如数据库）进行交互，使用全局事务，数据被Lock的时间跨整个事务，直到全局事务结束。</li>
+<li>2PC是反可伸缩模式，在事务处理过程中，参与者需要一直持有资源直到整个分布式事务结束。这样，当业务规模越来越大的情况下，2PC的局限性就越来越明显，系统可伸缩性会变得很差。</li>
+<li>与本地事务相比，XA协议的系统开销相当大，因而应当慎重考虑是否确实需要分布式事务，而且只有支持XA协议的资源才能参与分布式事务。</li>
+</ol>
+</li>
+</ul>
+<p>全局事务，作为一种标准的分布式事务解决方案，它解决了本地事务无法满足分布式场景中数据的ACID的要求，但由于其存在效率底下的致命缺点，在微服务架构下已不太适用。</p>
+<p>在业内，主要用来解决分布式事务的方案是使用柔性事务，柔性事务包括几种类型：两阶段型、补偿型、异步确保型和最大努力通知型。</p>
+<h2 id="基于可靠消息最终一致性（异步确保型）"><a href="#基于可靠消息最终一致性（异步确保型）" class="headerlink" title="基于可靠消息最终一致性（异步确保型）"></a>基于可靠消息最终一致性（异步确保型）</h2><p>数据一致性分为三个种类型：强一致性、弱一致性以及最终一致性，数据库实现的就是强一致性，能够保证在写入一份新的数据库，立即使其可见。最终一致性是弱一致性的强化版，系统保证在没有后续更新的前提下，系统最终返回上一次更新操作的值。在最终一致性的实现过程中，最基本的操作就是保证事务参与者的幂等性，所谓的幂等性，就是业务方能够使用相关的手段，保证单个事务多次提交依然能够保证达到同样的目的。</p>
+<p>在分布式系统中，服务之间通常会通过RPC来进行网络通讯，而远程调用最郁闷的地方就是结果有三种：成功、失败和超时（成功失败都有可能），从而导致了数据传输的不确定性，如何确保消息发送的一致性是可靠消息的前提保障。</p>
+<ul>
+<li>RPC同步调用：RPC的同步调用确保请求送达对方并收到对方响应，若没有收到响应，则抛出<code>Timeout</code>异常，这种情况下调用方是无法确定调用是成功还是失败的，需要根据业务场景（是否可重入、幂等）选择重试和补偿策略。</li>
+<li>消息发送一致性：如果业务操作成功，那么由这个业务操作所产生的消息一定要成功投递出去，否则就会丢失消息。在设计范式里通常不允许消费下游业务失败，不然后面失败了前面也不好回滚。但消费端消费失败时该怎么办？消费失败了，重试，还一直失败怎么办？是不是要自动回滚整个流程？答案是人工介入。从工程实践角度讲，这种整个流程自动回滚的代价是非常巨大的，不但实现复杂，还会引入新的问题，比如自动回滚失败，又怎么处理？针对这种极低概率的情况，采取人工处理会比实现一个高复杂的自动化回滚系统更加可靠也更加简单。</li>
+<li>最终一致性：主要是用<code>记录</code>和<code>补偿</code>的方式。在做所有的不确定的事情之前，先把事情记录下来，然后去做不确定的事情，结果可能是：成功、失败或是不确定，<code>不确定</code>（例如超时等）可以等价为失败。成功就可以把记录的东西清理掉了，对于失败和不确定，可以依靠<code>定时任务</code>等方式把所有失败的事情重新执行一遍，直到成功为止。</li>
+</ul>
+<p>以购物场景为例，张三购买物品，账户扣款 100 元的同时，需要在下游的会员服务给该账户增加 100 积分，如何保证原子性？</p>
+<p>一般的思路都是通过消息中间件来实现最终一致性：资金账户服务扣钱，然后发消息给中间件，会员积分服务接收此消息，进行增加积分。</p>
+<p>但这里面有个问题：在资金账户服务中，是先更新DB后发送消息呢？ 还是先发送消息后更新DB？</p>
+<p>假设先更新DB成功，发送消息网络异常，重发又失败，怎么办？假设先发送消息成功，更新DB失败，消息已经发出去了，又不能撤回，怎么办？</p>
+<p>当然，你可能已经想到了，我可以把发送消息这个网络调用和更新DB放在同一个本地事务中，如果发送消息失败，更新DB自动回滚，这样不就保证两个操作的原子性了吗？这个方案看似正确，但其实是错误的，原因有：</p>
+<ol>
+<li>把网络调用放在DB事务里面，可能会因为网络的延时，导致DB长事务，严重地会Block住整个DB，风险很大。</li>
+<li>网络的两军问题：发送消息失败，发送方并不知道消息中间件是真的没有收到消息还是消息已经收到了只是返回的时候失败了，如果是已经收到消息了，而发送端认为没有收到而执行事务回滚操作，从而无法保证数据的一致性。</li>
+</ol>
+<p>所以，这里得出结论：只要发送消息和更新DB这两个操作不是原子的，无论谁先谁后都是有问题的。</p>
+<p>事务消息的本质就是为了解决此类问题，即解决本地事务执行与消息发送的原子性问题。</p>
+<p><img src="/images/architect/distributed-transaction.png" alt="基于可靠消息最终一致性的分布式事务解决方案"></p>
+<p>消息发送基本流程如下：</p>
+<ol>
+<li>上游业务系统首先预发送（同步发送）消息到可靠消息服务</li>
+<li>在预发送消息成功返回后执行本地事务（在返回过程中出现死机、超时等异常情况的消息将由消息状态确认子系统处理）</li>
+<li>上游业务系统将本地事务执行结果发送（异步发送）到可靠消息服务（在发送过程中出现死机、超时等异常情况的消息将由消息状态确认子系统处理）</li>
+<li>如果业务处理成功，可靠消息服务则更新消息状态并将消息投放到实时消息服务(消息中间件)；如果业务处理失败，则将该消息进行删除</li>
+</ol>
+<p>消息消费基本流程如下：</p>
+<ol>
+<li>投放到实时消息服务的消息会被消息业务消费端监听并调用（同步）下游业务系统进行消费</li>
+<li>如果下游业务系统业务处理成功，消息业务消费端则和实时消息服务、可靠消息服务进行确认（确认结果就是将消息删除）；如果业务处理失败，则由消息恢复子系统进行处理</li>
+</ol>
+<ul>
+<li>优点<ol>
+<li>消息服务独立部署、独立维护、独立伸缩；</li>
+<li>消息存储可以按需选择不同的数据库来集成实现；</li>
+<li>消息服务可以被相同的使用场景共用，降低重复建设消息服务的成本；</li>
+<li>从应用（分布式服务）设计开发的角度实现了消息数据的可靠性，消息数据的可靠性不依赖于MQ中间件，弱化了对MQ中间件特性的依赖；</li>
+<li>降低了业务系统与消息系统间的耦合，有利于系统的扩展维护。</li>
+</ol>
+</li>
+<li>弊端<ol>
+<li>一次消息发送需要两次请求；</li>
+<li>上游业务系统需要提供一个事务状态查询接口供可靠消息服务调用；</li>
+<li>当下游业务处理成功时，下游业务系统需要调用可靠消息服务相关接口进行确认。</li>
+</ol>
+</li>
+</ul>
+<p><em>相关说明：</em></p>
+<ul>
+<li><p>上游业务系统预发送消息操作为何是同步的？</p>
+<blockquote>
+<p>因为我们需要获取消息预发送成功后返回的信息(消息ID)，否则后面就无法进行后续的消息更新(确认)或删除操作了。但消息预发送可能会有三种结果：成功、失败、超时(成功或失败都有可能)。然而，这个不要紧，因为消息必须要确认后才会进行投递。如果出现超时现象，我们尽可以把这个<strong>待确认</strong>的消息丢弃。此外，上游业务系统如果收到的不是<strong>消息预发送成功</strong>的反馈结果，就不会执行下一步业务处理操作，从而仍可以保证整个系统的一致性。</p>
+</blockquote>
+</li>
+<li><p>上游业务系统发送业务处理结果为何是异步的？</p>
+<blockquote>
+<p>首先，上游系统和消息中间件之间采用异步通信是为了提高系统并发度。业务系统直接和用户打交道，用户体验尤为重要，因为这种异步通信方式能够极大程度地降低用户等待问题。此外，异步通信相对于同步通信，没有了长时间的阻塞等待，因此系统的并发性也大大增加。对于异步通信可能引起信息的丢失问题，可以由消息服务的超时询问机制来弥补。</p>
+</blockquote>
+</li>
+<li><p>消息中间件投递消息失败后，为何是不断尝试重投而不是进行业务回滚？ </p>
+<blockquote>
+<p>这就涉及到分布式事务系统的实现成本问题。我们知道，当上游业务系统向消息中间件发送业务处理结果后，并不获取任何反馈结果便直接去做别的事情了。如果此时消息投递失败，我们就可以进行重试(下游业务系统需要保证幂等)。如果不断重试(超过了最大重试次数)还是失败了，那么就可以发通知，然后人工介入处理了。而如果是进行业务回滚的话，则需要让上游业务系统事先提供回滚接口，这无疑增加了额外的开发成本，业务系统的复杂度也将提高，为了这种小概率事件而设计这个复杂的流程反而得不偿失。对于一个业务系统的设计目标是：在保证性能的前提下，最大限度地降低系统的复杂度，从而降低系统的运维成本。</p>
+</blockquote>
+</li>
+<li><p>消息中间件和下游业务系统之间为什么要采用同步通信？</p>
+<blockquote>
+<p>上游业务系统发送完业务处理结果后，并不获取任何反馈结果便直接去做别的事情，接下来提交或回滚操作就完全交给消息中间件来完成，并且完全信任消息中间件，认为它一定能正确地完成事务的提交或回滚。然而，消息中间件向下游系统投递消息的过程是同步的，也就是消息中间件将消息投递给下游系统后，它会阻塞等待，等下游系统成功处理完任务返回确认应答后才取消阻塞等待，为什么这两者在设计上是不一致的呢？</p>
+<p>异步通信能提升系统性能，但随之会增加系统复杂度；而同步虽然降低系统并发度，但实现成本较低。因此，在对并发度要求不是很高或者服务器资源较为充裕的情况下，我们可以选择同步来降低系统的复杂度。我们知道，消息中间件是一个独立于业务系统的第三方中间件，它不和任何业务系统产生直接的耦合，它也不和用户产生直接的关联，它一般部署在独立的服务器集群上，具有良好的可扩展性，所以不必太过于担心它的性能，如果处理速度无法满足我们的要求，可以增加机器来解决。而且，即使消息中间件处理速度有一定的延迟也是可以接受的，因为我们追求的是最终一致性而非实时一致性，因此消息中间件产生的延时导致事务短暂的不一致是可以接受的。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="可靠消息服务"><a href="#可靠消息服务" class="headerlink" title="可靠消息服务"></a>可靠消息服务</h3><p>对消息进行预存储和转发以确保消息不丢失。</p>
+<blockquote>
+<p>尽管我们可以尽量地确保MQ可靠，让MQ可靠地持久化消息，但是网络是不可靠的，几乎没有办法确保网络可靠。所以，我们期望有一个可靠消息，能够避免任何问题，包括网络问题。如果消息不可靠，那么我们就需要采取其他的措施，比如本地消息表。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> tx_message (</span><br><span class="line">  <span class="keyword">id</span> <span class="built_in">bigint</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'消息ID'</span>,</span><br><span class="line">  <span class="keyword">version</span> <span class="built_in">int</span>(<span class="number">8</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="number">0</span> <span class="keyword">COMMENT</span> <span class="string">'版本号'</span>,</span><br><span class="line">  msg_status <span class="built_in">varchar</span>(<span class="number">16</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'消息状态：待确认、发送中'</span>,</span><br><span class="line">  msg_body <span class="built_in">text</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'消息内容'</span>,</span><br><span class="line">  content_type <span class="built_in">varchar</span>(<span class="number">64</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'JSON'</span> <span class="keyword">COMMENT</span> <span class="string">'消息数据类型'</span>,</span><br><span class="line">  dead_letter <span class="built_in">bit</span>(<span class="number">1</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="number">0</span> <span class="keyword">COMMENT</span> <span class="string">'死信'</span>,</span><br><span class="line">  retry_times <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="number">0</span> <span class="keyword">COMMENT</span> <span class="string">'重试次数(超过最大重试次数将成为死信)'</span>,</span><br><span class="line">  biz_id <span class="built_in">varchar</span>(<span class="number">64</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'业务ID'</span>,</span><br><span class="line">  queue <span class="built_in">varchar</span>(<span class="number">64</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'消息队列'</span>,</span><br><span class="line">  callback <span class="built_in">varchar</span>(<span class="number">64</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'业务状态回查接口'</span>,</span><br><span class="line">  remark <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'备注'</span>,</span><br><span class="line">  created_at <span class="built_in">timestamp</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'创建时间'</span>,</span><br><span class="line">  created_by <span class="built_in">varchar</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'创建者'</span>,</span><br><span class="line">  updated_at <span class="built_in">timestamp</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'更新时间'</span>,</span><br><span class="line">  updated_by <span class="built_in">varchar</span>(<span class="number">20</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'更新者'</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="keyword">id</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8 <span class="keyword">COMMENT</span>=<span class="string">'事务消息表'</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="消息状态确认子系统"><a href="#消息状态确认子系统" class="headerlink" title="消息状态确认子系统"></a>消息状态确认子系统</h3><p>用于定时从可靠消息服务中查询状态为<code>待确认</code>的消息，然后和上游业务系统进行确认，并根据确认结果进行处理：如果确认上游业务已处理成功，则更新消息状态并将消息投递到实时消息服务；如果确认上游业务处理失败，则将该消息删除；如果上游业务正在处理中，则继续等待(下次处理)。</p>
+<h3 id="消息恢复子系统"><a href="#消息恢复子系统" class="headerlink" title="消息恢复子系统"></a>消息恢复子系统</h3><p>用于定时从可靠消息服务中查询状态为<code>发送中</code>的消息并进行重新投递到实时消息服务(消息中间件)。</p>
+<blockquote>
+<p>由于可靠消息服务存在重投机制，所以下游业务系统必须保证相关业务接口的幂等性（即<code>f(n)=f(1)</code>），以确保消息不会被重复消费。</p>
+</blockquote>
+<h3 id="消息管理子系统"><a href="#消息管理子系统" class="headerlink" title="消息管理子系统"></a>消息管理子系统</h3><p>主要用于对已死亡的消息进行人工干预。</p>
+<h3 id="实时消息服务（消息中间件）"><a href="#实时消息服务（消息中间件）" class="headerlink" title="实时消息服务（消息中间件）"></a>实时消息服务（消息中间件）</h3><p>主要用于消息存储和转发。</p>
+<h2 id="RocketMQ事务消息"><a href="#RocketMQ事务消息" class="headerlink" title="RocketMQ事务消息"></a><a href="http://rocketmq.apache.org/docs/transaction-example/" target="_blank" rel="noopener">RocketMQ事务消息</a></h2><p>在RocketMQ中实现了分布式事务，实际上其实是对本地消息表的一个封装，将本地消息表移动到了MQ内部，其基本流程如下：</p>
+<ol>
+<li>事务发起方首先发送prepare消息到MQ</li>
+<li>在发送prepare消息成功后执行本地事务</li>
+<li>根据本地事务执行结果返回commit或者rollback</li>
+<li>如果是rollback消息，MQ将删除该prepare消息不进行投递；如果是commit消息，MQ将会把这个消息投递给consumer端</li>
+<li>如果执行本地事务过程中，出现死机、超时等异常情况导致消息确认失败，那么MQ将会不停地询问其同组的其它producer来获取状态</li>
+<li>consumer端的消费成功机制由MQ保证</li>
+</ol>
+<blockquote>
+<p>RocketMQ的事务消息主要是通过消息的异步处理，可以保证 <code>本地事务</code> 和 <code>消息发送</code> 同时成功或失败，从而保证数据的最终一致性。</p>
+</blockquote>
+<p><img src="/images/architect/distributed-transaction-rocketmq.png" alt="RocketMQ事务消息"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Producer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        TransactionMQProducer producer = <span class="keyword">new</span> TransactionMQProducer(<span class="string">"TransactionGroup"</span>);</span><br><span class="line">        producer.setNamesrvAddr(<span class="string">"127.0.0.1:9876"</span>);</span><br><span class="line">        producer.setTransactionListener(<span class="keyword">new</span> TransactionListenerImpl());</span><br><span class="line">        producer.setExecutorService(ForkJoinPool.commonPool());</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            producer.start();</span><br><span class="line">            <span class="comment">// 发送事务消息, 此消息不可见</span></span><br><span class="line">            TransactionSendResult sendResult = producer.sendMessageInTransaction(<span class="keyword">new</span> Message(</span><br><span class="line">                    <span class="string">"TransactionTopic"</span>,</span><br><span class="line">                    <span class="string">"事务消息"</span>.getBytes(StandardCharsets.UTF_8)</span><br><span class="line">            ), <span class="string">"tx"</span>);</span><br><span class="line">            log.debug(<span class="string">"====== &#123;&#125; ======"</span>, sendResult);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (MQClientException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            producer.shutdown();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TransactionListenerImpl</span> <span class="keyword">implements</span> <span class="title">TransactionListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 存储当前线程对应的事务状态</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, LocalTransactionState&gt; localTrans = <span class="keyword">new</span> ConcurrentHashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 发送prepare消息成功后回调该方法用于执行本地事务</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> msg 回传的消息</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> arg 调用send方法时传递的参数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> LocalTransactionState <span class="title">executeLocalTransaction</span><span class="params">(Message msg, Object arg)</span> </span>&#123;</span><br><span class="line">        String transactionId = msg.getTransactionId();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            localTrans.put(transactionId, UNKNOW);</span><br><span class="line">            log.debug(<span class="string">"====== 开始执行本地事务: transactionId=&#123;&#125; ======"</span>, transactionId);</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">60</span>);</span><br><span class="line">            log.debug(<span class="string">"====== 执行本地事务成功 ======"</span>);</span><br><span class="line">            localTrans.put(transactionId, COMMIT_MESSAGE);</span><br><span class="line">            <span class="keyword">return</span> COMMIT_MESSAGE;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            localTrans.put(transactionId, ROLLBACK_MESSAGE);</span><br><span class="line">            <span class="keyword">return</span> ROLLBACK_MESSAGE;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 消息回查, 当本地事务超时, broker会做消息回查操作</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> LocalTransactionState <span class="title">checkLocalTransaction</span><span class="params">(MessageExt msg)</span> </span>&#123;</span><br><span class="line">        String transactionId = msg.getTransactionId();</span><br><span class="line">        LocalTransactionState transactionState = localTrans.get(transactionId);</span><br><span class="line">        log.debug(<span class="string">"====== 执行消息回查: transactionId=&#123;&#125;, transactionState=&#123;&#125; ======"</span>, transactionId, transactionState);</span><br><span class="line">        <span class="keyword">return</span> Optional.ofNullable(transactionState).orElse(UNKNOW);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">====== 开始执行本地事务: transactionId=AC140A031F7C18B4AAC28A2C0D070000 ======</span><br><span class="line">====== 执行消息回查: transactionId=AC140A0323D018B4AAC28A25C2F40000, transactionState=null ======</span><br><span class="line">====== 执行消息回查: transactionId=AC140A031F7C18B4AAC28A2C0D070000, transactionState=UNKNOW ======</span><br><span class="line">====== 执行本地事务成功 ======</span><br><span class="line">====== SendResult [sendStatus=SEND_OK, msgId=AC140A031F7C18B4AAC28A2C0D070000, offsetMsgId=null, messageQueue=MessageQueue [topic=TransactionTopic, brokerName=Lenovo-PC, queueId=1], queueOffset=8] ======</span><br></pre></td></tr></table></figure>
+<h2 id="Seata分布式事务解决方案"><a href="#Seata分布式事务解决方案" class="headerlink" title="Seata分布式事务解决方案"></a><a href="https://github.com/seata/seata/wiki" target="_blank" rel="noopener">Seata分布式事务解决方案</a></h2>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/uploads/wechatpay.png" alt="Gavin Lu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/distributed/" rel="tag"># distributed</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/08/architect/performance/tomcat/" rel="next" title="性能优化 - Tomcat">
+                <i class="fa fa-chevron-left"></i> 性能优化 - Tomcat
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/31/life/hello-2019/" rel="prev" title="Goodbye 2018 Hello 2019">
+                Goodbye 2018 Hello 2019 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/uploads/avatar.png" alt="Gavin Lu">
+            
+              <p class="site-author-name" itemprop="name">Gavin Lu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/lugavin" title="GitHub &rarr; https://github.com/lugavin" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://bitbucket.org/lugavin" title="Bitbucket &rarr; https://bitbucket.org/lugavin" rel="noopener" target="_blank"><i class="fa fa-fw fa-bitbucket"></i>Bitbucket</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本地事务"><span class="nav-number">1.1.</span> <span class="nav-text">本地事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全局事务"><span class="nav-number">1.2.</span> <span class="nav-text">全局事务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于可靠消息最终一致性（异步确保型）"><span class="nav-number">2.</span> <span class="nav-text">基于可靠消息最终一致性（异步确保型）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#可靠消息服务"><span class="nav-number">2.1.</span> <span class="nav-text">可靠消息服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息状态确认子系统"><span class="nav-number">2.2.</span> <span class="nav-text">消息状态确认子系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息恢复子系统"><span class="nav-number">2.3.</span> <span class="nav-text">消息恢复子系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息管理子系统"><span class="nav-number">2.4.</span> <span class="nav-text">消息管理子系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实时消息服务（消息中间件）"><span class="nav-number">2.5.</span> <span class="nav-text">实时消息服务（消息中间件）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RocketMQ事务消息"><span class="nav-number">3.</span> <span class="nav-text">RocketMQ事务消息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Seata分布式事务解决方案"><span class="nav-number">4.</span> <span class="nav-text">Seata分布式事务解决方案</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gavin Lu</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: false,
+        appId: '5IwtIhDDNAEOmFsA0RwltEjE-gzGzoHsz',
+        appKey: 'aep6gMEg10pFmdT7kHu53dPV',
+        placeholder: 'Type your message here',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: true
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

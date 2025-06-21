@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="HTTP协议HTTP(HyperText Transfer Protocol)是一个基于请求-应答模式的、无状态的应用层协议，是万维网数据通信的基础。   尽管TCP/IP协议是互联网上最流行的网络协议，但是，在HTTP协议中，并没有规定必须使用它或它支持的层。事实上，HTTP可以在任何互联网协议或其他网络上实现，HTTP假定其下层协议提供可靠的传输。因此，任何能够提供这种保证的协议都可以被其使用">
+<meta name="keywords" content="distributed">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP协议">
+<meta property="og:url" content="https://lugavin.github.io/2018/10/14/architect/distributed/http/index.html">
+<meta property="og:site_name" content="Gavin&#39;s blog">
+<meta property="og:description" content="HTTP协议HTTP(HyperText Transfer Protocol)是一个基于请求-应答模式的、无状态的应用层协议，是万维网数据通信的基础。   尽管TCP/IP协议是互联网上最流行的网络协议，但是，在HTTP协议中，并没有规定必须使用它或它支持的层。事实上，HTTP可以在任何互联网协议或其他网络上实现，HTTP假定其下层协议提供可靠的传输。因此，任何能够提供这种保证的协议都可以被其使用">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://lugavin.github.io/images/architect/protocol-http-message-format.png">
+<meta property="og:image" content="https://lugavin.github.io/images/architect/protocol-http-persistent-connection.png">
+<meta property="og:image" content="https://lugavin.github.io/images/architect/protocol-http-cache-staleness.png">
+<meta property="og:image" content="https://lugavin.github.io/images/architect/protocol-tls-authentication.png">
+<meta property="og:image" content="https://lugavin.github.io/images/architect/protocol-https.jpg">
+<meta property="og:updated_time" content="2025-06-21T02:09:57.960Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTP协议">
+<meta name="twitter:description" content="HTTP协议HTTP(HyperText Transfer Protocol)是一个基于请求-应答模式的、无状态的应用层协议，是万维网数据通信的基础。   尽管TCP/IP协议是互联网上最流行的网络协议，但是，在HTTP协议中，并没有规定必须使用它或它支持的层。事实上，HTTP可以在任何互联网协议或其他网络上实现，HTTP假定其下层协议提供可靠的传输。因此，任何能够提供这种保证的协议都可以被其使用">
+<meta name="twitter:image" content="https://lugavin.github.io/images/architect/protocol-http-message-format.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Gavin's blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://lugavin.github.io/2018/10/14/architect/distributed/http/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>HTTP协议 | Gavin's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gavin's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">路漫漫其修远兮 吾将上下而求索</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-comments">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/comments/" rel="section"><i class="menu-item-icon fa fa-fw fa-send"></i> <br>留言</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lugavin.github.io/2018/10/14/architect/distributed/http/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gavin Lu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gavin's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">HTTP协议
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-14 10:10:00" itemprop="dateCreated datePublished" datetime="2018-10-14T10:10:00+00:00">2018-10-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2025-06-21 02:09:57" itemprop="dateModified" datetime="2025-06-21T02:09:57+00:00">2025-06-21</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/architect/" itemprop="url" rel="index"><span itemprop="name">architect</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+             <span id="/2018/10/14/architect/distributed/http/" class="leancloud_visitors" data-flag-title="HTTP协议">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h2><p>HTTP(HyperText Transfer Protocol)是一个基于<em>请求-应答</em>模式的、无状态的应用层协议，是万维网数据通信的基础。  </p>
+<p>尽管TCP/IP协议是互联网上最流行的网络协议，但是，在HTTP协议中，并没有规定必须使用它或它支持的层。事实上，HTTP可以在任何互联网协议或其他网络上实现，HTTP假定其下层协议提供可靠的传输。因此，任何能够提供这种保证的协议都可以被其使用。因此也就是其在TCP/IP协议族使用TCP作为其传输层。  </p>
+<p>HTTP并不需要其底层的传输层协议是面向连接的，只需要它是可靠的或不丢失消息(至少返回错误)的。在互联网中，有两个最常用的传输层协议：TCP是可靠的，而UDP不是。因此，HTTP依赖于面向连接的TCP进行消息传递，但连接并不是必须的(一个连接是由传输层来控制的，这从根本上不属于HTTP的范围)。</p>
+<p>HTTP是无状态的，即在同一个连接中，两次执行成功的请求之间是没有关系的。这就带来了一个问题，用户没有办法在同一个网站中进行连续的交互。而使用HTTP的头部扩展，HTTP Cookies 就可以解决这个问题。把Cookies添加到头部中，创建一个会话让每次请求都能共享相同的上下文信息，从而保持客户端和服务器之间的会话。  </p>
+<h3 id="HTTP报文格式"><a href="#HTTP报文格式" class="headerlink" title="HTTP报文格式"></a>HTTP报文格式</h3><p><img src="/images/architect/protocol-http-message-format.png" alt="HTTP Message Format"> </p>
+<h3 id="HTTP请求方式"><a href="#HTTP请求方式" class="headerlink" title="HTTP请求方式"></a>HTTP请求方式</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">请求方式</th>
+<th>幂等性</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">GET</td>
+<td>幂等</td>
+<td style="text-align:left">向服务器发出指定资源的请求。使用GET方法应该只用在读取数据，而不应当被用于产生“副作用”的操作中，原因是GET请求可能会被网络蜘蛛等随意访问</td>
+</tr>
+<tr>
+<td style="text-align:left">HEAD</td>
+<td>幂等</td>
+<td style="text-align:left">与GET方法一样，都是向服务器发出指定资源的请求。只不过服务器将不传回资源的本文部分。它的好处在于，使用这个方法可以在不必传输全部内容的情况下，就可以获取其中“关于该资源的信息”(元信息或称元数据)</td>
+</tr>
+<tr>
+<td style="text-align:left">POST</td>
+<td>非幂等</td>
+<td style="text-align:left">向指定资源提交数据，请求服务器进行处理(例如提交表单或者上传文件)。数据被包含在请求本文中，这个请求可能会创建新的资源或修改现有资源，或二者皆有</td>
+</tr>
+<tr>
+<td style="text-align:left">DELETE</td>
+<td>幂等</td>
+<td style="text-align:left">请求服务器删除Request-URI所标识的资源</td>
+</tr>
+<tr>
+<td style="text-align:left">PUT</td>
+<td>幂等</td>
+<td style="text-align:left">向指定资源位置上传其最新内容</td>
+</tr>
+<tr>
+<td style="text-align:left">PATCH</td>
+<td>非幂等</td>
+<td style="text-align:left">用于将局部修改应用到资源(如果对应的资源不存在，服务器可以创建一个新资源)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="HTTP状态码"><a href="#HTTP状态码" class="headerlink" title="HTTP状态码"></a>HTTP状态码</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1xx(消息)</td>
+<td>请求已被服务器接收，需要继续处理(除非在某些试验条件下，否则服务器禁止向此类客户端发送1xx响应)</td>
+</tr>
+<tr>
+<td>2xx(成功)</td>
+<td>请求已成功被服务器接收、理解、并接受</td>
+</tr>
+<tr>
+<td>3xx(重定向)</td>
+<td>需要客户端后续操作才能完成请求</td>
+</tr>
+<tr>
+<td>4xx(客户端错误)</td>
+<td>客户端原因导致服务器无法处理请求</td>
+</tr>
+<tr>
+<td>5xx(服务器错误)</td>
+<td>服务器原因导致处理请求出错</td>
+</tr>
+</tbody>
+</table>
+<h3 id="HTTP长连接"><a href="#HTTP长连接" class="headerlink" title="HTTP长连接"></a>HTTP长连接</h3><p>HTTP长连接(Keep-Alive)是使用同一个TCP连接来发送和接收多个HTTP请求/应答，而不是为每一个新的请求/应答打开新的连接的方法。  </p>
+<p><img src="/images/architect/protocol-http-persistent-connection.png" alt="HTTP persistent connection"> </p>
+<p>在 HTTP/1.0 中，默认使用的是短连接。也就是说，浏览器和服务器每进行一次HTTP操作就建立一次连接，任务结束就中断连接。如果客户端浏览器访问的某个HTML或其他类型的 Web网页中包含有其他的Web资源(如JS、CSS、Image等)，当浏览器每遇到这样一个Web资源，就会建立一个HTTP会话。  </p>
+<p>在 HTTP/1.0 中，没有官方的 Keep-Alive 的操作。通常是在现有协议上添加一个指数，如果浏览器支持 Keep-Alive，它会在请求头中添加 <em>Connection: Keep-Alive</em> 字段，然后当服务器收到请求作出响应时，它会在响应头中添加 <em>Connection: Keep-Alive</em> 字段，这样做，连接就不会中断，而是保持连接。当客户端发送另一个请求时，它会使用同一个连接。这一直持续到客户端或服务器端认为会话已经结束，其中一方中断连接。  </p>
+<p>在 HTTP/1.1 中，官方规定的 Keep-Alive 使用标准和 HTTP/1.0 版本中有些不同，所有的连接默认都是长连接，除非在请求头或响应头中添加 <em>Connection: close</em> 字段指明要关闭，这也就是为什么 <em>Connection: Keep-Alive</em> 字段再没有意义的原因。然而，Apache 2.0 httpd 的默认连接过期时间是仅仅15秒，对于 Apache 2.2 只有5秒。短的过期时间的优点是能够快速的传输多个web页组件，而不会绑定多个服务器进程或线程太长时间。  </p>
+<h3 id="HTTP缓存"><a href="#HTTP缓存" class="headerlink" title="HTTP缓存"></a>HTTP缓存</h3><p>缓存是一种保存资源副本并在下次请求时直接使用该副本的技术。当 Web 缓存发现请求的资源已经被存储，它会拦截请求，返回该资源的拷贝，而不会去源服务器重新下载。这样带来的好处有：缓解服务器端压力，提升性能(获取资源的耗时更短了)。对于网站来说，缓存是达到高性能的重要组成部分。缓存需要合理配置，因为并不是所有资源都是永久不变的，重要的是对一个资源的缓存应截止到其下一次发生改变(即不能缓存过期的资源)。<br>虽然 HTTP 缓存不是必须的，但重用缓存的资源通常是必要的。然而常见的 HTTP 缓存只能存储 GET 响应，对于其他类型的响应则无能为力(一般只有GET请求才会被缓存)。  </p>
+<p>在 HTTP/1.1 中定义的 Cache-Control 头用来区分对缓存机制的支持情况，请求头和响应头都支持这个属性。通过它提供的不同的值来定义缓存策略。  </p>
+<h4 id="缓存控制"><a href="#缓存控制" class="headerlink" title="缓存控制"></a>缓存控制</h4><ol>
+<li><p>禁止进行缓存<br>缓存中不得存储任何关于客户端请求和服务端响应的内容，每次由客户端发起的请求都会下载完整的响应内容。  </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Cache-Control:</span> <span class="literal">no</span><span class="string">-store</span></span><br><span class="line"><span class="attr">Cache-Control:</span> <span class="literal">no</span><span class="string">-cache,</span> <span class="literal">no</span><span class="string">-store,</span> <span class="string">must-revalidate</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>强制确认缓存<br>每次有请求发出时，缓存会将此请求发到服务器(该请求应该会带有与本地缓存相关的验证字段)，服务器端会验证请求中所描述的缓存是否过期，若未过期(实际就是返回304)，则缓存才使用本地缓存副本。  </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Cache-Control:</span> <span class="literal">no</span><span class="string">-cache</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>私有缓存和公共缓存<br>public 指令表示该响应可以被任何中间人(比如中间代理、CDN等)缓存。若指定了 public，则一些通常不被中间人缓存的页面(因为默认是private)，比如带有HTTP验证信息(帐号密码)的页面或某些特定影响状态码的页面，将会被其缓存。而 private 则表示该响应是专用于某单个用户的，中间人不能缓存此响应，该响应只能应用于浏览器私有缓存中。  </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Cache-Control:</span> <span class="string">private</span></span><br><span class="line"><span class="attr">Cache-Control:</span> <span class="string">public</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>缓存过期机制<br>过期机制中，最重要的指令是 “max-age=<seconds>“，表示资源能够被缓存(保持新鲜)的最大时间。相对Expires而言，max-age是距离请求发起的时间的秒数。针对应用中那些不会改变的文件，通常可以手动设置一定的时长以保证缓存有效，例如JS、CSS、图片等静态资源。  </seconds></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Cache-Control:</span> <span class="string">max-age=31536000</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>缓存验证确认<br>当使用了 “must-revalidate” 指令，那就意味着缓存在考虑使用一个陈旧的资源时，必须先验证它的状态，已过期的缓存将不被使用。  </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Cache-Control:</span> <span class="string">must-revalidate</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Pragma 头<br>Pragma 是 HTTP/1.0 标准中定义的一个header属性，请求中包含Pragma的效果跟在头信息中定义 Cache-Control: no-cache 相同，但是HTTP的响应头不支持这个属性，所以它不能拿来完全替代 HTTP/1.1 中定义的Cache-control头。通常定义Pragma以向后兼容基于 HTTP/1.0 的客户端。  </p>
+</li>
+</ol>
+<h4 id="新鲜度"><a href="#新鲜度" class="headerlink" title="新鲜度"></a>新鲜度</h4><p>理论上来讲，当一个资源被缓存存储后，该资源应该可以被永久存储在缓存中。由于缓存只有有限的空间用于存储资源副本，所以缓存会定期地将一些副本删除，这个过程叫做缓存驱逐。另一方面，当服务器上面的资源进行了更新，那么缓存中的对应资源也应该被更新，由于HTTP是C/S模式的协议，服务器更新一个资源时，不可能直接通知客户端及其缓存，所以双方必须为该资源约定一个过期时间，在该过期时间之前，该缓存副本就是新鲜的，当过了过期时间后，该缓存副本则变为陈旧的。驱逐算法用于将陈旧的缓存副本替换为新鲜的，注意，一个陈旧的缓存副本是不会直接被清除或忽略的，当客户端发起一个请求时，缓存检索到已有一个对应的陈旧缓存副本，则缓存会先将此请求附加一个 If-None-Match 头，然后发给目标服务器，以此来检查该资源副本是否是依然还是算新鲜的，若服务器返回了 304 Not Modified(该响应不会有带有实体信息)，则表示此资源副本是新鲜的，这样一来，可以节省一些带宽。若服务器通过 If-None-Match 或 If-Modified-Since 判断后发现已过期，那么会带有该资源的实体内容返回。  </p>
+<p><img src="/images/architect/protocol-http-cache-staleness.png" alt="HTTP Cache Staleness"> </p>
+<p>对于含有特定头信息的请求，会去计算缓存寿命。比如 Cache-control: max-age=N 的头，相应的缓存的寿命就是N。通常情况下，对于不含这个属性的请求则会去查看是否包含Expires属性，通过比较Expires的值和头里面Date属性的值来判断是否缓存还有效。如果 max-age 和 expires 属性都没有，再找头里的 Last-Modified 信息。如果有，缓存的寿命就等于头里面Date的值减去Last-Modified的值除以10。  </p>
+<p>更多地利用缓存资源，可以提高网站的性能和相应速度。为了优化缓存，过期时间设置得尽量长是一种很好的策略，但一旦要更新就会很困难。特指网页上引入的一些JS、CSS文件，当它们变动时需要尽快更新线上资源。相信有人想到了办法：通过更新页面中引用的资源路径，让浏览器主动放弃缓存,加载新资源。我们可以在URL后面(通常是文件名后面)会加上版本号(摘要算法)，加上版本号后的资源就被视作一个完全新的独立的资源了。但是这么做也存在一个弊端，所有引用这个资源的地方都需要更新链接。Web开发者们通常会采用自动化构建工具在实际工作中完成这些琐碎的工作。</p>
+<h4 id="缓存验证"><a href="#缓存验证" class="headerlink" title="缓存验证"></a>缓存验证</h4><p>用户点击刷新按钮时会开始缓存验证。如果缓存的响应头信息里含有 Cache-control: must-revalidate 的定义，在浏览的过程中也会触发缓存验证。另外，在浏览器偏好设置里设置 Advanced-&gt;Cache 为强制验证缓存也能达到相同的效果。  </p>
+<p>当缓存的文档过期后，需要进行缓存验证或者重新获取资源。只有在服务器返回强校验器或者弱校验器时才会进行验证。  </p>
+<p>ETag 响应头作为缓存的一种强校验器，是一个对用户代理(User Agent简称UA)不透明的值。对于像浏览器这样的HTTP UA，不知道ETag代表什么，不能预测它的值是多少。如果资源请求的响应头里含有ETag，客户端可以在后续的请求的头中带上 If-None-Match 头来验证缓存。  </p>
+<p>Last-Modified 响应头可以作为一种弱校验器。说它弱是因为它只能精确到一秒。如果响应头里含有这个信息，客户端可以在后续的请求中带上 If-Modified-Since 来验证缓存。  </p>
+<p>当向服务端发起缓存校验的请求时，服务端会返回 200 OK 表示返回正常的结果或者 304 Not Modified(不返回body)表示浏览器可以使用本地缓存文件。304的响应头也可以同时更新缓存文档的过期时间。  </p>
+<h2 id="TLS安全协议"><a href="#TLS安全协议" class="headerlink" title="TLS安全协议"></a>TLS安全协议</h2><p>TLS(Transport Layer Security)及其前身SSL(Secure Sockets Layer)是一种安全协议，目的是为互联网通信提供安全及数据完整性保障。  </p>
+<p>TLS使用 <a href="https://zh.wikipedia.org/wiki/X.509" target="_blank" rel="noopener">X.509</a> 认证，之后利用非对称加密演算来对通信方做身份认证，之后交换对称密钥作为会话密钥。这个会话密钥是用来将通信两方交换的数据做加密，保证两个应用间通信的保密性和可靠性，使客户与服务器应用之间的通信不被攻击者窃听。  </p>
+<p>TLS协议采用C/S架构模型，用于在两个应用程序间透过网络创建起安全的连线，防止在交换数据时受到窃听及篡改。</p>
+<p>TLS协议的优势是与高层的应用层协议(如HTTP、FTP、Telnet等)无耦合。应用层协议能透明地运行在TLS协议之上，由TLS协议进行创建加密通道需要的协商和认证。应用层协议传送的数据在通过TLS协议时都会被加密，从而保证通信的私密性。  </p>
+<p>TLS协议是可选的，必须配置客户端和服务器才能使用。一旦客户端和服务器都同意使用TLS协议，他们通过使用一个握手过程协商出一个有状态的连接以传输数据。通过握手，客户端和服务器协商各种参数用于创建安全连接：  </p>
+<ol>
+<li>当客户端连接到支持TLS协议的服务器要求创建安全连接并列出了受支持的密码组合(加密密码算法和加密哈希函数)，握手开始。</li>
+<li>服务器从该列表中决定加密和散列函数，并通知客户端。</li>
+<li>服务器发回其数字证书，此证书通常包含服务器的名称、受信任的证书颁发机构(CA)和服务器的公钥。</li>
+<li>客户端确认其颁发的证书的有效性。</li>
+<li>为了生成会话密钥用于安全连接，客户端使用服务器的公钥加密随机生成的密钥，并将其发送到服务器，只有服务器才能使用自己的私钥解密。</li>
+<li>利用随机数，双方生成用于加密和解密的对称密钥。这就是TLS协议的握手，握手完毕后的连接是安全的，直到连接被关闭。如果上述任何一个步骤失败，TLS握手过程就会失败，并且断开所有的连接。</li>
+</ol>
+<p><img src="/images/architect/protocol-tls-authentication.png" alt="TLS Authentication">  </p>
+<p>TLS利用密钥算法在互联网上提供端点身份认证与通讯保密，其基础是公钥基础设施(PKI)。不过在实现的典型例子中，只有网络服务者被可靠身份验证，而其客户端则不一定。这是因为公钥基础设施普遍商业运营，电子签名证书通常需要付费购买。协议的设计在某种程度上能够使C/S架构应用程序通讯本身预防窃听、干扰和消息伪造。</p>
+<p>TLS包含三个基本阶段：</p>
+<ol>
+<li>对等协商支持的密钥算法</li>
+<li>基于非对称密钥的信息传输加密和身份认证、基于PKI证书的身份认证</li>
+<li>基于对称密钥的数据传输保密</li>
+</ol>
+<p>在第一阶段，客户端与服务器协商所用密码算法。当前广泛实现的算法选择如下：  </p>
+<ul>
+<li>公钥私钥非对称密钥保密系统：RSA、Diffie-Hellman、DSA</li>
+<li>对称密钥保密系统：RC2、RC4、IDEA、DES、Triple DES、AES以及Camellia</li>
+<li>单向散列函数：MD5、SHA1以及SHA256</li>
+</ul>
+<h3 id="会话密钥"><a href="#会话密钥" class="headerlink" title="会话密钥"></a>会话密钥</h3><p>会话密钥(Session key)是一次性用于会话中加密用的对称式密钥，所有成员使用同一把密钥来加密明文、解密密文，在此次连线结束该密钥即无效，如需重新通信则需要再重新进行一次密钥的产生及交换等步骤。  </p>
+<p>在密码学中，只要消息一送离己方，就假设会遭到拦截。如果在交换密钥的过程中未经处理的会议密钥遭到拦截，则此加密形同虚设。所以在对称式加密中，如何交换密钥是一个重要的课题。  </p>
+<p>非对称加密虽然相较安全且不用考虑如何交换密钥，但需要较多的资源来进行运算，对于许多需求来说太慢了；所有私密密钥(secret key)算法都要求密钥是安全分发的，通过使用非对称加密算法来加密另一个更快速的对称式加密算法的秘密密钥，可以显著提高整体性能。  </p>
+<p>跟所有密钥一样，必须使用特殊的方法产生会话密钥，使其不能被攻击者预测，通常会使用随机的方式。在任何的加密系统中，没有正确选择会话密钥(或任何密钥)会是一个重大的设计缺陷。  </p>
+<h2 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h2><p>HTTPS 协议可以理解为 HTTP+SSL/TLS，即 HTTP 下加入 TLS 层，HTTPS 的安全基础是 TLS，客户端和服务端的信息传输都会通过 TLS 进行加密，所以传输的数据都是加密后的数据。   </p>
+<table>
+<thead>
+<tr>
+<th>HTTP的不安全性</th>
+<th>HTTPS解决方案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>窃听风险(攻击者可以获知消息内容)</td>
+<td>消息加密</td>
+</tr>
+<tr>
+<td>篡改风险(攻击者可以篡改消息内容)</td>
+<td>消息摘要</td>
+</tr>
+<tr>
+<td>冒充风险(攻击者可以冒充其他人参与通信)</td>
+<td>CA身份认证</td>
+</tr>
+</tbody>
+</table>
+<p><img src="/images/architect/protocol-https.jpg" alt="Protocol HTTPS"></p>
+<h2 id="RESTful"><a href="#RESTful" class="headerlink" title="RESTful"></a>RESTful</h2><p>REST(Representational State Transfer)是一种万维网软件架构风格，目的是便于不同软件/程序在网络(如互联网)中互相传递信息。需要注意的是，REST是设计风格而不是标准。REST通常基于使用HTTP、URI、XML和HTML这些现有的广泛流行的协议和标准。  </p>
+<p>要理解RESTful架构，最好的方法就是去理解 Representational State Transfer 这个词组到底是什么意思，它的每一个词代表了什么涵义。</p>
+<ul>
+<li>资源(Resources)：REST的名称 <em>表现层状态转化</em> 中，省略了主语，表现层其实指的是资源的表现层，而资源是由统一资源定位符(URI)来指定。  </li>
+<li>表现层(Representation)：资源的表现形式可以是JSON、XML或者HTML，当然也可以是任何其他的格式。</li>
+<li>状态转换(State Transfer)：状态转换是建立在表现层之上的，客户端通过操作资源的表现形式来操作资源，对资源的操作包括获取、创建、修改和删除资源，这些操作正好对应HTTP协议提供的GET、POST、PUT和DELETE方法。 </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>请求方式</th>
+<th>响应内容</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>GET/PUT</td>
+<td>资源</td>
+<td>操作成功</td>
+</tr>
+<tr>
+<td>201</td>
+<td>POST</td>
+<td>资源</td>
+<td>资源创建成功</td>
+</tr>
+<tr>
+<td>202</td>
+<td>POST/PUT/DELETE/PATCH</td>
+<td>N/A</td>
+<td>请求已被接受</td>
+</tr>
+<tr>
+<td>204</td>
+<td>PUT/DELETE/PATCH</td>
+<td>N/A</td>
+<td>操作执行成功但没有返回数据</td>
+</tr>
+<tr>
+<td>301</td>
+<td>GET</td>
+<td>Link</td>
+<td>资源已被移除</td>
+</tr>
+<tr>
+<td>303</td>
+<td>GET</td>
+<td>Link</td>
+<td>重定向</td>
+</tr>
+<tr>
+<td>304</td>
+<td>GET</td>
+<td>N/A</td>
+<td>资源没有被修改</td>
+</tr>
+<tr>
+<td>400</td>
+<td>GET/POST/PUT/DELETE/PATCH</td>
+<td>错误提示</td>
+<td>请求参数有误</td>
+</tr>
+<tr>
+<td>401</td>
+<td>GET/POST/PUT/DELETE/PATCH</td>
+<td>错误提示</td>
+<td>未认证</td>
+</tr>
+<tr>
+<td>403</td>
+<td>GET/POST/PUT/DELETE/PATCH</td>
+<td>错误提示</td>
+<td>未授权</td>
+</tr>
+<tr>
+<td>404</td>
+<td>GET/POST/PUT/DELETE/PATCH</td>
+<td>错误提示</td>
+<td>资源不存在</td>
+</tr>
+<tr>
+<td>405</td>
+<td>GET/POST/PUT/DELETE/PATCH</td>
+<td>错误提示</td>
+<td>请求方法不允许</td>
+</tr>
+<tr>
+<td>409</td>
+<td>GET/POST/PUT/DELETE/PATCH</td>
+<td>错误提示</td>
+<td>资源冲突</td>
+</tr>
+<tr>
+<td>415</td>
+<td>GET/POST/PUT/DELETE/PATCH</td>
+<td>错误提示</td>
+<td>不支持的数据（媒体）类型</td>
+</tr>
+<tr>
+<td>429</td>
+<td>GET/POST/PUT/DELETE/PATCH</td>
+<td>错误提示</td>
+<td>请求过多被限制</td>
+</tr>
+<tr>
+<td>500</td>
+<td>GET/POST/PUT/DELETE/PATCH</td>
+<td>错误提示</td>
+<td>服务器内部错误</td>
+</tr>
+</tbody>
+</table>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Overview" target="_blank" rel="noopener">HyperText Transfer Protocol</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Caching_FAQ" target="_blank" rel="noopener">HTTP caching</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Transport_Layer_Security" target="_blank" rel="noopener">Transport Layer Security</a></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/uploads/wechatpay.png" alt="Gavin Lu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/distributed/" rel="tag"># distributed</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/13/architect/distributed/serialization/" rel="next" title="序列化">
+                <i class="fa fa-chevron-left"></i> 序列化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/25/architect/distributed/nio/" rel="prev" title="NIO">
+                NIO <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/uploads/avatar.png" alt="Gavin Lu">
+            
+              <p class="site-author-name" itemprop="name">Gavin Lu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/lugavin" title="GitHub &rarr; https://github.com/lugavin" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://bitbucket.org/lugavin" title="Bitbucket &rarr; https://bitbucket.org/lugavin" rel="noopener" target="_blank"><i class="fa fa-fw fa-bitbucket"></i>Bitbucket</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP协议"><span class="nav-number">1.</span> <span class="nav-text">HTTP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP报文格式"><span class="nav-number">1.1.</span> <span class="nav-text">HTTP报文格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP请求方式"><span class="nav-number">1.2.</span> <span class="nav-text">HTTP请求方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP状态码"><span class="nav-number">1.3.</span> <span class="nav-text">HTTP状态码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP长连接"><span class="nav-number">1.4.</span> <span class="nav-text">HTTP长连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP缓存"><span class="nav-number">1.5.</span> <span class="nav-text">HTTP缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#缓存控制"><span class="nav-number">1.5.1.</span> <span class="nav-text">缓存控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#新鲜度"><span class="nav-number">1.5.2.</span> <span class="nav-text">新鲜度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缓存验证"><span class="nav-number">1.5.3.</span> <span class="nav-text">缓存验证</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TLS安全协议"><span class="nav-number">2.</span> <span class="nav-text">TLS安全协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#会话密钥"><span class="nav-number">2.1.</span> <span class="nav-text">会话密钥</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTPS"><span class="nav-number">3.</span> <span class="nav-text">HTTPS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RESTful"><span class="nav-number">4.</span> <span class="nav-text">RESTful</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">5.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gavin Lu</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: false,
+        appId: '5IwtIhDDNAEOmFsA0RwltEjE-gzGzoHsz',
+        appKey: 'aep6gMEg10pFmdT7kHu53dPV',
+        placeholder: 'Type your message here',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: true
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

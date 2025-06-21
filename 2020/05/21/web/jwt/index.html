@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="在设计Web应用程序时，安全认证是其中的关键部分。使用令牌进行认证是这方面的一个突破，而刷新令牌的出现，则是对其进行了补充并使其可用。 认证身份认证系统根据如何验证用户可划分为：  基于已知的东西（密码） 基于拥有的东西（身份证、U盘、令牌） 基于体貌特征（声音、指纹、眼睛）  基于令牌的身份认证令牌是通过现代认证和授权引入Web应用程序的。 我们可以说，由于OAuth协议，它的使用得到了扩展。这">
+<meta name="keywords" content="jwt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JWT">
+<meta property="og:url" content="https://lugavin.github.io/2020/05/21/web/jwt/index.html">
+<meta property="og:site_name" content="Gavin&#39;s blog">
+<meta property="og:description" content="在设计Web应用程序时，安全认证是其中的关键部分。使用令牌进行认证是这方面的一个突破，而刷新令牌的出现，则是对其进行了补充并使其可用。 认证身份认证系统根据如何验证用户可划分为：  基于已知的东西（密码） 基于拥有的东西（身份证、U盘、令牌） 基于体貌特征（声音、指纹、眼睛）  基于令牌的身份认证令牌是通过现代认证和授权引入Web应用程序的。 我们可以说，由于OAuth协议，它的使用得到了扩展。这">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2025-06-21T02:09:57.967Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JWT">
+<meta name="twitter:description" content="在设计Web应用程序时，安全认证是其中的关键部分。使用令牌进行认证是这方面的一个突破，而刷新令牌的出现，则是对其进行了补充并使其可用。 认证身份认证系统根据如何验证用户可划分为：  基于已知的东西（密码） 基于拥有的东西（身份证、U盘、令牌） 基于体貌特征（声音、指纹、眼睛）  基于令牌的身份认证令牌是通过现代认证和授权引入Web应用程序的。 我们可以说，由于OAuth协议，它的使用得到了扩展。这">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Gavin's blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://lugavin.github.io/2020/05/21/web/jwt/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>JWT | Gavin's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gavin's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">路漫漫其修远兮 吾将上下而求索</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-comments">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/comments/" rel="section"><i class="menu-item-icon fa fa-fw fa-send"></i> <br>留言</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lugavin.github.io/2020/05/21/web/jwt/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gavin Lu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gavin's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JWT
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-05-21 21:35:00" itemprop="dateCreated datePublished" datetime="2020-05-21T21:35:00+00:00">2020-05-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2025-06-21 02:09:57" itemprop="dateModified" datetime="2025-06-21T02:09:57+00:00">2025-06-21</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">web</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+             <span id="/2020/05/21/web/jwt/" class="leancloud_visitors" data-flag-title="JWT">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在设计Web应用程序时，安全认证是其中的关键部分。使用令牌进行认证是这方面的一个突破，而刷新令牌的出现，则是对其进行了补充并使其可用。</p>
+<h2 id="认证"><a href="#认证" class="headerlink" title="认证"></a>认证</h2><p>身份认证系统根据如何验证用户可划分为：</p>
+<ul>
+<li>基于已知的东西（密码）</li>
+<li>基于拥有的东西（身份证、U盘、令牌）</li>
+<li>基于体貌特征（声音、指纹、眼睛）</li>
+</ul>
+<h3 id="基于令牌的身份认证"><a href="#基于令牌的身份认证" class="headerlink" title="基于令牌的身份认证"></a>基于令牌的身份认证</h3><p>令牌是通过现代认证和授权引入Web应用程序的。 我们可以说，由于OAuth协议，它的使用得到了扩展。这些都集中在授权上，而不是人们通常认为的身份验证上。当我们谈论到使用令牌进行身份验证时，我们可以将其分为两种类型：基于令牌的有状态认证和基于令牌的无状态认证。</p>
+<h4 id="基于令牌的有状态认证"><a href="#基于令牌的有状态认证" class="headerlink" title="基于令牌的有状态认证"></a>基于令牌的有状态认证</h4><p>这是最常见的认证模式。当用户登录时，服务器会返回一个令牌，这个令牌通常存储在客户端浏览器的Cookie中，服务器会将会话信息保存在内存或数据库中（Redis、MongoDB…）。</p>
+<p>因此，每次用户用该令牌发起请求时，服务器都会搜索存储的会话信息以识别出是哪个用户在尝试访问，如果用户信息有效，就会执行所请求的方法。</p>
+<p>这种认证方式有几个问题，比如超载（存储所有被认证用户的信息会造成超载）、可扩展性（如果启动了多个服务器实例，为避免再次登录，将不得不以某种方式共享会话信息），除此之外，这种架构还存在着一些漏洞（CORS - 跨域资源共享、CSRF - 跨站请求伪造）。</p>
+<h4 id="基于令牌的无状态认证"><a href="#基于令牌的无状态认证" class="headerlink" title="基于令牌的无状态认证"></a>基于令牌的无状态认证</h4><p>为了解决上述的这些问题，无状态认证出现了。这意味着服务器不会存储任何信息，也不会存储会话。</p>
+<p>当用户使用凭证或其他方式进行身份验证时，在响应中将接收到一个访问令牌。从那一刻起，所有发起的API请求都会在HTTP头中携带这个令牌，这样服务器就可以识别出是哪个用户发起的请求，而不需要搜索数据库或其他存储系统。</p>
+<p>使用这种认证方式，应用程序变得可扩展，因为是客户端本身存储其认证信息而不是服务器，这样一来，请求可以在没有同步的情况下到达任意的服务器实例；此外，不同的平台可以使用相同的API；同时，这也提高了安全性，避免了CSRF漏洞（因为没有会话），并且，如果我们在令牌中加入过期时间，安全性会更高。</p>
+<h2 id="JWT认证"><a href="#JWT认证" class="headerlink" title="JWT认证"></a>JWT认证</h2><p>JWT是基于JSON的开放标准，用于创建允许应用程序或API资源使用的访问令牌。这个令牌将包含服务器识别所需要的用户信息以及其他可能有用的附加信息（如角色、权限等）。</p>
+<p>访问令牌也可以设置一个有效期，一旦有效期过了，服务器将不再允许用户使用这个令牌访问资源。此时，用户必须通过重新认证或一些额外的方法（刷新令牌）来获得一个新的访问令牌。</p>
+<p>JWT将JSON作为令牌中存储的信息要使用的内部格式。此外，如果与JWS和JWE结合使用，它会变得非常有用。将JWT与JWS和JWE结合，我们不仅可以对用户进行身份验证，还可以将加密后的信息发送出去，这样只有服务器才能提取加密后的信息出来，同时还可以对内容进行校验以确保没有被篡改。</p>
+<p>JWT令牌由三个部分组成：头信息、消息体和签名，中间使用点号分割：Header.Payload.Signature</p>
+<ul>
+<li>头信息：Header 部分是一个 JSON 对象，描述 JWT 的元数据，如alg属性表示签名的算法，typ属性表示这个令牌的类型</li>
+<li>消息体：Payload 部分也是一个 JSON 对象，用来存放实际需要传递的数据</li>
+<li>签名：Signature 部分是对前两部分内容的签名，以防止数据被篡改</li>
+</ul>
+<h3 id="令牌类型"><a href="#令牌类型" class="headerlink" title="令牌类型"></a>令牌类型</h3><p>令牌有很多类型，不过在JWT认证中，最典型的是访问令牌和刷新令牌：</p>
+<ul>
+<li>访问令牌：它包含了服务器需要知道用户是否可以访问所请求资源的所有信息。访问令牌通常是过期的令牌，其有效期很短。</li>
+<li>刷新令牌：刷新令牌用于生成一个新的访问令牌。通常情况下，如果访问令牌设置了有效期，一旦过期，用户就必须重新认证才能获得新的访问令牌。使用刷新令牌则可以跳过这一步，只需携带刷新令牌发起请求，就可以获得一个新的访问令牌，以允许用户继续访问应用资源。</li>
+</ul>
+<p>当用户访问之前没有访问过的资源时，可能也需要生成一个新的访问令牌，不过这取决于API实现的限制。</p>
+<p>与访问令牌相比，刷新令牌在存储时需要更高的安全性，因为如果它被第三方窃取，他们就可以利用它来获得访问令牌以访问受保护的应用资源。为了减少这种情况的发生，除了设置一个明显比访问令牌更长的有效期之外，应用还必须在服务端实现使刷新令牌失效的功能。</p>
+<h3 id="刷新令牌的实现"><a href="#刷新令牌的实现" class="headerlink" title="刷新令牌的实现"></a>刷新令牌的实现</h3><p>在这个例子中，我将跳过数据库部分，因而，尽管我会对其进行说明，但仍需要进行一些应该做的安全检查。我之所以这样做的原因是为了展示尽可能简单的代码，而并不限制任何永久性系统的实现。</p>
+<p>在第一段代码中，我们只是简单地启动一个Node服务，就像其他应用程序一样。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"><span class="keyword">var</span> app = express()</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">8999</span>)</span><br></pre></td></tr></table></figure>
+<p>我们首先要做的第一件事是添加一个验证用户身份的方法，最典型的是使用用户名和密码。为了简化代码，未从数据库中进行校验，且允许我们访问所有用户。</p>
+<p>在方法返回值中，我们将同时返回访问令牌和刷新令牌。正如我们在实现中看到的那样，令牌的有效期为300秒。</p>
+<p>对于访问令牌，我们使用 <a href="https://github.com/auth0/node-jsonwebtoken" target="_blank" rel="noopener">jsonwebtoken</a> 模块来加密并生成签名，即我们只需将要加密的对象以及用于加密和解密的密钥传递给它，就可自动生成JWT令牌。</p>
+<p>对于刷新令牌，我们将简单地生成一个UID，并将其与相关联的用户名一起储存在内存中。在完整实现中，我们可以将用户的信息、令牌的创建时间和失效时间保存在数据库中。</p>
+<p>虽然刷新令牌也可以是自包含令牌，就像我们创建的访问令牌一样，这种实现的好处是不用访问数据库来获取必要的信息。但如果是自包含令牌的话，我们将无法知道刷新令牌是否已被加入黑名单或被管理员覆写，又或者，如果用户被管理员禁用了，我们也无法知晓。这就是为什么我更喜欢通过不带自包含信息来实现这种类型的令牌。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> bodyParser = <span class="built_in">require</span>(<span class="string">'body-parser'</span>)</span><br><span class="line"><span class="keyword">var</span> jwt = <span class="built_in">require</span>(<span class="string">'jsonwebtoken'</span>) </span><br><span class="line"><span class="keyword">var</span> randtoken = <span class="built_in">require</span>(<span class="string">'rand-token'</span>) </span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> refreshTokens = &#123;&#125; </span><br><span class="line"><span class="keyword">var</span> SECRET = <span class="string">"SECRETO_PARA_ENCRIPTACION"</span> </span><br><span class="line">app.use(bodyParser.json()) </span><br><span class="line">app.use(bodyParser.urlencoded(&#123; <span class="attr">extended</span>: <span class="literal">true</span> &#125;)) </span><br><span class="line"></span><br><span class="line">app.post(<span class="string">'/login'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123; </span><br><span class="line">  <span class="keyword">var</span> username = req.body.username </span><br><span class="line">  <span class="keyword">var</span> password = req.body.password</span><br><span class="line">  <span class="keyword">var</span> user = &#123; </span><br><span class="line">    <span class="string">'username'</span>: username, </span><br><span class="line">    <span class="string">'role'</span>: <span class="string">'admin'</span> </span><br><span class="line">  &#125; </span><br><span class="line">  <span class="keyword">var</span> token = jwt.sign(user, SECRET, &#123; <span class="attr">expiresIn</span>: <span class="number">300</span> &#125;) </span><br><span class="line">  <span class="keyword">var</span> refreshToken = randtoken.uid(<span class="number">256</span>) </span><br><span class="line">  refreshTokens[refreshToken] = username</span><br><span class="line">  res.json(&#123;<span class="attr">token</span>: <span class="string">'JWT '</span> + token, <span class="attr">refreshToken</span>: refreshToken&#125;) </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>为了请求一个新的访问令牌，我们创建了 /token 资源。在该API中，我们接收刷新令牌和拥有该令牌的用户名。在这里，我们要做的是检查刷新令牌列表中是否包含发送给我们的令牌，并且该令牌具有相同的用户名。如果正确的话，我们会生成一个新的令牌，其中包含用户的信息（我们会从数据库中获取）并返回。</p>
+<p>在应用中，如果管理员可以暂时禁用用户或刷新令牌，则我们还必须在生成新的访问令牌之前对其进行检查。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">app.post(<span class="string">'/token'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> username = req.body.username</span><br><span class="line">  <span class="keyword">var</span> refreshToken = req.body.refreshToken</span><br><span class="line">  <span class="keyword">if</span>((refreshToken <span class="keyword">in</span> refreshTokens) &amp;&amp; (refreshTokens[refreshToken] == username)) &#123;</span><br><span class="line">    <span class="keyword">var</span> user = &#123;</span><br><span class="line">      <span class="string">'username'</span>: username,</span><br><span class="line">      <span class="string">'role'</span>: <span class="string">'admin'</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> token = jwt.sign(user, SECRET, &#123; <span class="attr">expiresIn</span>: <span class="number">300</span> &#125;)</span><br><span class="line">    res.json(&#123;<span class="attr">token</span>: <span class="string">'JWT '</span> + token&#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">    res.send(<span class="number">401</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>在这种架构中，有必要有一种方法可来禁用刷新令牌，以避免冒名顶替和滥用。</p>
+<p>在应用程序中，用户可以使用同一个身份（相同的用户名）在不同设备上工作，但每个设备上使用不同的令牌，如果其中一个令牌丢失或被盗，这个方法将允许管理员删除或禁用该刷新令牌，而不会影响用户在其他设备上的服务，也不需要重新认证、修改密码等。也就是说，用户可以继续工作而不受任何影响，也没有从被盗设备生成新访问令牌的风险。我们建议访问令牌设置较短的有效期，这样在这种情况下，可以快速恢复到安全状态。</p>
+<p>为此，我们创建了一个 /token/reject 资源来禁用刷新令牌。在本示例中，我们只需将其从内存列表中删除即可。在完整的实现中，有必要验证发起请求是否是管理员或其他对此资源具有权限的用户。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">app.post(<span class="string">'/token/reject'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123; </span><br><span class="line">  <span class="keyword">var</span> refreshToken = req.body.refreshToken </span><br><span class="line">  <span class="keyword">if</span>(refreshToken <span class="keyword">in</span> refreshTokens) &#123; </span><br><span class="line">    <span class="keyword">delete</span> refreshTokens[refreshToken]</span><br><span class="line">  &#125; </span><br><span class="line">  res.send(<span class="number">204</span>) </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>最后，我们将公开只能通过发送附带有先前获得的JWT令牌的请求头信息才能访问的资源，该令牌将由我们的应用程序生成并与使用我们的密钥（SECRET）签名。</p>
+<p>在本示例中，我们将使用 <a href="http://passportjs.org/" target="_blank" rel="noopener">Passport</a> 模块。Passport是Nodejs中用于身份验证的中间件，它非常灵活且模块化，这体现在大量的模块中，每个模块都实现了不同的身份验证策略（JWT、Twitter、Facebook、Google、Auth0、SAML等多达300种）。我们可以使用其中的任何一种，导入和配置都很简单，把最复杂的认证部分交给Passport来完成即可。</p>
+<p>首先，我们要加载中间件和必要的对象。Passport要求我们实现serializeUser方法（根据策略也可以实现deserializeUser），该方法用于将识别所需的用户信息储存在会话中。在我们的例子中，我们用用户名做索引，但理想的情况是使用ID。</p>
+<p>事实上，既然是无状态认证，那么会话就没有意义了，如果我们只用JWT，Passport将永远不会使用 deserializeUser 反序列化方法，我把它注释掉，以防引入新的策略时会用到。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> passport = <span class="built_in">require</span>(<span class="string">'passport'</span>)</span><br><span class="line"><span class="keyword">var</span> JwtStrategy = <span class="built_in">require</span>(<span class="string">'passport-jwt'</span>).Strategy</span><br><span class="line"><span class="keyword">var</span> ExtractJwt = <span class="built_in">require</span>(<span class="string">'passport-jwt'</span>).ExtractJwt</span><br><span class="line"></span><br><span class="line">app.use(passport.initialize())</span><br><span class="line">app.use(passport.session())</span><br><span class="line"></span><br><span class="line">passport.serializeUser(<span class="function"><span class="keyword">function</span> (<span class="params">user, done</span>) </span>&#123;</span><br><span class="line">  done(<span class="literal">null</span>, user.username)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">passport.deserializeUser(function (username, done) &#123;</span></span><br><span class="line"><span class="comment">  done(null, username)</span></span><br><span class="line"><span class="comment">&#125;)</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>最后，我们需要做的是，每当请求到达需要身份认证的资源时，从令牌中提取信息并进行处理（变量jwtPayload将有我们在用户登录时加密的用户对象）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> token = jwt.sign(user, SECRET, &#123; <span class="attr">expiresIn</span>: <span class="number">300</span> &#125;)</span><br></pre></td></tr></table></figure>
+<p>Passport身份验证策略配置如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> opts = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Setup JWT options</span></span><br><span class="line">opts.jwtFromRequest = ExtractJwt.fromAuthHeader()</span><br><span class="line">opts.secretOrKey = SECRET</span><br><span class="line"></span><br><span class="line">passport.use(<span class="keyword">new</span> JwtStrategy(opts, <span class="function"><span class="keyword">function</span> (<span class="params">jwtPayload, done</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//If the token has expiration, raise unauthorized</span></span><br><span class="line">  <span class="keyword">var</span> expirationDate = <span class="keyword">new</span> <span class="built_in">Date</span>(jwtPayload.exp * <span class="number">1000</span>)</span><br><span class="line">  <span class="keyword">if</span>(expirationDate &lt; <span class="keyword">new</span> <span class="built_in">Date</span>()) &#123;</span><br><span class="line">    <span class="keyword">return</span> done(<span class="literal">null</span>, <span class="literal">false</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> user = jwtPayload</span><br><span class="line">  done(<span class="literal">null</span>, user)</span><br><span class="line">&#125;))</span><br></pre></td></tr></table></figure></p>
+<p>我们将创建用于测试身份验证的 /test_jwt 资源，且只需告诉Passport，通过 jwt 策略，可以访问该路径来对进行身份验证。这样我们就有了一个想法，即通过Passport，我们可以使用不同的策略对每个资源进行身份验证，从而以非常简单的方式给我们提供了极大的灵活性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/test_jwt'</span>, passport.authenticate(<span class="string">'jwt'</span>), <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  res.json(&#123;<span class="attr">success</span>: <span class="string">'You are authenticated with JWT!'</span>, <span class="attr">user</span>: req.user&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>通过使用JWT，我们可以避免多次数据库调用，从而降低延迟，提高应用的效率。此外，通过使用刷新令牌，我们提高了这种架构的安全性和可用性。</p>
+<p>在大量的项目中，使用令牌进行认证是非常有用的，但它不是解决所有问题、为所有产品服务的圣杯，但我们在提出任何解决方案时都必须考虑到它。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="https://solidgeargroup.com/en/refresh-token-with-jwt-authentication-node-js/" target="_blank" rel="noopener">Refresh token with JWT authentication in Node.js</a></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/uploads/wechatpay.png" alt="Gavin Lu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jwt/" rel="tag"># jwt</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/21/architect/concurrent/nio-vs-io/" rel="next" title="Concurrent - NIO vs IO">
+                <i class="fa fa-chevron-left"></i> Concurrent - NIO vs IO
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/04/01/architect/distributed/contract/" rel="prev" title="微服务契约测试">
+                微服务契约测试 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/uploads/avatar.png" alt="Gavin Lu">
+            
+              <p class="site-author-name" itemprop="name">Gavin Lu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/lugavin" title="GitHub &rarr; https://github.com/lugavin" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://bitbucket.org/lugavin" title="Bitbucket &rarr; https://bitbucket.org/lugavin" rel="noopener" target="_blank"><i class="fa fa-fw fa-bitbucket"></i>Bitbucket</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#认证"><span class="nav-number">1.</span> <span class="nav-text">认证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于令牌的身份认证"><span class="nav-number">1.1.</span> <span class="nav-text">基于令牌的身份认证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基于令牌的有状态认证"><span class="nav-number">1.1.1.</span> <span class="nav-text">基于令牌的有状态认证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于令牌的无状态认证"><span class="nav-number">1.1.2.</span> <span class="nav-text">基于令牌的无状态认证</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JWT认证"><span class="nav-number">2.</span> <span class="nav-text">JWT认证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#令牌类型"><span class="nav-number">2.1.</span> <span class="nav-text">令牌类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#刷新令牌的实现"><span class="nav-number">2.2.</span> <span class="nav-text">刷新令牌的实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">3.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">4.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gavin Lu</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: false,
+        appId: '5IwtIhDDNAEOmFsA0RwltEjE-gzGzoHsz',
+        appKey: 'aep6gMEg10pFmdT7kHu53dPV',
+        placeholder: 'Type your message here',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: true
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
